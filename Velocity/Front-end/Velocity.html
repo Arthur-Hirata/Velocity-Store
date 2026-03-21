@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Front-end/src/styles/velocity/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Velocity Store</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <i class="fa-solid fa-desktop" id="logo"></i>
+        </div>
+        <div>
+            <h1 class="nome">Velocity Store</h1>
+        </div>
+        <div class="aux">
+            <a href="/Front-end/login.html"><button class="login">Login</button></a>
+        </div>
+    </nav>
+    <div>
+        <button class="compras" onclick="mostrarCarrinho()"><i class="fa-solid fa-cart-shopping" id="carrinho"></i></button>
+    </div>
+    <div class="lista">
+        <ul class="lista-carrinho">
+            
+        </ul>
+    </div>
+    <main>
+        <section class="inicio">
+            <a href=""><img class="foto-promo" src="https://img.cdndsgni.com/preview/12048485.jpg" alt="promoção de verão da loja "> </a>
+            <div class="promo">
+                <h1 class="tit">Itens em promoção</h1>
+                <div class="promo-itens">
+                    <div class="promocao">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkTk6jWaijcY6u1f2ygk-D6KUEebfNTeGLZg&s" class="foto-produto">
+                        <h5 class="preco-org"><s>R$ 1999</s></h5>
+                        <h4 class="price">R$ 1799</h4>
+                        <h3 class="nome-produto">RTX 3070 8GB</h3>
+                        <button class="btn-adicionar" data-id="1">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="promocao">
+                        <img src="https://img.terabyteshop.com.br/produto/p/gabinete-gamer-lian-li-vector-v100-rgb-mid-tower-vidro-temperado-e-atx-sem-fonte-sem-fan-black-v100x_261034.jpg" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 499</h5>
+                        <h4 class="price">R$ 399</h4>
+                        <h3 class="nome-produto">Lian Li vector V100</h3>                       
+                        <button class="btn-adicionar" data-id="2">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="promocao">
+                        <img src="https://images.kabum.com.br/produtos/fotos/sync_mirakl/507592/Mouse-Gamer-Sem-fio-Razer-Viper-V2-Pro-30-000DPI-6-Bot-es-Wireless-59g-Ultraleve-80hr-De-Bateria_1723491773_gg.jpg" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 899</h5>
+                        <h4 class="price">R$ 799</h4>
+                        <h3 class="nome-produto">Mouse Viper V2</h3>                       
+                        <button class="btn-adicionar" data-id="3">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="promocao">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJ7frmXxjKhRvpOcbaBfQnaLYaKwYfQ4efg&s" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 599</h5>
+                        <h4 class="price">R$ 459</h4>
+                        <h3 class="nome-produto">Teclado Blackwindow chroma</h3>                      
+                        <button class="btn-adicionar" data-id="4">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="promocao">
+                        <img src="https://a-static.mlcdn.com.br/800x800/monitor-gamer-benq-mobiuz-23-8-ex240n-full-hd-1ms-144hz-com-alto-falante/magazineluiza/240246600/4c6f8225f1855605267fb08fa683f51a.jpg" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 1999</h5>
+                        <h4 class="price">R$ 1599</h4>
+                        <h3 class="nome-produto">Monitro Benq 144Hz</h3>                       
+                        <button class="btn-adicionar" data-id="5">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="promocao">
+                    <img src="https://img.terabyteshop.com.br/produto/p/processador-amd-ryzen-7-8700g-42ghz-51ghz-turbo-8-cores-16-threads-am5-com-cooler-amd-wraith-stealth-100-100001236box_186220.jpg" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 1699</h5>
+                        <h4 class="price">R$ 1299</h4>
+                        <h3 class="nome-produto">AMD Ryzen 7 8700G</h3>                     
+                        <button class="btn-adicionar" data-id="6">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="promocao">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTERH5I2Fm3mHYBEsBmc2DIMsbBuM2gTVsgzQ&s" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 699</h5>
+                        <h4 class="price">R$ 499</h4>
+                        <h3 class="nome-produto">Mousepad Razer Gigantus V2</h3>                       
+                        <button class="btn-adicionar" data-id="7">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    <div class="promocao">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp5Mf1jTVsk1dP9wldzh121-XZRmwSqiGh_w&s" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 799</h5>
+                        <h4 class="price">R$ 599</h4>
+                        <h3 class="nome-produto"> Mouse Razer Viper mini</h3>
+                        <button class="btn-adicionar" data-id="8">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+<script src="/Front-end/src/js/velocity/velocity.js"></script>
+</html>

@@ -1,0 +1,78 @@
+.inicio{
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.foto-promo{
+    width: 1000px;
+    height: 450px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-branca-neon);
+    transition: transform 0.3s ease-in-out;
+}
+.foto-promo:hover{
+    transform:  scale(1.01);
+}
+.promo{
+    margin-top: 50px;
+}
+.promo-itens{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+.promocao{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: var(--sombra-branca);
+    background-color: rgb(43, 42, 42);
+    flex-direction: column;
+    z-index: 1;
+}
+.foto-produto{
+    width: 150px;
+    height: 130px;
+    border-radius: 12px;
+    margin-top: -130px;
+    position: absolute;
+}
+.preco-org{
+    color: white;
+    margin-left: 200px;
+    display: flex;
+    position: absolute;
+    margin-top: 50px;
+    font-size:10px;
+}
+.price{
+    color: red;
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 100px;
+    font-size: 20px;
+}
+.nome-produto{
+    position: absolute;
+    margin-top: 150px;
+}
+.btn-adicionar{
+    position: absolute;
+    margin-top: 220px;
+    background-color: var(--cor-promo);
+    color: var(--cor-texto2);
+    border: none;
+    border-radius: 12px;
+    width: 180px;
+    font-size: 16px;
+    height: 30px;
+}
+.btn-adicionar:hover{
+    filter: brightness(1.2);
+}
