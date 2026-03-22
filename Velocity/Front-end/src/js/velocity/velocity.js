@@ -5,12 +5,14 @@ $(document).ready(function(){
 const lista = document.querySelector(".lista");
 const carrinho = document.querySelector(".compras");
 const icon = document.getElementById("carrinho");
-
+const listaCompras = document.querySelector(".lista-compras")
 
 carrinho.addEventListener("click", function() {
     if (lista.style.display === "none" || lista.style.display === "") {
         icon.className = "fa-solid fa-x";
-        lista.style.display = "block";
+        carrinho.style.rigth = "100px"
+        lista.style.display = "flex";
+        lista.style.FlexDirection = "row"
     } else {
         icon.className = "fa-solid fa-cart-shopping";
         lista.style.display = "none";
@@ -21,13 +23,23 @@ const btnadc = document.querySelectorAll(".btn-adicionar");
 btnadc.forEach(btn => {
     btn.addEventListener('click', () => { //USEI IA AQUI
        
-        const idProduto = btn.dataset.id; 
-        console.log("Clicou no ID:", idProduto);
+        const idProduto = btn.dataset.id;
+        
+        const card = btn.closest('.promocao')
+        
+        const imagemElemento = card.querySelector(".foto-produto").src
+        console.log(imagemElemento)
+        
+        
+        
         
         fetch("http://127.0.0.1:5000/adicionar", { 
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({id: idProduto})
+            body: JSON.stringify({
+                id: idProduto,
+                imagem : imagemElemento
+            })
         })
         .then(response => response.json())
         .then(data => {
@@ -39,21 +51,99 @@ btnadc.forEach(btn => {
     }); 
 });
 
-
-    
-
-    
-
-
 function mostrarCarrinho(){ 
     fetch("http://127.0.0.1:5000/mostrar") 
     .then(resposta => resposta.json())  
     .then(listaDeProdutos => {                   
-       lista.innerHTML = ""
+       listaCompras.innerHTML = ""
        listaDeProdutos.forEach(produto => {
         const li = document.createElement("li")
-        li.textContent = `${produto.nome} - R$ ${produto.preco}`;
-        lista.appendChild(li)
+        li.className = "item-lista"
+        const spanQuantidade = document.createElement("span")
+        let quantidade = 1;
+        spanQuantidade.textContent = quantidade;
+        spanQuantidade.className = "quantidade";
+        const produtoNome = document.createElement("span")
+        produtoNome.textContent = `${produto.nome}`
+        produtoNome.className = "nome-item"
+        const produtoPreco = document.createElement("span")
+        const precoUnitario = `${produto.preco}`
+        var precoProdutoFinal = `${produto.preco}`;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        produtoPreco.textContent = precoProdutoFinal
+        produtoPreco.className = "preco-produto"
+        const aumentarQnt = document.createElement("button")
+        aumentarQnt.className = "btn-aumentar"
+        aumentarQnt.textContent = "+"
+        const removerQnt = document.createElement("button")
+        removerQnt.className = "btn-remover"
+        removerQnt.textContent = "X"
+        const divBtns = document.createElement("div")
+        divBtns.className = "div-btns"
+        divBtns.appendChild(aumentarQnt)
+        divBtns.append(spanQuantidade)
+        divBtns.appendChild(removerQnt)
+        const foto =document.createElement("img")
+        foto.src = produto.imagem;
+        foto.className = "foto-lista"
+
+
+        aumentarQnt.addEventListener("click", function(){
+            quantidade++
+            spanQuantidade.textContent = quantidade;
+           
+        })
+        removerQnt.addEventListener("click", function(){
+            if (quantidade > 1){
+                quantidade --
+                spanQuantidade.textContent = quantidade
+                
+            } else {
+                
+
+                fetch(`http://127.0.0.1:5000/remover/${produto.id}` ,{
+                    method: 'DELETE'
+                })
+                .then (resposta => {
+                    if (resposta.ok) {
+                        listaCompras.removeChild(li)
+                    } else {
+                        console.log("deu erro burrao")
+                    }
+
+                })
+                .catch(erro => console.error("Erro na requisição:", erro));
+            }
+        })
+
+
+
+
+
+
+
+
+        li.appendChild(foto)
+        li.appendChild(produtoPreco)
+        li.appendChild(produtoNome)
+        li.appendChild(divBtns)
+        li.style.display= "flex"
+        li.style.FlexDirection= "column"
+        li.style.border = "1px solid rgba(255, 255, 255, 0.8)"
+        listaCompras.appendChild(li)
        })
     })
     .catch(erro => console.error("Erro ao buscar:", erro)); 

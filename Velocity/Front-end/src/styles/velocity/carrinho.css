@@ -2,7 +2,6 @@
     position: fixed;
     right: 10px;
     bottom: 20px;
-    
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -16,7 +15,7 @@
 .lista{
     display: none;
     width: 900px;
-    height: 200px;
+    height: 250px;
     color: white;
     background-color: var(--fundo-card);
     border: 1px solid var(--cor-texto);
@@ -26,7 +25,75 @@
     z-index: 1000;
     box-shadow: var(--sombra-branca);
     list-style: none;
-    display: flex;
+    gap: 0px;
+    
+}
+.lista-compras{
     flex-direction: row;
+    display: flex;
+    gap: 40px;
+}
+.item-lista{
+    color: white;
+    border: 1px solid var(--sombra-branca);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--fundo-card);
+    border-radius: 12px;
+    width: 200px;
+    height: 210px;
+    flex-direction: column;
+    box-shadow: var(--sombra-branca);
+    overflow-x: auto;
+    margin-top: 0px;
+}
+
+.nome-item{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    position: relative;
+    margin-bottom: 10px;
+}
+.preco-produto{
+    color: red;
+    position: relative;
+    margin-top: 0px;
+    margin-left: 140px;
+    font-weight: bold;
+}
+.div-btns{
+    gap: 20px;
+    display: flex;
+    margin-bottom: -150px;
+    position: absolute;
+    align-items: center;
+}
+.btn-aumentar{
+    background-color: green;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+.btn-remover{
+    background-color: red;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px
+}
+.quantidade{
+    font-weight: bold;
+    
+}
+.foto-lista{
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    margin-top: -30px;
 }
 

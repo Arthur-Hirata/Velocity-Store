@@ -5,6 +5,9 @@ app= Flask(__name__)
 CORS(app)
 
 lista_carrinho= []
+preco_final = 0
+
+
 
 def conectar_banco():
     conn = sqlite3.connect("banco-itens.db")
@@ -15,7 +18,7 @@ def conectar_banco():
 def adicionar_item():
     dados = request.json
     id_produto = dados.get('id') 
-
+    imagem_url = dados.get('imagem')
     conexao = conectar_banco()
     cursor = conexao.cursor()
     cursor.execute("SELECT nome, preco FROM itens WHERE id = ?", (id_produto,))
@@ -26,7 +29,8 @@ def adicionar_item():
         novo_item = {
             "id": id_produto,
             "nome": produto_no_banco[0], 
-            "preco": produto_no_banco[1]  
+            "preco": produto_no_banco[1],
+            "imagem": imagem_url  
         }
 
         lista_carrinho.append(novo_item)
@@ -38,5 +42,15 @@ def adicionar_item():
 def mostrar_lista():
     return jsonify(lista_carrinho)
 
+
+@app.route('/remover/<string:id>', methods =['DELETE'])
+def remover_item(id):
+ global lista_carrinho
+ for produto in lista_carrinho :
+    if produto['id'] == id:
+       lista_carrinho.remove(produto)
+       return {"status" : "removido"}, 200
+
+ return {"status": "não encontrado"}, 404
 if __name__ == '__main__':
     app.run(debug=True)
