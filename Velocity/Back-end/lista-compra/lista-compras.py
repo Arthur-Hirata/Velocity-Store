@@ -107,6 +107,12 @@ def remover_item(id):
 
  return {"status": "não encontrado"}, 404
 
+@app.route('/apagar', methods=['DELETE'])
+def apagar_lista():
+    global lista_carrinho
+    lista_carrinho.clear()
+    return jsonify({"status": "lista_apagada"}), 200
+
 
 @app.route('/precofinal', methods=['GET'])
 def final_preco():

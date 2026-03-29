@@ -17,6 +17,7 @@ function atualizarPrecoFinal() {
     })
     .catch(err => console.error('Erro ao buscar preço final:', err));
 }
+const remover = document.querySelector(".remover")
 carrinho.addEventListener("click", function() {
     if (lista.style.display === "none" || lista.style.display === "") {
         icon.className = "fa-solid fa-x";
@@ -56,6 +57,17 @@ btnadc.forEach(btn => {
     }); 
 });
 
+remover.addEventListener('click', function(){
+    fetch ("http://127.0.0.1:5000/apagar", {
+        method: 'DELETE'
+    })
+    .then(response => response.json)
+    .then(data =>{
+        mostrarCarrinho();
+        atualizarPrecoFinal()
+    })
+    .catch(err => console.error("Erro ao limpar:", err));
+})
 function mostrarCarrinho(){ 
     fetch("http://127.0.0.1:5000/mostrar") 
     .then(resposta => resposta.json())  
@@ -134,9 +146,10 @@ function mostrarCarrinho(){
                     } else {
                         console.log("deu erro burrao")
                     }
-
+                    
                 })
                 .catch(erro => console.error("Erro na requisição:", erro));
+                remover.style.visibility = "hidden"
             }
         })
         li.appendChild(foto)
@@ -148,6 +161,13 @@ function mostrarCarrinho(){
         li.style.border = "1px solid rgba(255, 255, 255, 0.8)"
         listaCompras.appendChild(li)
        })
+       if (listaCompras.children.length > 0){
+            remover.style.visibility = 'visible'
+            
+        }
+        else {
+            remover.style.visibility = 'hidden'
+        }
     })
     .catch(erro => console.error("Erro ao buscar:", erro)); 
 }

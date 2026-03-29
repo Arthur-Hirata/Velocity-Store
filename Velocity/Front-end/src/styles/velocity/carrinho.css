@@ -15,6 +15,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 10000;
 }
 
 .compras:hover {
@@ -41,6 +42,7 @@
     overflow-x: auto;
     padding: 20px;
     left: 50%;
+    flex-direction: column;
     transform: translateX(-50%);
 }
 .lista-compras{
@@ -49,6 +51,11 @@
     gap: 20px;
     overflow-x: auto;
     padding-bottom: 10px;
+}
+.listas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .lista-compras::-webkit-scrollbar{
     background-color: transparent;
@@ -179,24 +186,23 @@
     align-items: center;
     flex-direction: column;
     gap: 15px;
-    margin-left: 0px;
+    margin-left: -30px;
     flex: 1;
     min-width: 300px;
     
 }
 .preco-final{
-    color: #E63946 ;
+    color: #F59E0B ;
     font-weight: bold;
     font-size: 28px;
     padding: 20px;
     text-align: center;
     margin-top: 15px;
     border-radius: 8px;
-    word-wrap: break-word;
-    word-break: break-word;
-    min-width: 280px;
-    
 }
+
+
+
 .btn-finalizar{
     background-color: var(--cor-secundaria);
     border: none;
@@ -221,4 +227,146 @@
 .btn-finalizar:active {
     transform: scale(0.95);
 }
+.remover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+.apagar-lista{
+    background-color: red;
+    color: var(--cor-texto2);
+    border: none;
+    border-radius: 12px;
+    width: 130px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (min-width:300px) and (max-width:450px) {
+    .compras{
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 10px;
+        font-size: 20px;
+        z-index: 10000;
+    }
+    .lista{
+        width: 90%;
+        max-width: 95%;
+        max-height: 400px;
+        bottom: 20px;
+        padding: 15px;
+        gap: 15px;
+        display: none;
+        
+        justify-content: center;
+        align-items: center;
+        
+    }
+    .lista-compras{
+        flex-direction: column;
+        gap: 15px;
+        overflow-y: auto;
+        max-height: 280px;
+        margin-left: -100px;
+        width: 100%;
+
+    }
+    .item-lista{
+        width: 70%;
+        height: auto;
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        grid-template-rows: auto auto auto;
+        gap: 10px;
+        padding: 10px;
+        
+    }
+    .foto-lista{
+        width: 70px;
+        height: 70px;
+        min-width: 70px;
+        margin-bottom: 0px;
+        grid-column: 1;
+        grid-row: 1 / 4;
+    }
+    .preco-produto{
+        font-size: 13px;
+        margin: 0px;
+        grid-column: 2;
+        grid-row: 1;
+        align-self: center;
+        justify-self: center;
+    }
+    .nome-item{
+        font-size: 11px;
+        max-height: 40px;
+        text-align: left;
+        grid-column: 2;
+        grid-row: 2;
+        align-self: center;
+    }
+    .div-btns{
+        gap: 8px;
+        flex-direction: row;
+        margin-top: 0px;
+        grid-column: 2;
+        grid-row: 3;
+        align-self: center;
+        justify-content: center;
+    }
+    .btn-aumentar,
+    .btn-remover{
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
+    }
+    .quantidade{
+        font-size: 12px;
+        min-width: 20px;
+    }
+    .final-lista{
+        margin-left: 0px;
+        
+        min-width: auto;
+        width: 10%;
+        
+    }
+    .preco-final{
+        font-size: 18px;
+        padding: 10px;
+        margin-top: 10px;
+    }
+}
+@media screen and (min-width:700px) and (max-width:1100px) {
+    
+}
+@media screen and (min-width:1300px) and (max-width:1600px){
+    .compras{
+        width: 50px;
+        height: 50px;
+    }
+
+}
+@media screen and (min-width:1900px) and (max-width:2000px) {
+    .compras{
+        right: 30px;
+    }
+}
+@media screen and (min-width:2500px) and (max-width:3000px) {
+    .compras{
+        right: 50px;
+    }
+}
+@media screen and (min-width:3001px) and (max-width:4000px) {
+    .compras{
+        right: 70px;
+        bottom: 50px;
+    }
+}
+
+
 
