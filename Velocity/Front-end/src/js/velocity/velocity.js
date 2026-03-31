@@ -1,6 +1,4 @@
 $(document).ready(function(){
-     
-
 })
 const lista = document.querySelector(".lista");
 const carrinho = document.querySelector(".compras");
