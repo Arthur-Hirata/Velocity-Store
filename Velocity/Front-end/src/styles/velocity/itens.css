@@ -115,3 +115,42 @@ input::placeholder, textarea::placeholder{
     position: relative;
     margin-top: -0px;
 }
+/* NAO TA FUNCOINADO TA UM LIXO ESSA PARTE, MAS ELA BUGA O RESTO ENTAO ESPERA PRA MUDAR
+/* Responsividade para mobile */
+@media (max-width: 900px) {
+    .hardware {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin-left: 0;
+        height: auto;
+    }
+    .hardware .promocao {
+        margin-top: 8px;
+        width: 100%;
+        display: block;
+    }
+}
+
+@media (max-width: 600px) {
+    .busca {
+        width: 90%;
+    }
+    .botoes {
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+    }
+    .btn-selecionar, .clicado, .nao-clicado {
+        width: 100%;
+        max-width: 280px;
+    }
+    .hardware {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+    .hardware .promocao {
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+

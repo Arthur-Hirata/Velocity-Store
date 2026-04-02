@@ -4,7 +4,6 @@ const lista = document.querySelector(".lista");
 const carrinho = document.querySelector(".compras");
 const icon = document.getElementById("carrinho");
 const listaCompras = document.querySelector(".lista-compras")
-
 function atualizarPrecoFinal() {
     fetch('http://127.0.0.1:5000/precofinal')
     .then(response => response.json())
@@ -160,8 +159,7 @@ function mostrarCarrinho(){
         listaCompras.appendChild(li)
        })
        if (listaCompras.children.length > 0){
-            remover.style.visibility = 'visible'
-            
+            remover.style.visibility = 'visible'  
         }
         else {
             remover.style.visibility = 'hidden'
