@@ -45,8 +45,16 @@ button:active{
     color: #FFFFFF;
     text-align: center;
     font-weight: bold;
-    text-shadow: 0 0 3px #fff, 0 0 20px #fff
+    text-shadow: 0 0 3px #fff, 0 0 20px #fff;
+    
 }
+@media screen and (min-width:300px) and (max-width:450px) {
+    button:hover{
+    transform: scale(1.05);
+    filter: brightness(1.01);
+}
+}
+
 /* cores reservas
 --cor-secundaria1 : #8082ec;
 --cor-secundaria2: #0071E3;

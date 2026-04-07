@@ -103,7 +103,7 @@
         </section>
         <section class="itens">
             <h1 class="tit">Hardware</h1>
-            <input type="text" class="busca" placeholder="Digete o item que deseja...">
+            <input type="text" class="busca" placeholder="Digete o item que deseja..." onkeyup="buscarProduto()">
             <div class="botoes">
                 <button class="btn-selecionar" onclick="tudo()">Tudo</button>
                 <button class="btn-selecionar" onclick="ram()">Memorias ram</button>
@@ -269,8 +269,10 @@
                         <h3 class="nome-produto">Lian Li o11 Dynamic</h3>
                         <button class="btn-adicionar" data-id="36">Carrinho<i class="fa-solid fa-cart-shopping"></i></button>
                     </li>
-
-                    
+                    <div class="erros">
+                        <span class="fa-solid fa-xmark" id="erro"></span>
+                        <span class="nao-encontrado"></span>
+                    </div>
 
                 </ul>
             </div>

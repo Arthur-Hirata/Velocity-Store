@@ -83,3 +83,31 @@ function gab(){
         }
     })
 }
+function buscarProduto(){
+    const pesquisa = document.querySelector(".busca").value.toLowerCase()
+    const erros = document.querySelector(".erros")
+    erros.style.display = "none"
+    let hasMatch = false
+    // USEI IA NESSA PARTE
+    for (let a = 0; a <itens.length; a++ ){
+        let subTexto = itens[a].querySelector(".nome-produto")
+    
+        if (subTexto){
+            let conteudo = subTexto.textContent || subTexto.innerText;
+            
+            if (conteudo.toLowerCase().indexOf(pesquisa)> -1 ){
+                itens[a].style.visibility = "visible"
+                itens[a].style.display = "flex"
+                hasMatch = true
+            } else {
+                itens[a].style.display = "none"
+            }
+        }
+    }
+    if (!hasMatch && pesquisa.length > 0){
+        const notFound = document.querySelector(".nao-encontrado")
+        const mensagem = `Desculpe não encontramos "${pesquisa}" em nosso estoque!`
+        notFound.textContent = mensagem
+        erros.style.display = "block"
+    }
+}
