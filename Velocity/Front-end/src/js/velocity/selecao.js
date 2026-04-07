@@ -111,3 +111,8 @@ function buscarProduto(){
         erros.style.display = "block"
     }
 }
+function apagarBusca(){
+    const pesquisa = document.querySelector(".busca")
+    pesquisa.value=""
+    buscarProduto()
+}

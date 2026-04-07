@@ -103,7 +103,11 @@
         </section>
         <section class="itens">
             <h1 class="tit">Hardware</h1>
-            <input type="text" class="busca" placeholder="Digete o item que deseja..." onkeyup="buscarProduto()">
+            <div class="input-pesquisa">
+                <button class="btn-busca"><i class="fa-solid fa-magnifying-glass" id="lupa"></i></button>
+                <input type="text" class="busca" placeholder="Digete a peça que deseja..." onkeyup="buscarProduto()">
+                <button class="erase" onclick="apagarBusca()"><i class="fa fa-eraser" id="apagar"></i></button>
+            </div>
             <div class="botoes">
                 <button class="btn-selecionar" onclick="tudo()">Tudo</button>
                 <button class="btn-selecionar" onclick="ram()">Memorias ram</button>
@@ -275,6 +279,25 @@
                     </div>
 
                 </ul>
+            </div>
+        </section>
+        <section class="itens">
+            <h1 class="tit">Periféricos</h1>
+            <div class="input-pesquisa">
+                <button class="btn-busca"><i class="fa-solid fa-magnifying-glass" id="lupa"></i></button>
+                <input type="text" class="busca" placeholder="Digete o periférico que deseja..." onkeyup="buscarProduto()">
+                <button class="erase" onclick="apagarBusca()"><i class="fa fa-eraser" id="apagar"></i></button>
+            </div>
+            <div class="botoes">
+                <button class="btn-selecionar" onclick="tudo()">Tudo</button>
+                <button class="btn-selecionar" onclick="mouse()">Mouses</button>
+                <button class="btn-selecionar" onclick="teclado()">Teclados</button>
+                <button class="btn-selecionar" onclick="mousepad()">Mousepads</button>
+                <button class="btn-selecionar" onclick="headset()">Headsetes</button>
+                <button class="btn-selecionar" onclick="monitor()">Monitores</button>
+            </div>
+            <div class="box">
+                <ul class="perifericos"></ul>
             </div>
         </section>
     </main>

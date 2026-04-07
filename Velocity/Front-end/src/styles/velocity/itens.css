@@ -138,9 +138,34 @@ input::placeholder, textarea::placeholder{
     margin: 0 auto;
     text-align: center;
 }
+.input-pesquisa{
+    display: flex;
+    flex-direction: row;
+}
+#lupa{
+    position: absolute;
+    font-size: 25px;
+    margin-left: 12px;
+    margin-top: 3px;
+}
+.btn-busca{
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+.erase{
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+#apagar{
+    margin-top: 30px;
+    font-size: 25px;
+    margin-left: -60px;
+}
 @media screen and (min-width:300px) and (max-width:450px) {
     .busca{
-        width: 300px;
+        width: 330px;
     }
     .botoes{
         display: grid;
@@ -189,6 +214,15 @@ input::placeholder, textarea::placeholder{
 .hardware .btn-adicionar{
     position: relative;
     margin-top: 10px;
+}
+#lupa{
+    font-size: 16px;
+    margin-top: 7px;
+}
+#apagar{
+    font-size: 16px;
+    margin-top: 33px;
+    margin-left:-52px;
 }
 }
 @media screen and (min-width:699px) and (max-width:1199px) {
@@ -253,5 +287,6 @@ input::placeholder, textarea::placeholder{
         margin-left: 470px;
     }
 }
+
 
 

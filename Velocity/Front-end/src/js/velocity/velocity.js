@@ -4,6 +4,7 @@ const lista = document.querySelector(".lista");
 const carrinho = document.querySelector(".compras");
 const icon = document.getElementById("carrinho");
 const listaCompras = document.querySelector(".lista-compras")
+const btnMap = new Map(); // ISSO AQUI EU NAO SABIA USEI A IA PRA FAZER
 function atualizarPrecoFinal() {
     fetch('http://127.0.0.1:5000/precofinal')
     .then(response => response.json())
@@ -32,7 +33,13 @@ const btnadc = document.querySelectorAll(".btn-adicionar");
 btnadc.forEach(btn => {
     btn.addEventListener('click', () => { //USEI IA AQUI
         const idProduto = btn.dataset.id;
+        btnMap.set(idProduto, btn); // Armazena o botão no mapa
         const card = btn.closest('.promocao')
+        btn.style.backgroundColor = "green"
+        btn.textContent = ""
+        const spanAdc = document.createElement("i")
+        spanAdc.className = "fas fa-check-circle"
+        btn.append(spanAdc)
         const imagemElemento = card.querySelector(".foto-produto").src
         let quantidade = 1;
         fetch("http://127.0.0.1:5000/adicionar", { 
@@ -65,7 +72,7 @@ remover.addEventListener('click', function(){
     })
     .catch(err => console.error("Erro ao limpar:", err));
 })
-function mostrarCarrinho(){ 
+function mostrarCarrinho(btn){ 
     fetch("http://127.0.0.1:5000/mostrar") 
     .then(resposta => resposta.json())  
     .then(listaDeProdutos => {                   
@@ -135,15 +142,24 @@ function mostrarCarrinho(){
             } else {
                 fetch(`http://127.0.0.1:5000/remover/${produto.id}` ,{
                     method: 'DELETE'
+                    
                 })
                 .then (resposta => {
                     if (resposta.ok) {
                         listaCompras.removeChild(li);
                         atualizarPrecoFinal();
+                        const btnAdicionar = btnMap.get(produto.id);
+                        if (btnAdicionar) {
+                            const carrinho = document.createElement("i")
+                            carrinho.className = "fa-solid fa-cart-shopping"
+                            carrinho.style.marginLeft = "4px"
+                            btnAdicionar.style.backgroundColor = "#F59E0B";
+                            btnAdicionar.textContent = "Carrnho";
+                            btnAdicionar.append(carrinho)
+                        }
                     } else {
                         console.log("deu erro burrao")
                     }
-                    
                 })
                 .catch(erro => console.error("Erro na requisição:", erro));
                 remover.style.visibility = "hidden"
