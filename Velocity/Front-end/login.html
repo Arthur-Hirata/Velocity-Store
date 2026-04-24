@@ -16,11 +16,15 @@
                 <input type="text" placeholder="Informe seu e-mail">
             </div>
             <div class="input">
-                <input type="password" placeholder="Insira sua senha">
+                <div class="senha-input">
+                    <input type="password" placeholder="Insira sua senha" id="senha">
+                    <button id="eye"><i class="fa-regular fa-eye" id="eye-password"></i></button>
+                </div>
                <a href=""><h3 class="sub">Esqueci minha senha</h3></a>
             </div>
         </div>
-        <button class="logar">Logar</button>
+        <a href="/Front-end/criar.html"><h2 class="link">Não tem uma conta? Crie agora.</h2></a>
+        <button class="logar" onclick="login()">Logar</button>
     </div>
 </body>
 <script src="/Front-end/src/js/login/script-login.js"></script>

@@ -33,7 +33,7 @@ a{
 .box{
     background-color: var(--fundo-card);
     width: 700px;
-    height: 600px;
+    height: 500px;
     border-radius: 12px;
     box-shadow: var(--sombra-branca);
     display: flex;
@@ -48,12 +48,22 @@ a{
 }
 .corpo{
     margin-top: 40px;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .input{
     display: flex;
     flex-direction: column;
-    margin-left: -120px;
+    padding: 25px;
+}
+#eye{
+    position: absolute;
+    margin-top: 7px;
+    margin-left: -30px;
+    background-color: transparent;
+    border: none;
 }
 input[type="text"], input[type="password"]{
     background-color: var(--fundo-card);
@@ -68,19 +78,29 @@ input[type="text"], input[type="password"]{
 .sub{
     font-size: 12px;
     color: #3B82F6;
-    margin-top: 12px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .logar{
     background-color: var(--cor-promo);
     border: none;
-    border-radius: 12px;
+    border-radius: 20px;
     width: 350px;
-    height: 30px;
+    height: 40px;
     transition: transform 0.3s ease-in-out;
     font-size: 20px;
+    margin-top: 40px;
+    font-size: 25px;
 }
 button:hover{
     transform: scale(1.05);
+}
+.link{
+    margin-top: 20px;
+    font-size: 20px;
+    color: white;
 }
 
 
