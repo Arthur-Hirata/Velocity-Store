@@ -1,3 +1,4 @@
+
 const olho = document.getElementById("eye1")
 const inputSenha = document.getElementById("senha1")
 olho.addEventListener("click", function(){
@@ -27,9 +28,21 @@ function criarConta(){
     const senhaConfirm = senha2.value
     let canCreatebyPassowrd = false
     let canCreatebyConfirmation = false
+    let canCreatebyMail= false
     const erro1 = document.getElementById("erro1")
     const erro2 = document.getElementById("erro2")
-
+    const erro3 = document.getElementById('erro3')
+    const regex = /\S+@\S+\.\S+/
+    const email = document.getElementById('email')
+    const userEmail = email.value
+    
+    if ((regex.test(userEmail))){
+        canCreatebyMail = true
+        erro3.style.display = 'none'
+    } else {
+        erro3.style.display = "block"
+    }
+    
     if (senha.length >= 8){
         canCreatebyPassowrd = true
         erro1.style.display = "none"
@@ -42,7 +55,14 @@ function criarConta(){
     } else {
         erro2.style.display = "block"
     }
-
+    let canCreate = canCreatebyConfirmation && canCreatebyPassowrd && canCreatebyMail
+    if (canCreate){
+        const box = document.querySelector('.box')
+        box.style.display= 'none'
+        document.getElementById('loader').style.visibility = 'visible';
+    setTimeout(function() {
+        window.location.href = 'Velocity.html'; 
+    }, 3000);
+    }
 }
 
-// pra adcionar a varivavel de criação, vc tem que criar as 3 e criar mais uma pra falar que pode
