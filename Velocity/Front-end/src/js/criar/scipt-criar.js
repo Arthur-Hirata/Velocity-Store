@@ -57,12 +57,32 @@ function criarConta(){
     }
     let canCreate = canCreatebyConfirmation && canCreatebyPassowrd && canCreatebyMail
     if (canCreate){
+        fetch('http://127.0.0.1:5000/criarUser',{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: userEmail,
+                senha : senha
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Resposta:", data);
+            mostrarCarrinho();
+            atualizarPrecoFinal();
+        })
+        .catch(err => console.error("Erro no fetch:", err));
+
+
+
+
         const box = document.querySelector('.box')
         box.style.display= 'none'
         document.getElementById('loader').style.visibility = 'visible';
     setTimeout(function() {
         window.location.href = 'Velocity.html'; 
-    }, 3000);
+    }, 5000);
+
     }
 }
 
