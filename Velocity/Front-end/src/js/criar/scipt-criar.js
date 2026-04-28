@@ -70,18 +70,15 @@ function criarConta(){
             console.log("Resposta:", data);
             mostrarCarrinho();
             atualizarPrecoFinal();
+            const box = document.querySelector('.box')
+            box.style.display= 'none'
+            document.getElementById('loader').style.visibility = 'visible';
+        setTimeout(function() {
+            window.location.href = 'Velocity.html'; 
+        }, 2000);
         })
         .catch(err => console.error("Erro no fetch:", err));
 
-
-
-
-        const box = document.querySelector('.box')
-        box.style.display= 'none'
-        document.getElementById('loader').style.visibility = 'visible';
-    setTimeout(function() {
-        window.location.href = 'Velocity.html'; 
-    }, 5000);
 
     }
 }
