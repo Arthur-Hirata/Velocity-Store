@@ -15,5 +15,28 @@ def adc_User():
         cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, senha))
         conexao.commit()
     return jsonify({"mensagem": "Usuário recebido!"})
+@app.route('/loginUser', methods=['POST'])
+def loginUser():
+    dados = request.json
+    email= dados.get('email')
+    senha = dados.get('senha')
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor= conexao.cursor()
+        cursor.execute("SELECT id, password FROM users WHERE email=?", (email,))
+        resultado = cursor.fetchone()
+    if resultado is None:
+        return jsonify({"mensagem" : "Erro, usuário não encontrado"}), 404
+
+    user_id, password_banco=resultado
+
+    if senha == password_banco:
+         return jsonify({"mensagem": "Login bem sucedido!", "id": user_id}), 200
+    else:
+        return jsonify({"mensagem": "Senha incorreta"}), 401
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
+    
