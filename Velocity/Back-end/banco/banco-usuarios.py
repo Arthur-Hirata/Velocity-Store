@@ -14,10 +14,6 @@ def adc_User():
         cursor= conexao.cursor()
         cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, senha))
         conexao.commit()
-    print(f"Email: {email} , Senha: {senha}")
-    
     return jsonify({"mensagem": "Usuário recebido!"})
-   
-
 if __name__ == '__main__':
     app.run(debug=True)

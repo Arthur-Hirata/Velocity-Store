@@ -1,4 +1,5 @@
 
+
 const olho = document.getElementById("eye1")
 const inputSenha = document.getElementById("senha1")
 olho.addEventListener("click", function(){
@@ -21,7 +22,15 @@ olho2.addEventListener("click", function(){
         olho2.classList = "fas fa-eye"
     }
 })
-function criarConta(){
+
+
+document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function(event) {
+        event.preventDefault();
+    });
+});
+
+function criarConta(){ 
     const senha1 = document.getElementById("senha1")
     const senha = senha1.value
     const senha2 = document.getElementById("senha2")
@@ -35,7 +44,6 @@ function criarConta(){
     const regex = /\S+@\S+\.\S+/
     const email = document.getElementById('email')
     const userEmail = email.value
-    
     if ((regex.test(userEmail))){
         canCreatebyMail = true
         erro3.style.display = 'none'
@@ -68,18 +76,15 @@ function criarConta(){
         .then(response => response.json())
         .then(data => {
             console.log("Resposta:", data);
-            mostrarCarrinho();
-            atualizarPrecoFinal();
-            const box = document.querySelector('.box')
-            box.style.display= 'none'
-            document.getElementById('loader').style.visibility = 'visible';
-        setTimeout(function() {
-            window.location.href = 'Velocity.html'; 
-        }, 2000);
+                setTimeout(function(){
+                    window.location.href='loader.html'
+                },)
         })
-        .catch(err => console.error("Erro no fetch:", err));
-
-
+        .catch(err => {
+            console.error("Erro no fetch:", err)
+        });
     }
 }
+
+
 

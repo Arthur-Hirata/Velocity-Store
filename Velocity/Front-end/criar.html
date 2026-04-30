@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/Front-end/src/styles/criar/style-criar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <title>Criar Conta</title>
+    <title>Criar Conta - Velocity Store</title>
 </head>
 <body>
     <div class="box">
@@ -21,7 +21,7 @@
                     <input type="password" placeholder="Insira uma senha forte" id="senha1">
                 </form>
                 <h5 id="erro1" style="display:none">Sua Senha deve ao menos 8 caracteres</h5>
-                <button class="btn-olho"><i class="fas fa-eye" id="eye1"></i></button>
+                <button type="button" class="btn-olho"><i class="fas fa-eye" id="eye1"></i></button>
             </div>
             <div class="password" style="margin-top: -20px;">
                 <h3 class="subtit">Repita sua senha</h3>
@@ -29,16 +29,11 @@
                     <input type="password" placeholder="Insira sua senha novemente" id="senha2">
                 </form>
                 <h5 id="erro2" style="display:none">Senha incorreta</h5>
-                <button class="btn-olho"><i class="fas fa-eye" id="eye2"></i></button>
+                <button type="button" class="btn-olho"><i class="fas fa-eye" id="eye2"></i></button>
             </div>
         </div>
-        <button class="criarConta" onclick="criarConta()">Cria Conta</button>
-    </div>
-    <div id="loader" style="visibility: hidden;">
-        <div class="spinner">
-        </div>
-        <h1>Estamos criando Sua conta!</h1>
+        <button type="button" id="btnCriar" class="criarConta" onclick="criarConta()" >Cria Conta</button>
     </div>
 </body>
-<script src="/Front-end/src/js/criar/scipt-criar.js"></script>
+<script src="src/js/criar/scipt-criar.js"></script>
 </html>
