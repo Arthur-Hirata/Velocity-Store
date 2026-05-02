@@ -34,6 +34,17 @@ def loginUser():
     else:
         return jsonify({"mensagem": "Senha incorreta"}), 401
 
+@app.route('/credenciais', methods = ['POST'])
+def FinalizarCredenciais():
+    dados = request.json
+    nome = dados.get("nome")
+    numero = dados.get("numero")
+    address = dados.get("address")
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("INSERT INTO users (nome, numero, address) VALUES (?,?,?)", (nome,numero,address))
+        conexao.commit()
+    return jsonify({"mensagem" : "Credenciais finalizadas"})
 
 
 

@@ -97,6 +97,9 @@ input[type="text"], input[type="password"]{
 button:hover{
     transform: scale(1.05);
 }
+button:active{
+    transform: scale(0.95);
+}
 .link{
     margin-top: 20px;
     font-size: 20px;

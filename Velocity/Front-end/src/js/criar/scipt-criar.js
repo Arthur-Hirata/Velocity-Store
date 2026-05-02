@@ -77,7 +77,7 @@ function criarConta(){
         .then(data => {
             console.log("Resposta:", data);
                 setTimeout(function(){
-                    window.location.href='loader.html'
+                    window.location.href='credentials.html'
                 },)
         })
         .catch(err => {

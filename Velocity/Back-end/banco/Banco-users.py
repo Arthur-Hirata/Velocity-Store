@@ -7,6 +7,9 @@ cursor.execute('''
                id INTEGER PRIMARY KEY AUTOINCREMENT,
                email TEXT NOT NULL,
                password TEXT NOT NULL,
+               nome TEXT,
+               numero TEXT,
+               address TEXT,
                buylist TEXT)''')
 
 conexao.commit()
