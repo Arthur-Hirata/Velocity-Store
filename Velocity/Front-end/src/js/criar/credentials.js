@@ -14,6 +14,7 @@ function finalizarCriação(){
     let hasName = false 
     let hasNumber = false
     let hasAddress = false
+    const userID = localStorage.getItem('userId')
     if (validName.length > 0) {
         hasName = true
     } else{
@@ -37,6 +38,7 @@ function finalizarCriação(){
             method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
+                    id: userID,
                     nome: nome,
                     numero : numero,
                     address : endereco

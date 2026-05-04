@@ -76,9 +76,13 @@ function criarConta(){
         .then(response => response.json())
         .then(data => {
             console.log("Resposta:", data);
-                setTimeout(function(){
-                    window.location.href='credentials.html'
-                },)
+            if (data.id) {
+                localStorage.setItem('userId', data.id);
+                console.log("ID do usuário:", data.id);
+            }
+            setTimeout(function(){
+                window.location.href='credentials.html'
+            },)
         })
         .catch(err => {
             console.error("Erro no fetch:", err)

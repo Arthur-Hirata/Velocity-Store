@@ -14,7 +14,8 @@ def adc_User():
         cursor= conexao.cursor()
         cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, senha))
         conexao.commit()
-    return jsonify({"mensagem": "Usuário recebido!"})
+        user_id = cursor.lastrowid
+    return jsonify({"mensagem": "Usuário recebido!", "id": user_id})
 @app.route('/loginUser', methods=['POST'])
 def loginUser():
     dados = request.json
@@ -37,14 +38,30 @@ def loginUser():
 @app.route('/credenciais', methods = ['POST'])
 def FinalizarCredenciais():
     dados = request.json
+    id = dados.get("id")
     nome = dados.get("nome")
     numero = dados.get("numero")
     address = dados.get("address")
     with sqlite3.connect("banco-users.db") as conexao:
         cursor = conexao.cursor()
-        cursor.execute("INSERT INTO users (nome, numero, address) VALUES (?,?,?)", (nome,numero,address))
+        cursor.execute("UPDATE users SET nome=?, numero=?, address=? WHERE id=?", (nome, numero, address, id))
         conexao.commit()
     return jsonify({"mensagem" : "Credenciais finalizadas"})
+
+
+@app.route('/getCredentials', methods=['POST'])
+def pegarCredenciais():
+    dados = request.json
+    id=dados.get("id")
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT nome, buylist FROM users WHERE id=?", (id))
+        resultado = cursor.fetchone()
+    
+    user_name, user_list = resultado
+    return jsonify({"nome" : user_name, "buylist" : user_list})
+
+
 
 
 
