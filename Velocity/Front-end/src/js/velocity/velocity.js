@@ -8,7 +8,7 @@ const btnMap = new Map(); // ISSO AQUI EU NAO SABIA USEI A IA PRA FAZER
 let isLogged = false
 const userId = localStorage.getItem('userId')
 
-if (typeof userId && userId !==""){
+if (userId && userId !==""){
     getCredentials()
     function getCredentials(){
         fetch('http://127.0.0.1:5000/getCredentials', {
@@ -28,12 +28,10 @@ if (typeof userId && userId !==""){
         })
     .catch(err => console.error("Erro no fetch:", err));
     }
-        
-
-
-
-
-
+    const login =document.querySelector(".login")
+    login.addEventListener("click", function(){
+        //colocar aqui
+    })
     function atualizarPrecoFinal() {
         fetch('http://127.0.0.1:5000/precofinal')
         .then(response => response.json())
@@ -213,6 +211,28 @@ if (typeof userId && userId !==""){
         .catch(erro => console.error("Erro ao buscar:", erro)); 
     }
 
-} else {
+}else{
     console.log("Você não esta logado")
+    function mostrarCarrinho(){
+        const divCompras = document.querySelector(".lista")
+        divCompras.style.display = "block"
+        const divLista = document.querySelector(".lista-compras")
+        divLista.style.display = "block"
+        const finalList = document.querySelector(".final-lista")
+        finalList.style.display = "none"
+
+        divCompras.style.height = "400px"
+        carrinho.addEventListener("click", function() {
+            if (lista.style.display === "none" || lista.style.display === "") {
+                icon.className = "fa-solid fa-x";
+                carrinho.style.rigth = "100px"
+                lista.style.display = "flex";
+                lista.style.FlexDirection = "row"
+            } else {
+                icon.className = "fa-solid fa-cart-shopping";
+                lista.style.display = "none";
+            }
+        })
+    }
+    
 }
