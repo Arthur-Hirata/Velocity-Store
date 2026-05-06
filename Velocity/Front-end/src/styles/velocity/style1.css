@@ -45,9 +45,55 @@ button:active{
     color: #FFFFFF;
     text-align: center;
     font-weight: bold;
-    text-shadow: 0 0 3px #fff, 0 0 20px #fff;
-    
+    text-shadow: 0 0 3px #fff, 0 0 20px #fff;    
 }
+.err{
+    visibility: hidden;
+    background-color: var(--fundo-card);
+    border-radius: 12px;
+    height: 400px;
+    width: 400px;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000000;
+    top: 30%;
+}
+.sair{
+    position: absolute;
+    margin-top: -380px;
+    margin-left: 390px;
+    border-radius: 50%;
+    background-color: rgb(224, 37, 37);
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+}
+.title{
+    color: red;
+}
+.erro-sub{
+    color: var(--cor-texto);
+    text-align: center;
+}
+.login3{
+    width: 100px;
+    height: 40px;
+    background-color: var(--cor-promo);
+    border: none;
+    border-radius: 12px;
+}
+
+
+
+
+
+
+
+
 @media screen and (min-width:300px) and (max-width:450px) {
     button:hover{
     transform: scale(1.05);

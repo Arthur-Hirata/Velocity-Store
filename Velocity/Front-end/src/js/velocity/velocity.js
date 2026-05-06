@@ -220,8 +220,10 @@ if (userId && userId !==""){
         divLista.style.display = "block"
         const finalList = document.querySelector(".final-lista")
         finalList.style.display = "none"
-
+        const btnLogin2 = document.querySelector(".login2")
+        btnLogin2.style.height = "80px"
         divCompras.style.height = "400px"
+        divCompras.style.display= "none"
         carrinho.addEventListener("click", function() {
             if (lista.style.display === "none" || lista.style.display === "") {
                 icon.className = "fa-solid fa-x";
@@ -233,6 +235,14 @@ if (userId && userId !==""){
                 lista.style.display = "none";
             }
         })
+        const erradc = document.querySelectorAll(".btn-adicionar")
+        const divErro = document.querySelector(".err")
+        erradc.forEach(btn =>{
+            btn.addEventListener("click", function(){
+                divErro.style.visibility="visible"
+                
+            })
+        })
     }
-    
+    mostrarCarrinho()
 }
