@@ -50,7 +50,7 @@ button:active{
 .err{
     visibility: hidden;
     background-color: var(--fundo-card);
-    border-radius: 12px;
+    border-radius: 32px;
     height: 400px;
     width: 400px;
     position: fixed;
@@ -61,10 +61,19 @@ button:active{
     z-index: 1000000;
     top: 30%;
 }
+body.blurred > *:not(.err) {
+    filter: blur(8px);
+    transition: filter 0.3s ease;
+    pointer-events: none;
+    user-select: none;
+}
+body.blurred .err {
+    pointer-events: auto;
+}
 .sair{
     position: absolute;
     margin-top: -380px;
-    margin-left: 390px;
+    margin-left: 380px;
     border-radius: 50%;
     background-color: rgb(224, 37, 37);
     border: none;
@@ -86,14 +95,6 @@ button:active{
     border: none;
     border-radius: 12px;
 }
-
-
-
-
-
-
-
-
 @media screen and (min-width:300px) and (max-width:450px) {
     button:hover{
     transform: scale(1.05);

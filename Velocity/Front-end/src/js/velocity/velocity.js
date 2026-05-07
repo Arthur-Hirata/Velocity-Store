@@ -10,6 +10,8 @@ const userId = localStorage.getItem('userId')
 
 if (userId && userId !==""){
     getCredentials()
+    const notlogged = document.querySelector(".not-logged")
+    notlogged.style.display ="none"
     function getCredentials(){
         fetch('http://127.0.0.1:5000/getCredentials', {
             method : 'POST',
@@ -28,7 +30,7 @@ if (userId && userId !==""){
         })
     .catch(err => console.error("Erro no fetch:", err));
     }
-    const login =document.querySelector(".login")
+    const login=document.querySelector(".login")
     login.addEventListener("click", function(){
         //colocar aqui
     })
@@ -237,11 +239,16 @@ if (userId && userId !==""){
         })
         const erradc = document.querySelectorAll(".btn-adicionar")
         const divErro = document.querySelector(".err")
+        const bntsair = document.querySelector(".sair")
         erradc.forEach(btn =>{
             btn.addEventListener("click", function(){
-                divErro.style.visibility="visible"
-                
+                divErro.style.visibility = "visible"
+                document.body.classList.add("blurred")
             })
+        })
+        bntsair.addEventListener("click", function(){
+            divErro.style.visibility = "hidden"
+            document.body.classList.remove("blurred")
         })
     }
     mostrarCarrinho()
