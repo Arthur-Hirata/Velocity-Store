@@ -17,7 +17,7 @@ if (userId && userId !==""){
             method : 'POST',
             headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    id: userId
+                    id_user: userId
         })}
     )
     .then(response => response.json())
@@ -34,6 +34,8 @@ if (userId && userId !==""){
     login.addEventListener("click", function(){
         //colocar aqui
     })
+
+
     function atualizarPrecoFinal() {
         fetch('http://127.0.0.1:5000/precofinal')
         .then(response => response.json())
@@ -76,6 +78,7 @@ if (userId && userId !==""){
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     id: idProduto,
+                    id_user: userId,
                     imagem : imagemElemento,
                     quantidade: quantidade
                 })
