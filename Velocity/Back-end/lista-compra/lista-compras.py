@@ -69,8 +69,18 @@ def adicionar_item():
     
     return jsonify({"status": "erro", "mensagem": "Produto não encontrado"})
 
-@app.route('/mostrar', methods =['GET'])
+@app.route('/mostrar', methods=['POST'])
 def mostrar_lista():
+    dados = request.json
+    user_Id = dados.get('id_user')
+    with sqlite3.connect('banco-users.db') as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT buylist FROM users WHERE id=?", (user_Id,))
+        resultado = cursor.fetchone()
+        if resultado and resultado[0]:
+            lista_carrinho = json.loads(resultado[0])
+        else:
+            lista_carrinho = []
     return jsonify(lista_carrinho)
 
 @app.route('/atualizar/<string:id>', methods =['PATCH'])

@@ -105,7 +105,13 @@ if (userId && userId !==""){
         .catch(err => console.error("Erro ao limpar:", err));
     })
     function mostrarCarrinho(btn){ 
-        fetch("http://127.0.0.1:5000/mostrar") 
+        fetch("http://127.0.0.1:5000/mostrar",{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({
+                    id_user: userId   
+                })
+        }) 
         .then(resposta => resposta.json())  
         .then(listaDeProdutos => {                   
            listaCompras.innerHTML = ""
