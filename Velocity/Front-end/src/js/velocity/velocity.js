@@ -95,9 +95,13 @@ if (userId && userId !==""){
     
     remover.addEventListener('click', function(){
         fetch ("http://127.0.0.1:5000/apagar", {
-            method: 'DELETE'
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({
+                    id_user: userId   
+                })
         })
-        .then(response => response.json)
+        .then(response => response.json())
         .then(data =>{
             mostrarCarrinho();
             atualizarPrecoFinal()
@@ -149,7 +153,7 @@ if (userId && userId !==""){
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         id: produto.id,
-                        quantidade: produto.quantidade + 1
+                        quantidade: produto.quantidade + 1,
                     })
                 })
                 .then(response => response.json())
@@ -166,8 +170,8 @@ if (userId && userId !==""){
                         method: 'PATCH',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
-                            id: produto.id,
-                            quantidade: produto.quantidade - 1
+                            quantidade: produto.quantidade - 1,
+                            user_Id: userId
                         })
                     })
                     .then(response => response.json())
@@ -179,8 +183,11 @@ if (userId && userId !==""){
                 .catch(err => console.error("Erro no fetch:", err));
                 } else {
                     fetch(`http://127.0.0.1:5000/remover/${produto.id}` ,{
-                        method: 'DELETE'
-                        
+                        method: 'DELETE',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            user_Id: userId
+                        })
                     })
                     .then (resposta => {
                         if (resposta.ok) {

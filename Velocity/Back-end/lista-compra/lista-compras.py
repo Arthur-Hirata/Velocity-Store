@@ -15,16 +15,16 @@ def calcular_preco_final():
     """Calcula o preço final somando todos os itens do carrinho"""
     total = sum(produto['preco_unitario'] * produto['quantidade'] for produto in lista_carrinho)
     return total
-
+#Funcionando
 @app.route('/adicionar', methods=['POST'])
 def adicionar_item():
     dados = request.json
     id_produto = dados.get('id') 
     imagem_url = dados.get('imagem')
-    quantidade = dados.get('quantidade') # Corrigido digitação 'quntidade'
+    quantidade = dados.get('quantidade') 
     user_id = dados.get('id_user')
 
-    # A partir daqui tudo precisa estar indentado (com 4 espaços)
+   
     conexao = conectar_banco()
     cursor = conexao.cursor()
     cursor.execute("SELECT nome, preco FROM itens WHERE id = ?", (id_produto,))
@@ -66,11 +66,12 @@ def adicionar_item():
                 conex.commit()
             
             return jsonify({"status": "sucesso", "item": novo_item})
-    
     return jsonify({"status": "erro", "mensagem": "Produto não encontrado"})
 
+#Funcionando
 @app.route('/mostrar', methods=['POST'])
 def mostrar_lista():
+    global lista_carrinho
     dados = request.json
     user_Id = dados.get('id_user')
     with sqlite3.connect('banco-users.db') as conexao:
@@ -102,6 +103,8 @@ def atualizar_item(id):
             return {"status": "atualizado"}, 200
     return {"status": "não encontrado"}, 404
 
+
+
 @app.route('/diminuir/<string:id>', methods =['PATCH'])
 def remover_quantidade(id):
     dados = request.json
@@ -121,29 +124,55 @@ def remover_quantidade(id):
             return {"status": "atualizado"}, 200
     return {"status": "não encontrado"}, 404
 
+
+
+
+# funcionando bem top
 @app.route('/remover/<string:id>', methods =['DELETE'])
 def remover_item(id):
- global lista_carrinho
- for produto in lista_carrinho :
-    if produto['id'] == id:
-       lista_carrinho.remove(produto)
-       return {"status" : "removido"}, 200
-
- return {"status": "não encontrado"}, 404
-
-@app.route('/apagar', methods=['DELETE'])
-def apagar_lista():
     global lista_carrinho
-    lista_carrinho.clear()
+    dados = request.json
+    user_Id = dados.get("user_Id")
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT buylist FROM users WHERE id=?", (user_Id))
+        result = cursor.fetchone()
+        if result and result[0]:
+            lista_carrinho= json.loads(result[0])
+        else:
+         lista_carrinho =[]
+
+        nova_lista = [item for item in lista_carrinho if item ['id'] != id]
+
+        if len(nova_lista) == len (lista_carrinho):
+            return{"status": "não encontrado"} , 404
+
+        lista_carrinho = nova_lista
+        cursor.execute("UPDATE users SET buylist= ? WHERE id=?", (json.dumps(lista_carrinho), user_Id))
+        conexao.commit()
+    return{"status": "removido"}, 200         
+
+
+#Funcionando
+@app.route('/apagar', methods=['PATCH'])
+def apagar_lista():
+    dados = request.json
+    user_Id = dados.get("id_user")
+    global lista_carrinho
+    lista_carrinho = []
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("UPDATE users SET buylist = ? WHERE id = ?", (json.dumps([]), user_Id))
+        conexao.commit()
     return jsonify({"status": "lista_apagada"}), 200
 
-
+#Funcionando misteriosamente (nao fiz nada e ta funcionando)
 @app.route('/precofinal', methods=['GET'])
 def final_preco():
     preco_total = calcular_preco_final()
     return jsonify({"preco_final": preco_total})
 
-
+# Funcionando
 @app.route('/getCredentials', methods=['POST'])
 def pegarCredenciais():
     dados = request.json
