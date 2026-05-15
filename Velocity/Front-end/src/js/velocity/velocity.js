@@ -154,6 +154,7 @@ if (userId && userId !==""){
                     body: JSON.stringify({
                         id: produto.id,
                         quantidade: produto.quantidade + 1,
+                        user_id: userId
                     })
                 })
                 .then(response => response.json())

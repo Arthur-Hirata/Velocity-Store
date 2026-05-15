@@ -83,48 +83,80 @@ def mostrar_lista():
         else:
             lista_carrinho = []
     return jsonify(lista_carrinho)
-
+# FUNCIONANDO usei bastante IA
 @app.route('/atualizar/<string:id>', methods =['PATCH'])
 def atualizar_item(id):
     dados = request.json
     quantidade = dados.get('quantidade')
+    user_Id = dados.get('user_id')
     conexao = conectar_banco()
     cursor = conexao.cursor()
     cursor.execute("SELECT preco FROM itens WHERE id = ?", (id,))
     preco_unitario= cursor.fetchone()
     conexao.close()
+    with sqlite3.connect('banco-users.db') as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT buylist FROM users WHERE id= ?", (user_Id,))
+        result = cursor.fetchone()
+        #CONVERTE A LISTA, SE NÃO EXISTIR ELE COMEÇA OUTRA
+        if result and result[0]:
+            lista_carrinho = json.loads(result[0])
+        else:
+            lista_carrinho = []
+        #procura o id
+        for produto in lista_carrinho:
+            if produto['id'] == id:
+                #isso é caso a quantidade nao for enviada
+                if quantidade is None:
+                    produto['quantidade'] += 1
+                #redefine a qunatidade do banco como a qunatidade  certa
+                else:
+                    produto['quantidade'] = quantidade
+                produto['preco_unitario'] = preco_unitario[0]
+                produto['preco'] = preco_unitario[0] * produto['quantidade']
 
-    for produto in lista_carrinho:
-        if produto['id'] == id:
-            produto['quantidade'] = quantidade
-            produto['preco_unitario'] = preco_unitario[0]
-            produto['preco'] = preco_unitario[0] * quantidade
-            
-            return {"status": "atualizado"}, 200
-    return {"status": "não encontrado"}, 404
+                cursor.execute("UPDATE users SET buylist=? WHERE id=?", (json.dumps(lista_carrinho), user_Id))
+                conexao.commit()
+                return jsonify({"status": "atualizado", "item": produto}), 200
 
+        return jsonify({"status": "não encontrado"}), 404
 
-
+#FUNCIONANDO , entendi como faz, mas usei IA pq tava com erro de identação e eu não percebi
 @app.route('/diminuir/<string:id>', methods =['PATCH'])
 def remover_quantidade(id):
     dados = request.json
     quantidade = dados.get('quantidade')
+    user_Id = dados.get('user_Id')
     conexao = conectar_banco()
     cursor = conexao.cursor()
     cursor.execute("SELECT preco FROM itens WHERE id = ?", (id,))
     preco_unitario= cursor.fetchone()
     conexao.close()
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT buylist FROM users WHERE id=?", (user_Id,))
+        result = cursor.fetchone()
 
-    for produto in lista_carrinho:
-        if produto['id'] == id:
-            produto['quantidade'] = quantidade
-            produto['preco_unitario'] = preco_unitario[0]
-            produto['preco'] = preco_unitario[0] * quantidade
-            
-            return {"status": "atualizado"}, 200
-    return {"status": "não encontrado"}, 404
+        if result and result[0]:
+            lista_carrinho = json.loads(result[0])
+        else:
+            lista_carrinho = []
+
+        for produto in lista_carrinho:
+            if produto['id'] == id:
+                produto['quantidade'] -= 1
+                produto['quantidade'] = quantidade
+                produto['preco_unitario'] = preco_unitario[0]
+                produto['preco'] = preco_unitario[0] * produto['quantidade']
+                
+            cursor.execute("UPDATE users SET buylist=? WHERE id=?", (json.dumps(lista_carrinho), user_Id))
+            conexao.commit()
+            return jsonify({"status": "atualizado", "item": produto}), 200
 
 
+
+
+        return jsonify({"status": "não encontrado"}), 404
 
 
 # funcionando bem top
