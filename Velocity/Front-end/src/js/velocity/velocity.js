@@ -62,7 +62,8 @@ if (userId && userId !==""){
     });
     const btnadc = document.querySelectorAll(".btn-adicionar");
     btnadc.forEach(btn => {
-        btn.addEventListener('click', () => { //USEI IA AQUI
+        btn.addEventListener('click', (e) => { //USEI IA AQUI
+            e.preventDefault();
             const idProduto = btn.dataset.id;
             btnMap.set(idProduto, btn); // Armazena o botão no mapa
             const card = btn.closest('.promocao')
@@ -94,6 +95,7 @@ if (userId && userId !==""){
     });
     
     remover.addEventListener('click', function(){
+        
         fetch ("http://127.0.0.1:5000/apagar", {
             method: 'PATCH',
             headers: { 'Content-Type': 'application/json' },
@@ -134,9 +136,11 @@ if (userId && userId !==""){
             produtoPreco.textContent = precoProdutoFinal
             produtoPreco.className = "preco-produto"
             const aumentarQnt = document.createElement("button")
+            aumentarQnt.type = "button"
             aumentarQnt.className = "btn-aumentar"
             aumentarQnt.textContent = "+"
             const removerQnt = document.createElement("button")
+            removerQnt.type = "button"
             removerQnt.className = "btn-remover"
             removerQnt.textContent = "X"
             const divBtns = document.createElement("div")
@@ -148,6 +152,7 @@ if (userId && userId !==""){
             foto.src = produto.imagem;
             foto.className = "foto-lista"
             aumentarQnt.addEventListener("click", function(){
+                
                 fetch("http://127.0.0.1:5000/atualizar/" + produto.id,{
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
@@ -166,6 +171,7 @@ if (userId && userId !==""){
                 .catch(err => console.error("Erro no fetch:", err));
             })
             removerQnt.addEventListener("click", function(){
+                 
                 if (produto.quantidade > 1){
                     fetch("http://127.0.0.1:5000/diminuir/" + produto.id,{
                         method: 'PATCH',
