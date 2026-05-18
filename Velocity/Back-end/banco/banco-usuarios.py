@@ -1,7 +1,7 @@
 import sqlite3
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
+from werkzeug.security import generate_password_hash, check_password_hash
 app= Flask(__name__)
 CORS(app)
 
@@ -10,9 +10,10 @@ def adc_User():
     dados = request.json
     email = dados.get('email')
     senha = dados.get('senha')
+    senha_hash = generate_password_hash(senha)
     with sqlite3.connect("banco-users.db") as conexao:
         cursor= conexao.cursor()
-        cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, senha))
+        cursor.execute("INSERT INTO users (email, password) VALUES (?, ?)", (email, senha_hash))
         conexao.commit()
         user_id = cursor.lastrowid
     return jsonify({"mensagem": "Usuário recebido!", "id": user_id})
@@ -30,7 +31,7 @@ def loginUser():
 
     user_id, password_banco=resultado
 
-    if senha == password_banco:
+    if check_password_hash(password_banco, senha):
          return jsonify({"mensagem": "Login bem sucedido!", "id": user_id}), 200
     else:
         return jsonify({"mensagem": "Senha incorreta"}), 401
@@ -52,10 +53,10 @@ def FinalizarCredenciais():
 @app.route('/getCredentials', methods=['POST'])
 def pegarCredenciais():
     dados = request.json
-    id=dados.get("id")
+    id=dados.get("id_user")
     with sqlite3.connect("banco-users.db") as conexao:
         cursor = conexao.cursor()
-        cursor.execute("SELECT nome, buylist FROM users WHERE id=?", (id))
+        cursor.execute("SELECT nome, buylist FROM users WHERE id=?", (id,))
         resultado = cursor.fetchone()
     
     user_name, user_list = resultado
