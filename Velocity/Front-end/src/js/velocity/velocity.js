@@ -8,6 +8,9 @@ const btnMap = new Map(); // ISSO AQUI EU NAO SABIA USEI A IA PRA FAZER
 let isLogged = false
 const userId = localStorage.getItem('userId')
 
+
+
+
 if (userId && userId !==""){
     getCredentials()
     const notlogged = document.querySelector(".not-logged")
@@ -30,9 +33,10 @@ if (userId && userId !==""){
         })
     .catch(err => console.error("Erro no fetch:", err));
     }
-    const login=document.querySelector(".login")
+    const login=document.querySelector(".red-log")
     login.addEventListener("click", function(){
         //colocar aqui
+        window.location.href = "acc.html"
     })
 
 
@@ -237,6 +241,10 @@ if (userId && userId !==""){
     }
 
 }else{
+    const login  = document.querySelector(".red-log")
+    login.addEventListener("click", function(){
+        window.location.href = "login.html"
+    })
     console.log("Você não esta logado")
     function mostrarCarrinho(){
         const divCompras = document.querySelector(".lista")
