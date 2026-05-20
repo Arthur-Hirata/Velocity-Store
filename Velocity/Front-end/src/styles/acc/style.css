@@ -33,8 +33,7 @@ button{
     transition: transform 0.3s ease-in-out;
 }
 button:hover{
-    transform: scale(1.1);
-    filter: brightness(1.01);
+    transform: scale(1.04);
 }
 button:active{
     transform: scale(0.95);
@@ -50,14 +49,16 @@ button:active{
     flex-direction: row;
 }
 .tit{
-    margin-top: 0px;
-    margin-left: -510px;
+    position: absolute;
+    text-align: center;
+    margin-top: -530px;
+    margin-left: 190px;
 }
 .btns{
     display: flex;
     flex-direction: column;
     gap: 30px;
-    margin-left: 40px;
+    margin-left: -500px;
 }
 hr{
     height: 660px;
@@ -66,36 +67,61 @@ hr{
 }
 .txt{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 .geral{
     display: flex;
     flex-direction: column;
     position: relative;
+    margin-left: 30px;
+}
+.velc{
+    margin-left: -90px;
+    font-size: 30px;
 }
 .btn-selec{
     width: 200px;
     height: 30px;
     color: black;
     font-weight: bolder;
-    background-color: #F59E0B;
+    background-color: var(--cor-promo);
     border-radius: 12px;
     border: none;
+    margin-left: -140px;
+}.btn-n-selec{
+    width: 200px;
+    height: 30px;
+    color: black;
+    font-weight: bolder;
+    background-color: var(--cor-texto);
+    border-radius: 12px;
+    border: none;
+    margin-left: -140px;
+}
+#excluir{
+    background-color: #E11D48;
 }
 .infos{
-    margin-top: 30px;
-}
-.sub{
-   margin-left: -600px;
-}
-.info{
-    margin-left: -400px;
-    margin-top: 10px;
-    color: var(--texto-cinza);
-}
-.geral2{
-    display: flex;
-    flex-direction: column;
     position: absolute;
-    visibility: visible;
+    margin-top: -120px;
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(2,1fr);
+    
 }
+.profile-div{
+    width: 300px;
+    height: 80px;
+    background-color: #2D3033;
+    border-radius: 120px;
+    border: none;
+}
+.profile-title{
+    margin-left: 20px;
+    position: absolute;
+}
+
+/* cores para o profile-div
+#2D3033 
+#1F1E1E
+#383737
