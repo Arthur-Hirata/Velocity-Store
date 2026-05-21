@@ -63,7 +63,17 @@ def pegarCredenciais():
     return jsonify({"nome" : user_name, "buylist" : user_list})
 
 
+@app.route('/getInfo', methods= ['POST'])
+def pegarInfo():
+    dados= request.json
+    id_user = dados.get("userId")
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT nome, email, numero, address FROM users WHERE id=?", (id_user,))
+        result = cursor.fetchone()
+    user_name, user_email, user_num, user_cep = result
 
+    return jsonify({"nome": user_name, "email" : user_email,"tel" : user_num, "cep": user_cep})
 
 
 if __name__ == '__main__':

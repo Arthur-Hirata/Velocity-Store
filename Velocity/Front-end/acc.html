@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/Front-end/src/styles/acc/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Conta - Velocity</title>
 </head>
 <body>
@@ -14,30 +16,46 @@
             <button class="btn-n-selec">Ver pedidos</button>
             <button class="btn-n-selec">Mudar dados</button>
             <button class="btn-n-selec">Mudar senha</button>
-            <button class="btn-n-selec" id="excluir">Ecluir Conta</button>
+            <button class="btn-n-selec" id="excluir">Excluir Conta</button>
+        </div>
+        <div class="overlay" style="display: none;">
+            <div class="alert-exc">
+                <h1 class="tit-alert" style="text-align: center; font-size: 50px; color: #E11D48;">Cuidado!</h1>
+                <h3 class="alert-txt">Após apertar em excluir, não é possível recuperar sua conta</h3>
+                <div class="bt">
+                    <button class="excluir" onclick="excluirConta()">Excluir <i class="fas fa-trash"></i></button>
+                    <button class="vlt">Voltar</button>
+                </div>
+            </div>
         </div>
         <h1 class="tit">Revise suas informações</h1>
         <div class="txt">
             <div class="geral">
                 <div class="infos">
                     <div class="profile-div">
-                        <span class="profile-title" style="margin-top: 5px;">Nome</span>
+                        <span class="profile-title" >Nome</span>
+                        <span class="profile-value" id="name"></span>
                     </div>
                     <div class="profile-div">
-                        <span class="profile-title" style="margin-top: 5px;">E-mail</span>
+                        <span class="profile-title">E-mail</span>
+                        <span class="profile-value" id="email"></span>
                     </div>
                     <div class="profile-div">
-                        <span class="profile-title" style="margin-top: 5px;">Senha</span>
+                        <span class="profile-title">Senha</span>
+                        <span class="profile-value" id="senha"></span>
                     </div>
                     <div class="profile-div">
-                        <span class="profile-title" style="margin-top: 5px;">Telefone</span>
+                        <span class="profile-title">Telefone</span>
+                        <span class="profile-value" id="telefone"></span>
                     </div>
                     <div class="profile-div">
-                        <span class="profile-title" style="margin-top: 5px;">CEP</span>
+                        <span class="profile-title">CEP</span>
+                        <span class="profile-value" id="cep"></span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="/Front-end/src/js/acc/acc.js"></script>
 </body>
 </html>

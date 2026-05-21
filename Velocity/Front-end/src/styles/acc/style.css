@@ -31,6 +31,7 @@ body{
 button{
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    user-select: none;
 }
 button:hover{
     transform: scale(1.04);
@@ -115,12 +116,70 @@ hr{
     background-color: #2D3033;
     border-radius: 120px;
     border: none;
+    display: flex;
+    flex-direction: column;
 }
 .profile-title{
-    margin-left: 20px;
-    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    
 }
-
+.profile-value{
+   text-align: center;
+   margin-top: 10px;
+}
+.alert-exc{
+    position: absolute;
+    width: 500px;
+    height: 400px;
+    background-color: var(--fundo-card);
+    z-index: 1000;
+    border-radius: 20px;
+}
+.bt{
+    display: flex;
+    margin-top: 70px;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.alert-txt{
+    text-align: center;
+    margin-left: 12px;
+    margin-right: 12px;
+    font-size: 25px;
+    margin-top: 20px;
+}
+.excluir{
+    width: 140px;
+    height: 30px;
+    background-color: #E11D48;
+    border-radius: 12px;
+    border: none;
+   
+}
+.vlt{
+    width: 140px;
+    height: 30px;
+    background-color: var(--cor-texto);
+    border-radius: 12px;
+    border: none;
+    
+}
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(5px);           
+    -webkit-backdrop-filter: blur(5px);  
+    z-index: 999;                       
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 /* cores para o profile-div
 #2D3033 
 #1F1E1E
