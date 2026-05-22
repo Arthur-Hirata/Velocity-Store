@@ -75,6 +75,16 @@ def pegarInfo():
 
     return jsonify({"nome": user_name, "email" : user_email,"tel" : user_num, "cep": user_cep})
 
+@app.route('/deleteAcc', methods=['DELETE'])
+def deleteAcc():
+    dados = request.json
+    id_user= dados.get("userId")
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor=conexao.cursor()
+        cursor.execute("DELETE FROM users WHERE id=?", (id_user,))
+        conexao.commit()
+    return jsonify({"mensagem":"Conta deletada com sucesso"})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

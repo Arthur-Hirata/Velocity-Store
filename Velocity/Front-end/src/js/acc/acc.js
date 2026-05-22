@@ -43,4 +43,34 @@ if (userId && userId !==""){
             overlay.style.display = "none"
         }
     })
+    function excluirConta(){
+        fetch('http://127.0.0.1:5000/deleteAcc', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId : userId
+            })
+        })
+        .then(response => response.json())
+        .then(data=>{
+            if (data.mensagem === "Conta deletada com sucesso"){
+                console.log("Deletou")
+                localStorage.removeItem('userId')
+            } else {
+                console.log("Sua conta não foi excluida")
+            }
+        })
+        .catch(error => {
+        console.error("Erro na requisição de rede:", error);
+    });
+    }
+    const verPedidos=document.getElementById("ver-pedidos")
+    const title= document.querySelector(".tit")
+
+    verPedidos.addEventListener("click", function(){
+        const infogeral = document.querySelector(".infos")
+        infogeral.style.visibility = "hidden"
+        title.textContent = "Sua lista de compras"
+        
+    })
 }

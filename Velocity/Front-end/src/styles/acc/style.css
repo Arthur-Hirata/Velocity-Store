@@ -108,7 +108,7 @@ hr{
     display: grid;
     gap: 40px;
     grid-template-columns: repeat(2,1fr);
-    
+    visibility: visible;
 }
 .profile-div{
     width: 300px;
