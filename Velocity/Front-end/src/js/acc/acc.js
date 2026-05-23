@@ -56,6 +56,8 @@ if (userId && userId !==""){
             if (data.mensagem === "Conta deletada com sucesso"){
                 console.log("Deletou")
                 localStorage.removeItem('userId')
+                
+
             } else {
                 console.log("Sua conta não foi excluida")
             }
@@ -64,13 +66,45 @@ if (userId && userId !==""){
         console.error("Erro na requisição de rede:", error);
     });
     }
+    const verInfo=  document.getElementById("ver-info")
     const verPedidos=document.getElementById("ver-pedidos")
     const title= document.querySelector(".tit")
 
+    verInfo.addEventListener("click", function(){
+        const infogeral = document.querySelector(".infos")
+        const list = document.querySelector(".lista")
+        const lista=document.querySelector(".listaProdutos")
+        lista.style.visibility = "hidden"
+        infogeral.style.visibility = "visible"
+        list.style.visibility = "hidden"
+        title.textContent = "Revise suas informações"
+    })
     verPedidos.addEventListener("click", function(){
         const infogeral = document.querySelector(".infos")
         infogeral.style.visibility = "hidden"
+        const list = document.querySelector(".lista")
+        list.style.visibility = "visible"
         title.textContent = "Sua lista de compras"
-        
+        const lista=document.querySelector(".listaProdutos")
+        lista.style.visibility = "visible"
+        fetch('http://127.0.0.1:5000/mostrar', {
+            method : 'POST',
+            body: JSON.stringify({
+                id_user : userId
+            })
+        })
+        .then(resposta => resposta.json())
+        .then(listaProdutos =>{
+            listaProdutos.forEach(produto =>{
+                lista.innerHTML = ""
+                const li = document.createElement("li")
+                li.className = "item-lista"
+            })
+        })
     })
+
+
+
+
+
 }

@@ -180,6 +180,126 @@ hr{
     justify-content: center;
     align-items: center;
 }
+.lista{
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.list-emp{
+    position: absolute;
+    font-size: 50px;
+    width: 1000px;
+    margin-left: 650px;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+.final-price{
+    position: absolute;
+    font-size: 30px;
+    width: 1000px;
+    margin-left: 590px;
+    margin-top: -400px;
+    color: #F59E0B;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+}
+.listaProdutos{
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    list-style: none;
+    gap: 40px;
+    margin-left: 600px;
+    margin-top: 100px;
+    overflow-y:auto;
+    overflow-x: hidden;
+    height: 450px;
+}
+.listaProdutos::-webkit-scrollbar{
+    background-color: transparent;
+    width: 6px;
+    height: 6px;
+}
+.listaProdutos::-webkit-scrollbar-track{
+    background-color: transparent;
+    border-radius: 50%;
+}
+.listaProdutos::-webkit-scrollbar-thumb{
+    background-color: gray;
+    border-radius: 50px;
+    margin-left: 12px;
+}
+.item-lista{
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    width: 150px;
+    height: 200px;
+    flex-direction: column;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow-x: auto;
+    margin-top: 0px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+.item-lista:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+#imagem-item{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+#nome-item{
+    font-size: 17px;
+    color: var(--cor-texto);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    word-break: break-word;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 130px;
+    position: absolute;
+}
+#preco-item{
+    color: #FF6B6B;
+    text-align: center;
+    font-size: 20px;
+}
+.limpar-lista{
+    position: absolute;
+    margin-left: 600px;
+    margin-top: 590px;
+    height: 30px;
+    width: 120px;
+    color: white;
+    background-color: #E11D48;
+    border: none;
+    border-radius: 12px;
+}
+
+
+
 /* cores para o profile-div
 #2D3033 
 #1F1E1E
