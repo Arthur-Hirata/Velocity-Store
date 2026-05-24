@@ -79,7 +79,17 @@ if (userId && userId !==""){
         list.style.visibility = "hidden"
         title.textContent = "Revise suas informações"
     })
-    verPedidos.addEventListener("click", function(){
+    function atualizarPrecoFinal(){
+        fetch('http://127.0.0.1:5000/precofinal')
+        .then(response => response.json())
+        .then(data => {
+            const precoFinalElement = document.querySelector('.final-price');
+            const precoFormatado = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(data.preco_final);
+            precoFinalElement.innerHTML = `Preço Final ${precoFormatado}`;
+        })
+        .catch(err => console.error('Erro ao buscar preço final:', err));
+    }
+    function mostrarLista(){
         const infogeral = document.querySelector(".infos")
         infogeral.style.visibility = "hidden"
         const list = document.querySelector(".lista")
@@ -89,22 +99,51 @@ if (userId && userId !==""){
         lista.style.visibility = "visible"
         fetch('http://127.0.0.1:5000/mostrar', {
             method : 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id_user : userId
+                id_user: userId
             })
         })
         .then(resposta => resposta.json())
         .then(listaProdutos =>{
+            lista.innerHTML=""
             listaProdutos.forEach(produto =>{
-                lista.innerHTML = ""
                 const li = document.createElement("li")
                 li.className = "item-lista"
+                const spanNome = document.createElement("span")
+                const imgItem= document.createElement("img")
+                const spanPrice= document.createElement("span")
+                const finalPrice=document.querySelector(".final-price")
+                spanNome.classList="nome-item"
+                imgItem.classList="imagem-item"
+                spanPrice.classList="preco-item"
+                imgItem.src = produto.imagem
+                spanNome.textContent= `${produto.nome}`
+                spanPrice.textContent=`${produto.preco}`
+                li.append(imgItem)
+                li.append(spanNome)
+                li.append(spanPrice)
+                lista.appendChild(li)
+                atualizarPrecoFinal()
+                const limparLista =document.querySelector(".limpar-lista")
+                limparLista.addEventListener("click", function(){
+                    fetch('http://127.0.0.1:5000/apagar', {
+                        method : 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            id_user : userId
+                        })
+                     })
+                    .then(response => response.json())
+                    .then(data =>{
+                        mostrarLista();
+                        limparLista.style.visibility="hidden"
+                        finalPrice.style.visibility = "hidden"
+                        })
+                    .catch(err => console.error("Erro ao limpar:", err))
+                    })
+                }) 
+                
             })
-        })
-    })
-
-
-
-
-
-}
+        }
+    }
