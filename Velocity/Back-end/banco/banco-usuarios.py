@@ -75,6 +75,21 @@ def pegarInfo():
 
     return jsonify({"nome": user_name, "email" : user_email,"tel" : user_num, "cep": user_cep})
 
+@app.route('/ConfirmPassword', methods=['POST'])
+def confirPass():
+    dados= request.json
+    id_user=dados.get("userId")
+    senhaAtual= dados.get("senhaAtual")
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT password FROM users WHERE id=?", (id_user,))
+        result=cursor.fetchone()
+    if result:
+        senha_hash_banco = result[0]
+        if check_password_hash(senha_hash_banco, senhaAtual):
+            return jsonify ({"mensagem": "A senha está correta"}), 200
+    return jsonify ({"mensagem" : "A senha está incorreta"}), 401
+
 @app.route('/deleteAcc', methods=['DELETE'])
 def deleteAcc():
     dados = request.json
@@ -84,6 +99,9 @@ def deleteAcc():
         cursor.execute("DELETE FROM users WHERE id=?", (id_user,))
         conexao.commit()
     return jsonify({"mensagem":"Conta deletada com sucesso"})
+
+
+
 
 
 if __name__ == '__main__':

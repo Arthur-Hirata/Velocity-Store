@@ -188,17 +188,6 @@ hr{
     align-items: center;
 
 }
-.list-emp{
-    position: absolute;
-    font-size: 50px;
-    width: 1000px;
-    margin-left: 650px;
-    color: red;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    visibility: hidden;
-}
 .final-price{
     position: absolute;
     font-size: 30px;
@@ -297,7 +286,61 @@ hr{
     border: none;
     border-radius: 12px;
 }
+.change-pass{
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.sub{
+    position: absolute;
+    margin-top: -200px;
+    margin-left: 620px;
+    width: 250px;
+}
+input[type="text"], input[type="password"]{
+    background-color: var(--fundo-card);
+    border: 1px solid var(--sombra-branca);
+    width: 400px;
+    height: 30px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-branca);
+    text-align: center;
+    color: var(--cor-texto);
+    position: absolute;
+    font-size: 14px;
+}
+#senha-atual{
+    margin-top: -120px;
+    margin-left: 570px;
 
+}
+.btn-olho{
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    color: var(--cor-texto);
+}
+#olho1{
+    margin-top: -120px;
+    margin-left: 930px;
+}
+.sub2{
+    position: absolute;
+    margin-top: 0px;
+    margin-left: 620px;
+    width: 250px;
+}
+#nova-senha{
+    position: absolute;
+    margin-top: 70px;
+    margin-left: 570px;
+}
+#olho2{
+    margin-left: 930px;
+    margin-top: 70px;
+}
 
 
 /* cores para o profile-div

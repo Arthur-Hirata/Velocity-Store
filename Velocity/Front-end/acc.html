@@ -15,7 +15,7 @@
             <button class="btn-selec" id="ver-info">Informações</button>
             <button class="btn-n-selec" id="ver-pedidos" onclick="mostrarLista()">Ver pedidos</button>
             <button class="btn-n-selec">Mudar dados</button>
-            <button class="btn-n-selec">Mudar senha</button>
+            <button class="btn-n-selec" id="mudar-senha">Mudar senha</button>
             <button class="btn-n-selec" id="excluir">Excluir Conta</button>
         </div>
         <div class="overlay" style="display: none;">
@@ -54,11 +54,19 @@
                     </div>
                 </div>
                 <div class="lista">
-                    <h3 class="list-emp">Sua lista está vazia!</h3>
                     <h3 class="final-price"></h3>
                     <ul class="listaProdutos">
                     </ul>
                     <button class="limpar-lista">Limpar lista <i class="fas fa-trash"></i></button>
+                </div>
+                <div class="change-cred"></div>
+                <div class="change-pass">       
+                        <h3 class="sub">Digite sua senha atual</h3>
+                        <input type="password" id="senha-atual" placeholder="Senha atual">
+                        <button class="btn-olho" id="olho1"><i class="fas fa-eye"></i></button>
+                        <h3 class="sub2">Digite sua nova senha</h3>
+                        <input type="password" id="nova-senha" placeholder="Senha nova">
+                        <button class="btn-olho" id="olho2"><i class="fas fa-eye"></i></button>
                 </div>
             </div>
         </div>

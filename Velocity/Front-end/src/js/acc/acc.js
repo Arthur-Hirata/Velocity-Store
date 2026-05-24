@@ -68,16 +68,20 @@ if (userId && userId !==""){
     }
     const verInfo=  document.getElementById("ver-info")
     const verPedidos=document.getElementById("ver-pedidos")
+    const mudSenha = document.getElementById("mudar-senha")
     const title= document.querySelector(".tit")
+    const infogeral = document.querySelector(".infos")
+    const list = document.querySelector(".lista")
+    const changePass= document.querySelector(".change-pass")
 
     verInfo.addEventListener("click", function(){
-        const infogeral = document.querySelector(".infos")
-        const list = document.querySelector(".lista")
         const lista=document.querySelector(".listaProdutos")
-        lista.style.visibility = "hidden"
-        infogeral.style.visibility = "visible"
+        lista.style.visibility="hidden"
+        infogeral.style.visibility="visible"
+        changePass.style.visibility="hidden"
         list.style.visibility = "hidden"
         title.textContent = "Revise suas informações"
+        getCredentials()
     })
     function atualizarPrecoFinal(){
         fetch('http://127.0.0.1:5000/precofinal')
@@ -90,9 +94,8 @@ if (userId && userId !==""){
         .catch(err => console.error('Erro ao buscar preço final:', err));
     }
     function mostrarLista(){
-        const infogeral = document.querySelector(".infos")
         infogeral.style.visibility = "hidden"
-        const list = document.querySelector(".lista")
+        changePass.style.visibility="hidden"
         list.style.visibility = "visible"
         title.textContent = "Sua lista de compras"
         const lista=document.querySelector(".listaProdutos")
@@ -145,5 +148,54 @@ if (userId && userId !==""){
                 }) 
                 
             })
-        }
     }
+    mudSenha.addEventListener("click", function(){
+        infogeral.style.visibility="hidden"
+        list.style.visibility="hidden"
+        changePass.style.visibility="visible"
+        title.textContent="Mude sua senha"
+        const inputSenhaatual = document.getElementById("senha-atual")
+        const senhaAtual= inputSenhaatual.value()  
+
+        fetch('http://127.0.0.1:5000/ConfirmPassword',{
+            method : 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: userId,
+                senhaAtual : senhaAtual
+            })
+        })
+        .then(response => response.json())
+        .then(data=>{
+            if (data.mensagem === "A senha está correta"){
+                
+            } else if (data.mensagem === "A senha está incorreta"){
+
+            }
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    })
+}
