@@ -100,6 +100,19 @@ def deleteAcc():
         conexao.commit()
     return jsonify({"mensagem":"Conta deletada com sucesso"})
 
+@app.route('/passwordChange', methods=['PATCH'])
+def mudarSenha():
+    dados = request.json
+    id_user = dados.get("userId")
+    novaSenha = dados.get("senhaNova")
+    senhaHash= generate_password_hash(novaSenha)
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("UPDATE users SET password=? WHERE id=?", (senhaHash, id_user))
+        conexao.commit()
+
+    return jsonify ({"mensagem": "A sua senha foi mudada com sucesso"}), 200
+
 
 
 

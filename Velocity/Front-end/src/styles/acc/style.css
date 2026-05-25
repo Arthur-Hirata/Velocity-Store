@@ -128,6 +128,30 @@ hr{
    text-align: center;
    margin-top: 10px;
 }
+.log-out{
+    width: 120px;
+    height: 40px;
+    margin-left: 90px;
+    margin-top: 30px;
+    border-radius: 12px;
+    background-color: var(--cor-promo);
+    color: var(--cor-texto);
+    border: none;
+}
+.overlay2{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(5px);           
+    -webkit-backdrop-filter: blur(5px);  
+    z-index: 999;                       
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .alert-exc{
     position: absolute;
     width: 500px;
@@ -165,6 +189,13 @@ hr{
     border-radius: 12px;
     border: none;
     
+}
+.vlt2{
+    width: 140px;
+    height: 30px;
+    background-color: var(--cor-texto);
+    border-radius: 12px;
+    border: none;
 }
 .overlay{
     position: fixed;
@@ -340,6 +371,34 @@ input[type="text"], input[type="password"]{
 #olho2{
     margin-left: 930px;
     margin-top: 70px;
+}
+.sub3{
+    position: absolute;
+    margin-top: 190px;
+    margin-left: 620px;
+    width: 300px;
+}
+#confirm-new-pass{
+    position: absolute;
+    margin-top: 260px;
+    margin-left: 570px;
+}
+#olho3{
+    position: absolute;
+    margin-left: 930px;
+    margin-top: 260px;   
+
+}
+.mud-senha{
+    width: 200px;
+    height: 30px;
+    background-color: var(--cor-promo);
+    color: var(--cor-texto);
+    border-radius: 12px;
+    border: none;
+    position: absolute;
+    margin-left: 590px;
+    margin-top: 450px;
 }
 
 

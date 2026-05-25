@@ -43,6 +43,26 @@ if (userId && userId !==""){
             overlay.style.display = "none"
         }
     })
+    const btnLogout = document.querySelector(".log-out")
+    btnLogout.addEventListener("click", function(){
+        const overlay = document.querySelector(".overlay2")
+        if (overlay){
+            overlay.style.display= "flex"
+        }
+    })
+    const bntvoltar2= document.querySelector(".vlt2")
+    bntvoltar2.addEventListener("click", function(){
+        const overlay = document.querySelector(".overlay2")
+        if (overlay){
+            overlay.style.display= "none"
+        }
+    })
+    function sairConta(){
+        userId.value=""
+        window.location.href="Velocity.html"
+    }
+
+
     function excluirConta(){
         fetch('http://127.0.0.1:5000/deleteAcc', {
             method: 'DELETE',
@@ -68,7 +88,7 @@ if (userId && userId !==""){
     }
     const verInfo=  document.getElementById("ver-info")
     const verPedidos=document.getElementById("ver-pedidos")
-    const mudSenha = document.getElementById("mudar-senha")
+    const mudarSenha = document.getElementById("mudar-senha")
     const title= document.querySelector(".tit")
     const infogeral = document.querySelector(".infos")
     const list = document.querySelector(".lista")
@@ -149,16 +169,20 @@ if (userId && userId !==""){
                 
             })
     }
-    mudSenha.addEventListener("click", function(){
+    mudarSenha.addEventListener("click", function(){
         infogeral.style.visibility="hidden"
         list.style.visibility="hidden"
         changePass.style.visibility="visible"
         title.textContent="Mude sua senha"
+    })
+    const mudSenha=document.querySelector(".mud-senha")
+    mudSenha.addEventListener("click", function(){
         const inputSenhaatual = document.getElementById("senha-atual")
-        const senhaAtual= inputSenhaatual.value()  
+        const senhaAtual= inputSenhaatual.value  
+
 
         fetch('http://127.0.0.1:5000/ConfirmPassword',{
-            method : 'PATCH',
+            method : 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 userId: userId,
@@ -167,35 +191,48 @@ if (userId && userId !==""){
         })
         .then(response => response.json())
         .then(data=>{
+            let canChangebyPass = false
+            let canChangebyNew = false
+            let canChangeByConfirm = false
+            let senhaNova ="";
             if (data.mensagem === "A senha está correta"){
-                
+                const newPass =document.getElementById("nova-senha")
+                const senhaNova = newPass.value
+                const confimationPass=document.getElementById("confirm-new-pass")
+                const confirm = confimationPass.value
+                canChangebyPass = true
+                if (senhaNova.length >= 8){
+                    canChangebyNew = true
+                } else {
+
+                }
+                if (senhaNova === confirm){
+                        canChangeByConfirm = true
+                }
             } else if (data.mensagem === "A senha está incorreta"){
 
             }
+            let canChange = canChangeByConfirm && canChangebyPass && canChangebyNew
+            if (canChange){
+                fetch('http://127.0.0.1:5000/passwordChange', {
+                    method : 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId: userId,
+                        senhaNova: senhaNova
+                    })
+                })
+                .then(response => response.json())
+                .then(data=>{
+                    if (data.mensagem ==="A sua senha foi mudada com sucesso"){
+                       alert("deu certo");
+                       document.getElementById("senha-atual").value = "";
+                        document.getElementById("nova-senha").value = "";
+                        document.getElementById("confirm-new-pass").value = "";
+                    }
+                })
+            }
+
         })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     })
 }

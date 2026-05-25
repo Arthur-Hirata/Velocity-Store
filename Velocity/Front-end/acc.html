@@ -28,6 +28,16 @@
                 </div>
             </div>
         </div>
+        <div class="overlay2" style="display: none;">
+            <div class="alert-exc">
+            <h1 class="tit-alert" style="text-align: center; font-size: 50px; color: #E11D48;">Cuidado!</h1>
+                <h3 class="alert-txt">Tem certeza que deseja deslogar?</h3>
+                <div class="bt">
+                    <button class="excluir" onclick="sairConta()">Sair <i class="fa fa-sign-out"></i></button>
+                    <button class="vlt2">Voltar</button>
+                </div>
+            </div>
+        </div>
         <h1 class="tit">Revise suas informações</h1>
         <div class="txt">
             <div class="geral">
@@ -52,6 +62,7 @@
                         <span class="profile-title">CEP</span>
                         <span class="profile-value" id="cep"></span>
                     </div>
+                    <button class="log-out">Log out <i class="fa fa-sign-out"></i></button>
                 </div>
                 <div class="lista">
                     <h3 class="final-price"></h3>
@@ -67,6 +78,10 @@
                         <h3 class="sub2">Digite sua nova senha</h3>
                         <input type="password" id="nova-senha" placeholder="Senha nova">
                         <button class="btn-olho" id="olho2"><i class="fas fa-eye"></i></button>
+                        <h3 class="sub3">Digite novamente sua senha</h3>
+                        <input type="password"id="confirm-new-pass" placeholder="Confirme sua nova senha">
+                        <button class="btn-olho" id="olho3" ><i class="fas fa-eye"></i></button>
+                        <button class="mud-senha">Mudar Senha</button>
                 </div>
             </div>
         </div>
