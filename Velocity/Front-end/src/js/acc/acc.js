@@ -175,10 +175,35 @@ if (userId && userId !==""){
         changePass.style.visibility="visible"
         title.textContent="Mude sua senha"
     })
+    function aplicarEstilopadrao(input){
+        input.style.boxShadow = "0 0 20px 5px rgba(255, 255, 255, 0.8)";
+        input.style.border = "1px solid var(--sombra-branca)";
+    }
+    function aplicarEstiloerro(input){
+        input.style.boxShadow = "none";
+        input.style.border = "1px solid red";
+    }
+
     const mudSenha=document.querySelector(".mud-senha")
     mudSenha.addEventListener("click", function(){
         const inputSenhaatual = document.getElementById("senha-atual")
         const senhaAtual= inputSenhaatual.value  
+        const erro1 = document.getElementById("erro1")
+        const erro2 = document.getElementById("erro2")
+        const erro3 = document.getElementById("erro3")
+        const newPass =document.getElementById("nova-senha")
+        const confimationPass=document.getElementById("confirm-new-pass")
+        const senhaNova = newPass.value
+        const confirm = confimationPass.value
+
+        erro1.style.display = "none";
+        erro2.style.display = "none";
+        erro3.style.display = "none";
+        aplicarEstilopadrao(inputSenhaatual);
+        aplicarEstilopadrao(newPass);
+        aplicarEstilopadrao(confimationPass);
+
+
 
 
         fetch('http://127.0.0.1:5000/ConfirmPassword',{
@@ -194,22 +219,26 @@ if (userId && userId !==""){
             let canChangebyPass = false
             let canChangebyNew = false
             let canChangeByConfirm = false
-            let senhaNova ="";
             if (data.mensagem === "A senha está correta"){
-                const newPass =document.getElementById("nova-senha")
-                const senhaNova = newPass.value
-                const confimationPass=document.getElementById("confirm-new-pass")
-                const confirm = confimationPass.value
                 canChangebyPass = true
                 if (senhaNova.length >= 8){
                     canChangebyNew = true
-                } else {
+                    
 
+                } else {
+                   erro2.style.display="block"
+                   aplicarEstiloerro(newPass)
                 }
                 if (senhaNova === confirm){
                         canChangeByConfirm = true
+                } else{
+                    erro3.style.display = "block";
+                    aplicarEstiloerro(confimationPass);
                 }
             } else if (data.mensagem === "A senha está incorreta"){
+                erro1.style.display = "block";
+                aplicarEstiloerro(inputSenhaatual);
+
 
             }
             let canChange = canChangeByConfirm && canChangebyPass && canChangebyNew
@@ -236,3 +265,5 @@ if (userId && userId !==""){
         })
     })
 }
+
+// SENHA DE TESTE = 12345601

@@ -345,7 +345,6 @@ input[type="text"], input[type="password"]{
 #senha-atual{
     margin-top: -120px;
     margin-left: 570px;
-
 }
 .btn-olho{
     position: absolute;
@@ -359,34 +358,34 @@ input[type="text"], input[type="password"]{
 }
 .sub2{
     position: absolute;
-    margin-top: 0px;
+    margin-top: 20px;
     margin-left: 620px;
     width: 250px;
 }
 #nova-senha{
     position: absolute;
-    margin-top: 70px;
+    margin-top: 90px;
     margin-left: 570px;
 }
 #olho2{
     margin-left: 930px;
-    margin-top: 70px;
+    margin-top: 90px;
 }
 .sub3{
     position: absolute;
-    margin-top: 190px;
+    margin-top: 210px;
     margin-left: 620px;
     width: 300px;
 }
 #confirm-new-pass{
     position: absolute;
-    margin-top: 260px;
+    margin-top: 280px;
     margin-left: 570px;
 }
 #olho3{
     position: absolute;
     margin-left: 930px;
-    margin-top: 260px;   
+    margin-top: 280px;   
 
 }
 .mud-senha{
@@ -399,6 +398,29 @@ input[type="text"], input[type="password"]{
     position: absolute;
     margin-left: 590px;
     margin-top: 450px;
+}
+.erro{
+    font-size: 14px;
+    color: red;
+    position: absolute;
+}
+#erro1{
+    margin-top: -60px;
+    margin-left: 350px;
+    width: 170px;
+    display: none;
+}
+#erro2{
+    margin-top: 150px;
+    margin-left: 550px;
+    width: 370px;
+    display: none;
+}
+#erro3{
+    margin-top: 340px;
+    margin-left: 550px;
+    width: 370px;
+    display: none;
 }
 
 
