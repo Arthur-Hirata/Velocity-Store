@@ -240,7 +240,7 @@ if (userId && userId !==""){
     }
 
 }else{
-    const login  = document.querySelector(".red-log")
+    const login= document.querySelector(".red-log")
     login.addEventListener("click", function(){
         window.location.href = "login.html"
     })

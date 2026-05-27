@@ -58,7 +58,7 @@ if (userId && userId !==""){
         }
     })
     function sairConta(){
-        userId.value=""
+        localStorage.removeItem('userId')
         window.location.href="Velocity.html"
     }
 
@@ -184,15 +184,56 @@ if (userId && userId !==""){
         input.style.border = "1px solid red";
     }
 
+    const inputSenhaatual = document.getElementById("senha-atual")
+    const newPass = document.getElementById("nova-senha")
+    const confimationPass = document.getElementById("confirm-new-pass")
+    const olho1 = document.getElementById("olho1")
+    const olho2 = document.getElementById("olho2")
+    const olho3 = document.getElementById("olho3")
+    const icon1 = olho1?.querySelector("i")
+    const icon2 = olho2?.querySelector("i")
+    const icon3 = olho3?.querySelector("i")
+
+    if (olho1){
+        olho1.addEventListener("click", function(){
+            if (inputSenhaatual.type === "password"){
+                inputSenhaatual.type = "text"
+                if (icon1) icon1.className = "fas fa-eye-slash"
+            } else {
+                inputSenhaatual.type = "password"
+                if (icon1) icon1.className = "fas fa-eye"
+            }
+        })
+    }
+    if (olho2){
+        olho2.addEventListener("click", function(){
+            if (newPass.type === "password"){
+                newPass.type = "text"
+                if (icon2) icon2.className = "fas fa-eye-slash"
+            } else {
+                newPass.type = "password"
+                if (icon2) icon2.className = "fas fa-eye"
+            }
+        })
+    }
+    if (olho3){
+        olho3.addEventListener("click", function(){
+            if (confimationPass.type === "password"){
+                confimationPass.type = "text"
+                if (icon3) icon3.className = "fas fa-eye-slash"
+            } else {
+                confimationPass.type = "password"
+                if (icon3) icon3.className = "fas fa-eye"
+            }
+        })
+    }
+
     const mudSenha=document.querySelector(".mud-senha")
     mudSenha.addEventListener("click", function(){
-        const inputSenhaatual = document.getElementById("senha-atual")
         const senhaAtual= inputSenhaatual.value  
         const erro1 = document.getElementById("erro1")
         const erro2 = document.getElementById("erro2")
         const erro3 = document.getElementById("erro3")
-        const newPass =document.getElementById("nova-senha")
-        const confimationPass=document.getElementById("confirm-new-pass")
         const senhaNova = newPass.value
         const confirm = confimationPass.value
 
@@ -202,9 +243,6 @@ if (userId && userId !==""){
         aplicarEstilopadrao(inputSenhaatual);
         aplicarEstilopadrao(newPass);
         aplicarEstilopadrao(confimationPass);
-
-
-
 
         fetch('http://127.0.0.1:5000/ConfirmPassword',{
             method : 'POST',
@@ -254,10 +292,22 @@ if (userId && userId !==""){
                 .then(response => response.json())
                 .then(data=>{
                     if (data.mensagem ==="A sua senha foi mudada com sucesso"){
-                       alert("deu certo");
-                       document.getElementById("senha-atual").value = "";
+                        document.getElementById("senha-atual").value = "";
                         document.getElementById("nova-senha").value = "";
                         document.getElementById("confirm-new-pass").value = "";
+                        
+                        const overlay3 = document.querySelector(".overlay3")
+                        overlay3.style.display = "flex"
+                        const vlt3 = document.querySelector(".vlt3")
+                        vlt3.addEventListener("click", function(){
+                            overlay3.style.display = "none"
+                        })
+
+
+
+
+
+
                     }
                 })
             }
@@ -266,4 +316,4 @@ if (userId && userId !==""){
     })
 }
 
-// SENHA DE TESTE = 12345601
+// SENHA DE TESTE =abc123abc id =13 
