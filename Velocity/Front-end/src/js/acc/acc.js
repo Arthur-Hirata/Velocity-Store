@@ -17,12 +17,20 @@ if (userId && userId !==""){
         const senha = document.getElementById("senha")
         const tel = document.getElementById("telefone")
         const CEP = document.getElementById("cep")
+        const name2 = document.getElementById("name2")
+        const email2 = document.getElementById("email2")
+        const tel2 = document.getElementById("telefone2")
+        const CEP2 = document.getElementById("cep2")
             if (data){
                 name.textContent = data.nome
                 email.textContent = data.email
                 senha.textContent = "*********"
                 tel.textContent = data.tel
                 CEP.textContent = data.cep
+                name2.value = data.nome
+                email2.value = data.email
+                tel2.value = data.tel
+                CEP2.value= data.cep
             }
         })
     .catch(err => console.error("Erro no fetch:", err));
@@ -92,6 +100,7 @@ if (userId && userId !==""){
     const title= document.querySelector(".tit")
     const infogeral = document.querySelector(".infos")
     const list = document.querySelector(".lista")
+    const changeCred= document.querySelector(".change-cred")
     const changePass= document.querySelector(".change-pass")
 
     verInfo.addEventListener("click", function(){
@@ -99,6 +108,7 @@ if (userId && userId !==""){
         lista.style.visibility="hidden"
         infogeral.style.visibility="visible"
         changePass.style.visibility="hidden"
+        changeCred.style.visibility="hidden"
         list.style.visibility = "hidden"
         title.textContent = "Revise suas informações"
         getCredentials()
@@ -117,6 +127,7 @@ if (userId && userId !==""){
         infogeral.style.visibility = "hidden"
         changePass.style.visibility="hidden"
         list.style.visibility = "visible"
+        changeCred.style.visibility="hidden"
         title.textContent = "Sua lista de compras"
         const lista=document.querySelector(".listaProdutos")
         lista.style.visibility = "visible"
@@ -169,12 +180,6 @@ if (userId && userId !==""){
                 
             })
     }
-    mudarSenha.addEventListener("click", function(){
-        infogeral.style.visibility="hidden"
-        list.style.visibility="hidden"
-        changePass.style.visibility="visible"
-        title.textContent="Mude sua senha"
-    })
     function aplicarEstilopadrao(input){
         input.style.boxShadow = "0 0 20px 5px rgba(255, 255, 255, 0.8)";
         input.style.border = "1px solid var(--sombra-branca)";
@@ -183,7 +188,15 @@ if (userId && userId !==""){
         input.style.boxShadow = "none";
         input.style.border = "1px solid red";
     }
+    
+    mudarSenha.addEventListener("click", function(){
+        infogeral.style.visibility="hidden"
+        list.style.visibility="hidden"
+        changePass.style.visibility="visible"
+        title.textContent="Mude sua senha"
+        changeCred.style.visibility="hidden"
 
+    })
     const inputSenhaatual = document.getElementById("senha-atual")
     const newPass = document.getElementById("nova-senha")
     const confimationPass = document.getElementById("confirm-new-pass")
@@ -231,6 +244,7 @@ if (userId && userId !==""){
     const mudSenha=document.querySelector(".mud-senha")
     mudSenha.addEventListener("click", function(){
         const senhaAtual= inputSenhaatual.value  
+        
         const erro1 = document.getElementById("erro1")
         const erro2 = document.getElementById("erro2")
         const erro3 = document.getElementById("erro3")
@@ -314,6 +328,121 @@ if (userId && userId !==""){
 
         })
     })
+    const mudarCred= document.getElementById("mudarDados")
+    mudarCred.addEventListener("click", function(){
+        changeCred.style.visibility="visible"
+        infogeral.style.visibility = "hidden"
+        changePass.style.visibility="hidden"
+        list.style.visibility = "hiddeen"
+        title.textContent = "Mude suas infomações"
+
+        getCredentials()
+    })
+    function salvarInfo(){
+        const inputNome= document.getElementById("name2")
+        const inputNumero = document.getElementById("telefone2")
+        const inputEmail = document.getElementById("email2")
+        const inputEndereco= document.getElementById("cep2")
+        const regexCEP =/^[0-9]{5}-?[0-9]{3}$/
+        const regexCelular = /^\(?[1-9]{2}\)? ?9[0-9]{4}-?[0-9]{4}$/
+        const regex = /\S+@\S+\.\S+/
+
+        const nome = inputNome.value
+        const numero = inputNumero.value
+        const endereco = inputEndereco.value
+        const email= inputEmail.value
+        const validName = nome.trim()
+        const validAddress = endereco.trim()
+
+        const errName = document.getElementById("erro-nome")
+        const errMail = document.getElementById("erro-email")
+        const errNumber = document.getElementById("erro-tel")
+        const errCep = document.getElementById("erro-cep")
+
+
+
+
+
+        let hasName = validName.length > 0
+        errName.style.visibility = hasName ? "hidden" : "visible"
+        inputNome.style.border = hasName ? "none" : "1px solid #E11D48"
+
+        let hasEmail = regex.test(email)
+        errMail.style.visibility = hasEmail ? "hidden" : "visible"
+        inputEmail.style.border = hasEmail ? "none" : "1px solid #E11D48"
+
+        let hasNumber = regexCelular.test(numero)
+        errNumber.style.visibility = hasNumber ? "hidden" : "visible"
+        inputNumero.style.border = hasNumber ? "none" : "1px solid #E11D48"
+
+        let hasAddress = regexCEP.test(validAddress)
+        errCep.style.visibility = hasAddress ? "hidden" : "visible"
+        inputEndereco.style.border = hasAddress ? "none" : "1px solid #E11D48"
+        
+        
+        let canComplete = hasName && hasNumber && hasAddress && hasEmail
+
+        if (canComplete) {
+            fetch('http://127.0.0.1:5000/atualizarCredenciais', {
+                method : 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId: userId,
+                    name: validName,
+                    email: email,
+                    tel:numero,
+                    cep:validAddress
+                })
+            })
+            .then(response=> response.json())
+            .then(data=>{
+                if (data.mensagem === "Informações atualizadas"){
+                    alert("deu certo!")
+                } else if (data.mensagem === "Erro no banco de dados") {
+                    alert("Erro em nosso banco de dados, tente novamente mais tarde!")
+                }
+            })
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 }
 
 // SENHA DE TESTE =abc123abc id =13 
+/*
+if (validName.length > 0) {
+            hasName = true
+        } else{
+            const err = document.getElementById("erro-nome")
+            err.style.display = "block"
+        } if (regex.test(email)){
+            hasEmail = true
+        }else{
+            const err = document.getElementById("erro-email")
+            err.style.display = "block"
+        }
+        if (regexCelular.test(numero)) {
+        hasNumber = true
+        } else {
+            const err = document.getElementById("erro-celular")
+            err.style.display = "block"
+        } if (regexCEP.test(endereco)){
+            hasAddress = true
+        } else {
+            const err = document.getElementById("erro-CEP")
+            err.style.display = "block"
+        }
+*/

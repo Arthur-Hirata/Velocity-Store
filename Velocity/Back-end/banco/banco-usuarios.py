@@ -113,7 +113,23 @@ def mudarSenha():
 
     return jsonify ({"mensagem": "A sua senha foi mudada com sucesso"}), 200
 
-
+@app.route('/atualizarCredenciais',methods = ['PATCH'])
+def mudarCred():
+    dados= request.json
+    id_user = dados.get("userId")
+    nome = dados.get("name")
+    email = dados.get("email")
+    numero = dados.get("tel")
+    address= dados.get("cep")
+    try:
+        with sqlite3.connect("banco-users.db") as conexao:
+            cursor = conexao.cursor()
+            cursor.execute("UPDATE users SET email=?, nome=?, numero=?, address=? WHERE id=?", (email, nome, numero, address, id_user))
+            conexao.commit()
+    
+    except sqlite3.Error as e:
+        return jsonify({"mensagem": "Erro no banco de dados"}), 500
+    return jsonify({"mensagem": "Informações atualizadas"}), 200
 
 
 
