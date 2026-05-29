@@ -381,7 +381,16 @@ if (userId && userId !==""){
         
         
         let canComplete = hasName && hasNumber && hasAddress && hasEmail
+        
+        const alert4= document.getElementById("overlay4")
+        const alertBnt = document.getElementById("vlt4")
+        const alertTitle = document.getElementById("tit-alert")
+        const alertMsg = document.getElementById("alert-txt")
 
+        alertBnt.addEventListener("click", function(){
+            alert4.style.display = "none"
+        })
+        
         if (canComplete) {
             fetch('http://127.0.0.1:5000/atualizarCredenciais', {
                 method : 'PATCH',
@@ -397,52 +406,19 @@ if (userId && userId !==""){
             .then(response=> response.json())
             .then(data=>{
                 if (data.mensagem === "Informações atualizadas"){
-                    alert("deu certo!")
+                    alert4.style.display = "flex"
+                    alertTitle.textContent = "Parabens!"
+                    alertTitle.style.color = "#1B4D3E"
+                    alertMsg.textContent= "Suas informações foram alteradas com sucesso!"
                 } else if (data.mensagem === "Erro no banco de dados") {
-                    alert("Erro em nosso banco de dados, tente novamente mais tarde!")
+                    alert4.style.display = "flex"
+                    alertTitle.textContent = "Erro!"
+                    alertTitle.style.color = "#E11D48"
+                    alertMsg.textContent= "Ocorreu um erro em nosso banco de dados, tente novamente mais tarde."
                 }
             })
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
+            }}
 }
 
 // SENHA DE TESTE =abc123abc id =13 
-/*
-if (validName.length > 0) {
-            hasName = true
-        } else{
-            const err = document.getElementById("erro-nome")
-            err.style.display = "block"
-        } if (regex.test(email)){
-            hasEmail = true
-        }else{
-            const err = document.getElementById("erro-email")
-            err.style.display = "block"
-        }
-        if (regexCelular.test(numero)) {
-        hasNumber = true
-        } else {
-            const err = document.getElementById("erro-celular")
-            err.style.display = "block"
-        } if (regexCEP.test(endereco)){
-            hasAddress = true
-        } else {
-            const err = document.getElementById("erro-CEP")
-            err.style.display = "block"
-        }
-*/
+
