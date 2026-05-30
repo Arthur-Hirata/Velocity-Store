@@ -24,15 +24,19 @@ def loginUser():
     senha = dados.get('senha')
     with sqlite3.connect("banco-users.db") as conexao:
         cursor= conexao.cursor()
-        cursor.execute("SELECT id, password FROM users WHERE email=?", (email,))
+        cursor.execute("SELECT id, password, role FROM users WHERE email=?", (email,))
         resultado = cursor.fetchone()
     if resultado is None:
         return jsonify({"mensagem" : "Erro, usuário não encontrado"}), 404
 
-    user_id, password_banco=resultado
+
+    user_id, password_banco, cargo=resultado
 
     if check_password_hash(password_banco, senha):
-         return jsonify({"mensagem": "Login bem sucedido!", "id": user_id}), 200
+         if cargo == 'admin':
+             return jsonify ({"mensagem": "login admin", "id": user_id}), 200
+         else:
+            return jsonify({"mensagem": "Login bem sucedido!", "id": user_id}), 200
     else:
         return jsonify({"mensagem": "Senha incorreta"}), 401
 

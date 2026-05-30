@@ -5,6 +5,7 @@ cursor = conexao.cursor()
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS users (
                id INTEGER PRIMARY KEY AUTOINCREMENT,
+               role TEXT NOT NULL DEFAULT 'user',
                email TEXT NOT NULL,
                password TEXT NOT NULL,
                nome TEXT,
