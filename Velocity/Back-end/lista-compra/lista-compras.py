@@ -82,7 +82,9 @@ def mostrar_lista():
             lista_carrinho = json.loads(resultado[0])
         else:
             lista_carrinho = []
-    return jsonify(lista_carrinho)
+
+
+    return jsonify(lista_carrinho,)
 # FUNCIONANDO usei bastante IA
 @app.route('/atualizar/<string:id>', methods =['PATCH'])
 def atualizar_item(id):
@@ -182,7 +184,7 @@ def remover_item(id):
         lista_carrinho = nova_lista
         cursor.execute("UPDATE users SET buylist= ? WHERE id=?", (json.dumps(lista_carrinho), user_Id))
         conexao.commit()
-    return{"status": "removido"}, 200         
+    return {"status": "removido",}, 200         
 
 
 #Funcionando

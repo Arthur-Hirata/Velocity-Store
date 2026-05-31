@@ -10,37 +10,49 @@ const userId = localStorage.getItem('userId')
 
 
 
+function getCredentials(id){
+    fetch('http://127.0.0.1:5000/getCredentials', {
+        method : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id_user: id
+    })}
+)
+.then(response => response.json())
+.then(data => {
+    console.log("Resposta:", data);
+        if (data.nome){
+            const loginText = document.querySelector(".login")
+            loginText.textContent = data.nome
+        }
+        if (data.role === "admin"){
+            createAdimn();
+        }
+    })
+.catch(err => console.error("Erro no fetch:", err));
+}
+const login=document.querySelector(".red-log")
+login.addEventListener("click", function(){
+    window.location.href = "acc.html"
+})
 
+function createAdimn(){
+    if (document.querySelector(".admin-button")) return;
+
+    const bntAdmin = document.createElement("button")
+    bntAdmin.className = "admin-button"
+    bntAdmin.textContent = "Admin"
+    const navaux = document.querySelector(".aux")
+    navaux.appendChild(bntAdmin)
+    bntAdmin.onclick= () => window.location.href = "acc.html";
+}
 if (userId && userId !==""){
-    getCredentials()
+    getCredentials(userId)
     const notlogged = document.querySelector(".not-logged")
     notlogged.style.display ="none"
-    function getCredentials(){
-        fetch('http://127.0.0.1:5000/getCredentials', {
-            method : 'POST',
-            headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id_user: userId
-        })}
-    )
-    .then(response => response.json())
-    .then(data => {
-        console.log("Resposta:", data);
-            if (data.nome){
-                const loginText = document.querySelector(".login")
-                loginText.textContent = data.nome
-            }
-        })
-    .catch(err => console.error("Erro no fetch:", err));
-    }
-    const login=document.querySelector(".red-log")
-    login.addEventListener("click", function(){
-        //colocar aqui
-        window.location.href = "acc.html"
-    })
 
 
-    function atualizarPrecoFinal() {
+    function atualizarPrecoFinal(preco_final) {
         fetch('http://127.0.0.1:5000/precofinal')
         .then(response => response.json())
         .then(data => {
@@ -174,7 +186,6 @@ if (userId && userId !==""){
                 .catch(err => console.error("Erro no fetch:", err));
             })
             removerQnt.addEventListener("click", function(){
-                 
                 if (produto.quantidade > 1){
                     fetch("http://127.0.0.1:5000/diminuir/" + produto.id,{
                         method: 'PATCH',

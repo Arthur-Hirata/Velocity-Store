@@ -60,11 +60,20 @@ def pegarCredenciais():
     id=dados.get("id_user")
     with sqlite3.connect("banco-users.db") as conexao:
         cursor = conexao.cursor()
-        cursor.execute("SELECT nome, buylist FROM users WHERE id=?", (id,))
+        cursor.execute("SELECT nome, buylist, role FROM users WHERE id=?", (id,))
         resultado = cursor.fetchone()
     
-    user_name, user_list = resultado
-    return jsonify({"nome" : user_name, "buylist" : user_list})
+    
+    if not resultado:
+        return jsonify ({"mensagem": "usuário não encontrado"}), 404    
+
+    user_name, user_list, role = resultado
+
+    return jsonify({
+        "nome" : user_name,
+        "buylist" : user_list,
+        "role" : role
+    }),200
 
 
 @app.route('/getInfo', methods= ['POST'])
