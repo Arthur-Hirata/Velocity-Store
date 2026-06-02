@@ -22,6 +22,20 @@ function verifyIdentity(){
 function sair(){
     window.location.href = "Velocity.html"
 }
+function pegarInfomações(){
+    fetch('http://127.0.0.1:5000/verifyQnt', {
+        method : 'GET',
+         headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data =>{
+        const userQnt = document.getElementById("quantidade-Clientes")
+        userQnt.textContent = data.users
+        const produtosQnt = document.getElementById("quantidade-produtos")
+        produtosQnt.textContent = data.produtos
+    })
+}
 if (userId && userId !==""){
     verifyIdentity()
+    pegarInfomações()
 }

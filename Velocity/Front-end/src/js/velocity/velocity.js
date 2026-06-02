@@ -247,7 +247,15 @@ if (userId && userId !==""){
                 remover.style.visibility = 'hidden'
             }
         })
-        .catch(erro => console.error("Erro ao buscar:", erro)); 
+        .catch(erro => console.error("Erro ao buscar:", erro));
+
+        function finz
+
+
+
+
+
+
     }
 
 }else{

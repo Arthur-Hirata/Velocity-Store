@@ -137,8 +137,9 @@ nav{
 }
 .nav-link{
     text-decoration: none;
-    color: var(--cor-texto2);
+    color: var(--cor-promo);
     font-weight: bold;
+    box-shadow: var(--sombra-branca);
 }
 .visao-geral{
     display: grid;
@@ -164,6 +165,7 @@ nav{
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+    color: var(--cor-texto);
     margin: 0; 
     margin-top: 10px;
 }
@@ -176,9 +178,11 @@ nav{
     width: 450px;
     height: 140px;
     border: none;
+    box-shadow: var(--sombra-branca);
 }
 .subtit{
     text-align: center;
+    
 }
 .value{
     font-size: 40px;
