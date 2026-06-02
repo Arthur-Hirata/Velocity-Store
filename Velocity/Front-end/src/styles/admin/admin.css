@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+    --cor-primaria: #1E293B;
+    --cor-secundaria: #FFFFFF;
+    --cor-marca:#1E3A8A;
+    --cor-destaque: #3B82F6;
+    --cor-promo: #F59E0B;
+    --cor-texto:  #FFFFFF;
+    --cor-texto2: #1F2937;
+    --fundo-card: rgb(43, 42, 42);
+    --sombra:0px 0px 12px 4px rgba(0,0, 0, 0.4);
+    --sombra-branca-neon:0 0 20px 5px rgba(255, 255, 255, 0.8);
+    --sombra-branca:0 4px 15px rgba(255, 255, 255, 0.3);
+}
+body{
+    background-color:  var(--cor-primaria);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cor-texto);
+    font-family: Poppins;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    flex-direction: column;
+}
+button{
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+button:hover{
+    transform: scale(1.1);
+    filter: brightness(1.01);
+}
+button:active{
+    transform: scale(0.95);
+}
+.acesso-restrito{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(5px);           
+    -webkit-backdrop-filter: blur(5px);  
+    z-index: 999;                       
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.alert{
+    background-color: var(--fundo-card);
+    width: 600px;
+    height: 400px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.tit1{
+    text-align: center;
+    color: red;
+}
+#aviso{
+    font-weight: bold;
+    margin-left: 50px;
+    margin-right: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 50px;
+}
+.vlt1{
+    background-color: #F59E0B;
+    width: 120px;
+    height: 30px;
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
+nav{
+    background-color: var(--cor-secundaria);
+    width: 80%;
+    height: 50px;
+    border-radius: 100px;
+    border: none;
+    margin-top: 30px;
+    position: sticky;
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--sombra-branca);
+    animation: surgeNavbar 1s ease-in-out forwards;
+    
+}
+@keyframes surgeNavbar {
+    from{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+#logo{
+    font-size: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    margin-left: 10px;
+    color: var(--cor-texto2);
+    
+}
+.nome{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--cor-texto2);
+    margin: -290px;
+    margin-top: -23px;
+    text-shadow: 0 0 4px #1F2937 0 0 12px #1F2937;
+}
+.aux{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-left: 550px;
+}
+.nav-link{
+    text-decoration: none;
+    color: var(--cor-texto2);
+    font-weight: bold;
+}
+.visao-geral{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(3,1fr);
+    gap: 50px;
+    height: 600px;
+    margin-top: 70px;
+    margin-right:180px;
+    color: #1E293B;
+}
+.column1{
+    grid-column: 1;
+    grid-row: 1/4;
+    margin-left: 140px;
+}
+.foto-admin{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.admin-name{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0; 
+    margin-top: 10px;
+}
+#clientes{
+    margin-top: 100px;
+}
+.info{
+    background-color: var(--cor-texto);
+    border-radius: 20px;
+    width: 450px;
+    height: 140px;
+    border: none;
+}
+.subtit{
+    text-align: center;
+}
+.value{
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}

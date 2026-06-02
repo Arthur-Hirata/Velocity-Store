@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Front-end/src/styles/admin/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Conta - Velocity</title>
+</head>
+<body>
+    <div class="acesso-restrito" style="display: none;">
+        <div class="alert">
+            <h1 class="tit1">CUIDADO!</h1>
+            <h3 id="aviso">Você não tem acesso a essa área caso não seja o admin! Saia imediatamente</h3>
+            <button class="vlt1" onclick="sair()">Sair</button>
+        </div>
+    </div>
+    <nav>
+        <div>
+            <i class="fa-solid fa-desktop" id="logo"></i>
+        </div>
+        <div>
+            <h1 class="nome">Velocity Store</h1>
+        </div>
+        <div class="aux">
+            <a href="#clientes" class="nav-link">Banco de clientes</a>
+            <a href="#Bancoitens" class="nav-link">Banco de itens</a>
+            <a href="#adcprodutos" class="nav-link">Adicionar Produtos</a>
+        </div>
+    </nav>
+    <div class="visao-geral">
+        <div class="column1">
+            <img src="/Front-end/src/images/foto.jpg" class="foto-admin">
+            <h3 class="admin-name"></h3>
+        </div>
+        <div class="item-c2-l1">
+            <div class="info">
+                <h2 class="subtit">Quantidade de clientes</h2>
+                <span id="quantidade-Clientes" class="value"> 12</span>
+            </div>
+        </div>
+        <div class="item-c3-l1" style="margin-top: 20px;">
+            <div class="info">
+                
+            </div>
+        </div>
+        <div class="item-c2-l2">
+            <div class="info">
+                
+            </div>
+        </div>
+        <div class="item-c3-l2">
+            <div class="info">
+                
+            </div>
+        </div>
+        <div class="item-c2-l3">
+            <div class="info">
+                
+            </div>
+        </div>
+        <div class="item-c3-l3">
+            <div class="info">
+                
+            </div>
+        </div>
+    </div>
+    <div id="clientes">
+        <h1 class="tit">Banco de clientes</h1>
+    </div>
+    <footer></footer>
+</body>
+<script src="/Front-end/src/js/admin/admin.js"></script>
+</html>
