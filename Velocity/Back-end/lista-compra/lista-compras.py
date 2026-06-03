@@ -231,5 +231,36 @@ def pegarInfo():
 
     return jsonify({"nome": user_name, "email" : user_email,"tel" : user_num, "cep": user_cep})
 
+@app.route('/pegarListaFinal', methods=['POST'])
+def pegarlista():
+    dados = request.json
+    userId = dados.get("userId")
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT buylist, nome FROM users WHERE id=?", (userId,))
+        result = cursor.fetchone()
+    lista_carrinho = json.loads(result[0])
+    nome=result[1]
+    total =preço_total(lista_carrinho)
+
+    with sqlite3.connect("itens-comprados.db") as conex:
+        cursor = conex.cursor()
+        cursor.execute("INSERT INTO itens_comprados (usuario, preco, produtos) VALUES (?,?,?)",  (nome, total, json.dumps(lista_carrinho)))
+        conex.commit()
+    
+    with sqlite3.connect("banco-users.db") as con:
+        cursor = con.cursor()
+        buylist = "[]"
+        cursor.execute("UPDATE users SET buylist=? WHERE id=?", (buylist, userId))
+        con.commit()
+    return jsonify({"mensagem": "deu certo"})
+    
+
+def preço_total(lista_carrinho):
+    total = sum(produto['preco_unitario'] * produto['quantidade'] for produto in lista_carrinho)
+    return total
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

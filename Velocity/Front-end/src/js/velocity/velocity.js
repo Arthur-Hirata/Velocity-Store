@@ -20,7 +20,6 @@ function getCredentials(id){
 )
 .then(response => response.json())
 .then(data => {
-    console.log("Resposta:", data);
         if (data.nome){
             const loginText = document.querySelector(".login")
             loginText.textContent = data.nome
@@ -249,14 +248,26 @@ if (userId && userId !==""){
         })
         .catch(erro => console.error("Erro ao buscar:", erro));
 
-        function finz
-
-
-
-
-
-
     }
+    function finalizarCompra(){
+        fetch('http://127.0.0.1:5000/pegarListaFinal',{
+            method : "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                userId: userId
+            })
+        })
+        .then(response=> response.json())
+        .then( data=>{
+            if (data.mensagem === "deu certo"){
+                listaCompras.innerHTML = ""
+                const prefinal = document.querySelector(".preco-final")
+                prefinal.innerHTML="Preço Final <br> R$ 0,00"
+            }
+        })
+        .catch(error => {
+        console.error("Erro ao conectar com a API:", error);
+        });}
 
 }else{
     const login= document.querySelector(".red-log")
@@ -302,3 +313,7 @@ if (userId && userId !==""){
     }
     mostrarCarrinho()
 }
+ /* IDEIAS 
+ Gráfico de Crescimento : se a biblioteca JavaScript Chart.js (é super simples) para transformar a quantidade de usuários e produtos em um gráfico de barras ou pizza visualmente bonito.
+ Logs de Atividade: Uma tabela simples que mostra as últimas ações do sistema. Exemplo: "Admin XPTO cadastrou o produto Y às 14:00".        
+ Exportar Dados: Um botão que baixa a lista de usuários ou produtos em um arquivo .csv (Excel).*/
