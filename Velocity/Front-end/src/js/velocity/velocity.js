@@ -250,25 +250,42 @@ if (userId && userId !==""){
 
     }
     function finalizarCompra(){
-        fetch('http://127.0.0.1:5000/pegarListaFinal',{
-            method : "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                userId: userId
+        if (listaCompras.length >0) {
+            fetch('http://127.0.0.1:5000/pegarListaFinal',{
+                method : "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId: userId
+                })
             })
-        })
-        .then(response=> response.json())
-        .then( data=>{
-            if (data.mensagem === "deu certo"){
-                listaCompras.innerHTML = ""
-                const prefinal = document.querySelector(".preco-final")
-                prefinal.innerHTML="Preço Final <br> R$ 0,00"
+            .then(response=> response.json())
+            .then( data=>{
+                if (data.mensagem === "deu certo"){
+                    listaCompras.innerHTML = ""
+                    const prefinal = document.querySelector(".preco-final")
+                    prefinal.innerHTML="Preço Final <br> R$ 0,00"
+                    const sucess = document.querySelector(".overlay")
+                    sucess.style.display ="flex"
+                    lista.style.display = 'none'
+                    const bntVoltar = document.querySelector(".vlt")
+                    bntVoltar.addEventListener("click", function(){
+                        sucess.style.display = "none"
+                    })
+                }
+            })
+            .catch(error => {
+            console.error("Erro ao conectar com a API:", error);
+            });}
+            else {
+                const fail = document.querySelector(".overlay2")
+                fail.style.display = "flex"
+                lista.style.display = 'none'
+                const btnVlt2 = document.querySelector(".vlt2")
+                btnVlt2.addEventListener("click", function(){
+                    fail.style.display = 'none'
+                })
             }
-        })
-        .catch(error => {
-        console.error("Erro ao conectar com a API:", error);
-        });}
-
+        }
 }else{
     const login= document.querySelector(".red-log")
     login.addEventListener("click", function(){

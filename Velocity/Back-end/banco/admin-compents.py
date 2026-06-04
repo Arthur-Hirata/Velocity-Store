@@ -29,14 +29,43 @@ def numUsers():
     with sqlite3.connect("banco-users.db") as conexao:
         cursor = conexao.cursor()
         cursor.execute("SELECT COUNT(*) AS total_users FROM users WHERE role='user'")
-        result = cursor.fetchone()
-    total_users = result[0] if result else 0
+        resultado1 = cursor.fetchone()
+    total_users = resultado1[0] if resultado1 else 0
 
     with sqlite3.connect("banco-itens.db") as conex:
         cursor= conex.cursor()
         cursor.execute("SELECT COUNT(*) AS total_produtos FROM itens")
-        resultado = cursor.fetchone()
-    total_produtos = resultado[0] if resultado else 0
-    return jsonify({"users" : total_users, "produtos" : total_produtos })
+        resultado2 = cursor.fetchone()
+    total_produtos = resultado2[0] if resultado2 else 0
+
+    with sqlite3.connect("itens-comprados.db") as conexao:
+        cursor=conexao.cursor()
+        cursor.execute("SELECT COUNT(*) AS total_vendas FROM itens_comprados")
+        resultado3 = cursor.fetchone()
+    total_vendas = resultado3 [0] if resultado3 else 0
+
+    with sqlite3.connect("itens-comprados.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT SUM(preco) FROM itens_comprados")
+        resultado4 = cursor.fetchone()
+    valor_total = resultado4 [0] if resultado4 else 0
+
+    with sqlite3.connect("itens-comprados.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT COUNT(*) FROM itens_comprados WHERE data>= datetime('now', '-24 hours', 'localtime')")
+        resultado5 = cursor.fetchone()
+    vendas24hrs = resultado5[0] if resultado5 else 0
+
+    with sqlite3.connect('itens-comprados.db') as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT data FROM itens_comprados ORDER BY id DESC LIMIT 1")
+        resultado6 = cursor.fetchone()
+    data_ultima_venda = resultado6[0] if resultado6 else "Sem vendas"
+
+
+
+
+
+    return jsonify({"users" : total_users, "produtos" : total_produtos, "vendas" : total_vendas, "faturamento" : valor_total, "vendasDia": vendas24hrs, 'ultima_venda' : data_ultima_venda})
 if __name__ == '__main__':
     app.run(debug=True)
