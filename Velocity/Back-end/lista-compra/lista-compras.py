@@ -144,7 +144,7 @@ def remover_quantidade(id):
         else:
             lista_carrinho = []
 
-        for produto in lista_carrinho:
+        for produto in lista_carrinho:  
             if produto['id'] == id:
                 produto['quantidade'] -= 1
                 produto['quantidade'] = quantidade

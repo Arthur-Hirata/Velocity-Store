@@ -148,7 +148,7 @@ nav{
     gap: 50px;
     height: 600px;
     margin-top: 70px;
-    margin-right:180px;
+    margin-right:300px;
     color: #1E293B;
 }
 .column1{
@@ -171,6 +171,10 @@ nav{
 }
 #clientes{
     margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .info{
     background-color: var(--cor-texto);
@@ -190,4 +194,66 @@ nav{
     font-weight: bold;
     display: flex;
     justify-content: center;
+}
+#tabela-users{
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: var(--sombra);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+    
+}
+#tabela-users {
+    width: 80%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: var(--sombra);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+#tabela-users thead {
+    background: rgba(59, 130, 246, 0.18);
+}
+
+#tabela-users th,
+#tabela-users td {
+    width: 15%;
+    padding: 18px 20px;
+    text-align: center;
+    color: var(--cor-texto);
+    font-size: 0.95rem;
+    word-break: break-word;
+}
+
+#tabela-users th {
+    color: var(--cor-texto2);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    background: rgba(255, 255, 255, 0.14);
+}
+
+#tabela-users tbody tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#tabela-users tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+#tabela-users tbody tr:hover {
+    background: rgba(59, 130, 246, 0.12);
+}
+
+#tabela-users td {
+    color: #e2e8f0;
+}
+
+#tabela-users td:last-child {
+    word-break: break-word;
+    max-width: 250px;
 }

@@ -61,11 +61,25 @@ def numUsers():
         cursor.execute("SELECT data FROM itens_comprados ORDER BY id DESC LIMIT 1")
         resultado6 = cursor.fetchone()
     data_ultima_venda = resultado6[0] if resultado6 else "Sem vendas"
-
-
-
-
-
     return jsonify({"users" : total_users, "produtos" : total_produtos, "vendas" : total_vendas, "faturamento" : valor_total, "vendasDia": vendas24hrs, 'ultima_venda' : data_ultima_venda})
+
+@app.route('/getUsers', methods=['GET'])
+def pegarUsers():
+    with sqlite3.connect("banco-users.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT id, email, nome, numero, buylist FROM users")
+        resultado = cursor.fetchall()
+    user = []
+    for id, email, nome, numero, lista in resultado:
+        user.append(
+        {
+            'id' : id,
+            'nome': nome,
+            'numero' : numero,
+            'email' : email,
+            'lista' : lista
+        })
+    return jsonify({"user": user}),200
+
 if __name__ == '__main__':
     app.run(debug=True)

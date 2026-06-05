@@ -250,7 +250,7 @@ if (userId && userId !==""){
 
     }
     function finalizarCompra(){
-        if (listaCompras.length >0) {
+        if (listaCompras.children.length > 0) {
             fetch('http://127.0.0.1:5000/pegarListaFinal',{
                 method : "POST",
                 headers: { 'Content-Type': 'application/json' },
@@ -274,7 +274,7 @@ if (userId && userId !==""){
                 }
             })
             .catch(error => {
-            console.error("Erro ao conectar com a API:", error);
+                console.error("Erro ao conectar com a API:", error);
             });}
             else {
                 const fail = document.querySelector(".overlay2")
