@@ -80,6 +80,33 @@ def pegarUsers():
             'lista' : lista
         })
     return jsonify({"user": user}),200
+@app.route('/pegarItens', methods=['GET'])
+def pegarItens():
+    with sqlite3.connect("banco-itens.db") as conexao:
+        cursor = conexao.cursor()
+        cursor.execute("SELECT id, nome, preco FROM itens")
+        resultado = cursor.fetchall()
+    item=[]
+    for id, nome, preco in resultado:
+        item.append({
+            'id' : id,
+            'nome' : nome,
+            'preco': preco
+        })
+    return jsonify({"item" : item})
+
+@app.route('/atualizarItem', methods=['POST'])
+def atualizarItem():
+    dados = request.json
+    item_id = dados.get('id')
+    
+
+
+
+
+@app.route('/adcItem', methods=['PATCH'])
+def adcItem():
+    dados = request.json
 
 if __name__ == '__main__':
     app.run(debug=True)

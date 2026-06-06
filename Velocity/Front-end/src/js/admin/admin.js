@@ -22,6 +22,27 @@ function verifyIdentity(){
 function sair(){
     window.location.href = "Velocity.html"
 }
+function pegarInfomações(){
+    fetch('http://127.0.0.1:5000/verifyQnt', {
+        method : 'GET',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data =>{
+        const userQnt = document.getElementById("quantidade-Clientes")
+        userQnt.textContent = data.users
+        const produtosQnt = document.getElementById("quantidade-produtos")
+        produtosQnt.textContent = data.produtos
+        const vendasQnt = document.getElementById("quantidade-vendas")
+        vendasQnt.textContent = data.vendas
+        const faturamento= document.getElementById('faturamento-total')
+        faturamento.textContent = "R$" + data.faturamento
+        const vendasDia = document.getElementById('quantidade-vendas-dia')
+        vendasDia.textContent = data.vendasDia
+        const ultimaVenda = document.getElementById('ultima-venda')
+        ultimaVenda.textContent = data.ultima_venda
+    })
+}
 function clientes(){
     fetch('http://127.0.0.1:5000/getUsers',{
         method : 'GET',
@@ -46,29 +67,27 @@ function clientes(){
         })
     })  .catch(err => console.error('Erro ao carregar usuários:', err));
 }
-function pegarInfomações(){
-    fetch('http://127.0.0.1:5000/verifyQnt', {
+function itens(){
+    fetch('http://127.0.0.1:5000/pegarItens', {
         method : 'GET',
         headers: { 'Content-Type': 'application/json' }
     })
     .then(response => response.json())
-    .then(data =>{
-        const userQnt = document.getElementById("quantidade-Clientes")
-        userQnt.textContent = data.users
-        const produtosQnt = document.getElementById("quantidade-produtos")
-        produtosQnt.textContent = data.produtos
-        const vendasQnt = document.getElementById("quantidade-vendas")
-        vendasQnt.textContent = data.vendas
-        const faturamento= document.getElementById('faturamento-total')
-        faturamento.textContent = "R$" + data.faturamento
-        const vendasDia = document.getElementById('quantidade-vendas-dia')
-        vendasDia.textContent = data.vendasDia
-        const ultimaVenda = document.getElementById('ultima-venda')
-        ultimaVenda.textContent = data.ultima_venda
-    })
+    .then(data=>{
+        const tabelaItens = document.getElementById("tabela-itens")
+        data.item.forEach(item=>{
+            const tr = document.createElement("tr")
+            tr.innerHTML=`
+                <td>${item.id}</td>
+                <td>${item.nome}</td>
+                <td>${item.preco}</td>`
+            tabelaItens.appendChild(tr)
+        })
+    }) .catch(err => console.error('Erro ao carregar usuários:', err));
 }
 if (userId && userId !==""){
     verifyIdentity()
     pegarInfomações()
     clientes()
+    itens()
 }

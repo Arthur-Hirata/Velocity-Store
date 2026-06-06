@@ -26,7 +26,7 @@
         <div class="aux">
             <a href="#clientes" class="nav-link">Banco de clientes</a>
             <a href="#Bancoitens" class="nav-link">Banco de itens</a>
-            <a href="#adcprodutos" class="nav-link">Adicionar Produtos</a>
+            <a href="#Editarprodutos" class="nav-link">Editar Produtos</a>
         </div>
     </nav>
     <div class="visao-geral">
@@ -73,18 +73,60 @@
     </div>
     <div id="clientes">
         <h1 class="tit">Banco de clientes</h1>
-        <table id="tabela-users">
-            <tr>
-                <td>ID</td>
-                <td>Nome</td>
-                <td>Email</td>
-                <td>Número</td>
-                <td>Lista de compras</td>
-
-            </tr>
-        </table>
+        <div class="conteiner-tabela-users">
+            <table id="tabela-users">
+                <tr>
+                    <td>ID</td>
+                    <td>Nome</td>
+                    <td>Email</td>
+                    <td>Número</td>
+                    <td>Lista de compras</td>
+    
+                </tr>
+            </table>
+        </div>
     </div>
-    <footer></footer>
+    <div id="Bancoitens">
+        <h1 class="tit">Banco de itens</h1>
+        <div class="container-tabela-itens">
+            <table id="tabela-itens">
+                <tr>
+                    <td>ID</td>
+                    <td>Nome</td>
+                    <td>Preço</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="Editarprodutos">
+        <h1 class="tit">Editar Produtos</h1>
+        <div class="container-Editar">
+            <div class="editar">
+                <h3 class="sub">Edite um item existente</h3>
+                <div class="inputs">
+                    <input type="text" placeholder="ID do item">
+                    <input type="text" placeholder="Nome do item">
+                    <input type="text" placeholder="Preço do item">
+                </div>
+                <div class="btns">
+                    <button class="enviar" onclick="editarItem()">Editar</button>
+                    <button class="cancelar">Cancelar</button>
+                </div>
+            </div>
+            <div class="adcionar">
+                <h3 class="sub">Adicione um novo item</h3>
+                <div class="inputs">
+                    <input type="text" placeholder="Nome do item">
+                    <input type="text" placeholder="Preço do item">
+                </div>
+                <div class="btns">
+                    <button class="enviar"onclick="adicionarItem">Adicionar Item</button>
+                    <button class="cancelar">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>footer</footer>
 </body>
 <script src="/Front-end/src/js/admin/admin.js"></script>
 </html>
