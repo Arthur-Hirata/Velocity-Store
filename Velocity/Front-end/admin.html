@@ -16,6 +16,13 @@
             <button class="vlt1" onclick="sair()">Sair</button>
         </div>
     </div>
+    <div class="overlay" style="display: none;">
+        <div class="alert">
+            <h1 class="tit" id="alert-title">dasdasda</h1>
+            <h3 class="sub" id="alert-sub">dasdasd</h3>
+            <button class="voltar">Voltar</button>
+        </div>
+    </div>
     <nav>
         <div>
             <i class="fa-solid fa-desktop" id="logo"></i>
@@ -104,9 +111,9 @@
             <div class="editar">
                 <h3 class="sub">Edite um item existente</h3>
                 <div class="inputs">
-                    <input type="text" placeholder="ID do item">
-                    <input type="text" placeholder="Nome do item">
-                    <input type="text" placeholder="Preço do item">
+                    <input type="text" placeholder="ID do item" id="item-id">
+                    <input type="text" placeholder="Nome do item" id="nome-item">
+                    <input type="text" placeholder="Preço do item" id="preco-item">
                 </div>
                 <div class="btns">
                     <button class="enviar" onclick="editarItem()">Editar</button>
@@ -116,11 +123,11 @@
             <div class="adcionar">
                 <h3 class="sub">Adicione um novo item</h3>
                 <div class="inputs">
-                    <input type="text" placeholder="Nome do item">
-                    <input type="text" placeholder="Preço do item">
+                    <input type="text" placeholder="Nome do item" id="nome-item-novo">
+                    <input type="text" placeholder="Preço do item" id="preco-item-novo">
                 </div>
                 <div class="btns">
-                    <button class="enviar"onclick="adicionarItem">Adicionar Item</button>
+                    <button class="enviar"onclick="adicionarItem()">Adicionar Item</button>
                     <button class="cancelar">Cancelar</button>
                 </div>
             </div>

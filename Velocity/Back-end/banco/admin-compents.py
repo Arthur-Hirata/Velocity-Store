@@ -95,18 +95,34 @@ def pegarItens():
         })
     return jsonify({"item" : item})
 
-@app.route('/atualizarItem', methods=['POST'])
+@app.route('/atualizarItem', methods=['PATCH'])
 def atualizarItem():
     dados = request.json
     item_id = dados.get('id')
-    
-
-
-
-
-@app.route('/adcItem', methods=['PATCH'])
+    nome = dados.get('nome')
+    preco = dados.get('preco')
+    try:
+        with sqlite3.connect('banco-itens.db') as conexao:
+            cursor = conexao.cursor()
+            cursor.execute("UPDATE itens set nome=?, preco=? WHERE id=?", (nome, preco, item_id))
+            conexao.commit()
+    except sqlite3.Error as e:
+        return jsonify({"mensagem": "Erro no banco de dados"}), 500
+    return jsonify({"mensagem": "Item atualizado com sucesso"}), 200
+ 
+@app.route('/adcItem', methods=['POST'])
 def adcItem():
     dados = request.json
+    nome= dados.get('nome')
+    preco = dados.get('preco')
+    try:
+        with sqlite3.connect("banco-itens.db") as conexao:
+            cursor = conexao.cursor()
+            cursor.execute("INSERT INTO itens (nome, preco) VALUES(?,?)", (nome, preco))
+            conexao.commit()
+    except sqlite3.Error as e:
+        return jsonify({"mensagem": "Erro no banco de dados"}), 500
+    return jsonify({"mensagem" : "Item adcionando com sucesso"}), 201
 
 if __name__ == '__main__':
     app.run(debug=True)

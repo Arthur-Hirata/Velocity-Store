@@ -60,6 +60,44 @@ button:active{
     align-items: center;
     justify-content: center;
 }
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(5px);           
+    -webkit-backdrop-filter: blur(5px);  
+    z-index: 999;                       
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#alert-title{
+    font-weight: bold;
+    text-align: center;
+}
+#alert-sub{
+    font-weight: bold;
+    margin-left: 50px;
+    margin-right: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 50px;
+}
+.voltar{
+    background-color: #F59E0B;
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+}
 .tit1{
     text-align: center;
     color: red;

@@ -85,6 +85,71 @@ function itens(){
         })
     }) .catch(err => console.error('Erro ao carregar usuários:', err));
 }
+const overlay = document.querySelector(".overlay")
+const alertTitle = document.getElementById("alert-title")
+const alertSub = document.getElementById("alert-sub")
+const bntVoltar = document.querySelector(".voltar")
+bntVoltar.addEventListener("click", function(){
+    overlay.style.display = "none"
+})
+function editarItem(){
+    const itemId = document.getElementById("item-id").value
+    const nomeItem = document.getElementById("nome-item").value
+    const precoItem= document.getElementById("preco-item").value
+
+    fetch('http://127.0.0.1:5000/atualizarItem', {
+        method : 'PATCH',
+        headers :{ 'Content-Type': 'application/json' },
+        body : JSON.stringify({
+            id : itemId,
+            nome : nomeItem,
+            preco : precoItem
+        })
+    }).then (response => response.json())
+    .then(data=>{
+        overlay.style.display = "flex"
+        if (data.mensagem === "Item atualizado com sucesso"){
+            alertTitle.textContent = "Parabéns"
+            alertTitle.style.color = "#2e7d32"
+            alertSub.textContent = "Você atualizou o item com sucesso"
+            itemId.value=""
+            nomeItem.value=""
+            precoItem.value=""
+            itens()
+        } else {
+            alertTitle.textContent = "Erro!"
+            alertTitle.style.color = "#c62828"
+            alertSub.textContent = "O item não foi atualizado no banco de dados, tente mais tarde."
+        }
+    }) .catch(err => console.error('Erro ao atualizar item:', err));
+}
+function adicionarItem(){
+    const nomeItemNovo = document.getElementById("nome-item-novo").value
+    const precoItemNovo = document.getElementById("preco-item-novo").value
+    fetch('http://127.0.0.1:5000/adcItem', {
+        method : 'POST',
+        headers : { 'Content-Type': 'application/json' },
+        body : JSON.stringify({
+            nome : nomeItemNovo,
+            preco : precoItemNovo
+        })
+    }).then (response=> response.json())
+    .then(data=>{
+        overlay.style.display = "flex"
+        if (data.mensagem === "Item adcionando com sucesso"){
+            alertTitle.textContent = "Parabéns"
+            alertTitle.style.color = "#2e7d32"
+            alertSub.textContent = "Você adicionou o item com sucesso"
+            nomeItemNovo.value=""
+            precoItemNovo.value=""
+            itens()
+        } else {
+            alertTitle.textContent = "Erro!"
+            alertTitle.style.color = "#c62828"
+            alertSub.textContent = "O item não foi adicionado ao banco de dados, tente mais tarde."
+        }
+    }) .catch(err => console.error('Erro ao atualizar item:', err));
+}
 if (userId && userId !==""){
     verifyIdentity()
     pegarInfomações()
