@@ -124,5 +124,18 @@ def adcItem():
         return jsonify({"mensagem": "Erro no banco de dados"}), 500
     return jsonify({"mensagem" : "Item adcionando com sucesso"}), 201
 
+@app.route('/apagarUser', methods=['DELETE'])
+def deletarUser():
+    dados = request.json
+    userId = dados.get("idUser")
+    try:
+        with sqlite3.connect("banco-users.db") as conexao:
+            cursor = conexao.cursor()
+            cursor.execute("DELETE FROM users WHERE id=?", (userId,))
+            conexao.commit()
+    except sqlite3.Error as e:
+        return jsonify({"mensagem": "Erro ao excluir o usuário"})
+    return jsonify({"mensagem":"Usuário excluido com sucesso"})
+
 if __name__ == '__main__':
     app.run(debug=True)

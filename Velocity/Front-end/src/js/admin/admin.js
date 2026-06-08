@@ -50,23 +50,73 @@ function clientes(){
     })
     .then(response => response.json())
     .then(data=>{
-        const tabela = document.getElementById("tabela-users")
+        var tabela = document.getElementById("tabela-users")
         data.user.forEach(user =>{
             const tr = document.createElement("tr")
             let lista = typeof user.lista === 'string' ? JSON.parse(user.lista) : user.lista
+            
             if (Array.isArray(lista) && lista.length ===0){
                 lista = "null"
             }
             tr.innerHTML= `
-                <td>${user.id}</td>
-                <td>${user.nome}</td>
+                <td class="user-id">${user.id}</td>
+                <td class="username">${user.nome}</td>
                 <td>${user.email}</td>
                 <td>${user.numero}</td>
-                <td>${lista}</td>`
+                <td>${lista}</td>
+                <button class="btn-apagar-user" onclick="apagarUser(this)"><i class="fa-solid fa-trash"></i></button>`
+                
             tabela.appendChild(tr)
         })
     })  .catch(err => console.error('Erro ao carregar usuários:', err));
 }
+function apagarUser(btn){
+    const line = btn.closest("tr")
+    const apagarId = line.querySelector(".user-id").innerText
+    const nomeUser = line.querySelector(".username").innerText
+    const overlay2 = document.querySelector(".overlay2")
+    overlay2.style.display = "flex"
+    const alertText = document.querySelector(".subalert")
+    alertText.textContent = "Você tem certeza que deseja excluir o usuário " + nomeUser + "?" 
+    const btnSim = document.querySelector(".sim")
+    const btnNao = document.querySelector(".nao")
+    btnSim.onclick= function(){
+        fetch('http://127.0.0.1:5000/apagarUser',{
+            method : "DELETE", 
+            headers: { 'Content-Type': 'application/json' },
+            body : JSON.stringify({
+                idUser : apagarId
+            })
+        }) .then(response => response.json())
+        .then(data=>{
+            overlay2.style.display = "none"
+            if (data.mensagem === "Usuário excluido com sucesso"){
+                overlay.style.display = "flex"
+                alertTitle.textContent = "Tarefa concluida!"
+                alertTitle.style.color = "#2e7d32"
+                alertSub.textContent = "Usuário exluido com sucesso"
+                const tabela = document.getElementById("tabela-users")
+                if (tabela){
+                    tabela.innerHTML=""
+                    clientes()
+                }
+            } else {
+                overlay.style.display = "flex"
+                alertTitle.textContent = "Erro"
+                alertTitle.style.color = "#c62828"
+                alertSub.textContent = "Erro no banco de dados, tente novamente mais tarde."
+            }
+        })
+        .catch(err => {
+            overlay2.style.display = "none";
+            console.error("Erro na requisição:", err);
+        });
+    }
+    btnNao.onclick= function(){
+        overlay2.style.display = "none"
+    }
+}
+
 function itens(){
     fetch('http://127.0.0.1:5000/pegarItens', {
         method : 'GET',

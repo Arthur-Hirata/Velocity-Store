@@ -18,9 +18,19 @@
     </div>
     <div class="overlay" style="display: none;">
         <div class="alert">
-            <h1 class="tit" id="alert-title">dasdasda</h1>
+            <h1 class="tit" id="alert-title"></h1>
             <h3 class="sub" id="alert-sub">dasdasd</h3>
             <button class="voltar">Voltar</button>
+        </div>
+    </div>
+    <div class="overlay2" style="display: none;">
+        <div class="alert">
+            <h1 class="tit" id="alert-title" style="color: red;font-size: 40px;margin-top: -20px;">Cuidado!</h1>
+            <h3 class="subalert" id="alert-sub" style="margin-top: 50px;">Você tem certeza que deseja apagar esse usuário?</h3>
+            <div class="btns" style="margin-top: 60px;">
+                <button class="sim">Sim</button>
+                <button class="nao">Voltar</button>
+            </div>
         </div>
     </div>
     <nav>
@@ -125,6 +135,17 @@
                 <div class="inputs">
                     <input type="text" placeholder="Nome do item" id="nome-item-novo">
                     <input type="text" placeholder="Preço do item" id="preco-item-novo">
+                </div>
+                <div class="btns">
+                    <button class="enviar"onclick="adicionarItem()">Adicionar Item</button>
+                    <button class="cancelar">Cancelar</button>
+                </div>
+            </div>
+            <div class="apagar">
+                <h3 class="sub">Apague um item</h3>
+                <div class="inputs">
+                    <input type="text" placeholder="Id do item" id="remover-item-id">
+                    <input type="text" placeholder="Confirmação do id do item" id="confirmar-remover-item-id">
                 </div>
                 <div class="btns">
                     <button class="enviar"onclick="adicionarItem()">Adicionar Item</button>

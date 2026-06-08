@@ -43,7 +43,7 @@ function createAdimn(){
     bntAdmin.textContent = "Admin"
     const navaux = document.querySelector(".aux")
     navaux.appendChild(bntAdmin)
-    bntAdmin.onclick= () => window.location.href = "acc.html";
+    bntAdmin.onclick= () => window.location.href = "admin.html";
 }
 if (userId && userId !==""){
     getCredentials(userId)
