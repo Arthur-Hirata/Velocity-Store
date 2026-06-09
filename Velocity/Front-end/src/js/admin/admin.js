@@ -70,17 +70,28 @@ function clientes(){
         })
     })  .catch(err => console.error('Erro ao carregar usuários:', err));
 }
+const overlay2 = document.querySelector(".overlay2")
+const alertText = document.querySelector(".subalert")
+const btnSim = document.querySelector(".sim")
+const btnNao = document.querySelector(".nao")
+let confirmarAcao = null
+btnSim.onclick = function(){
+    if (typeof confirmarAcao === "function"){
+        overlay2.style.display= "none"
+        confirmarAcao()
+    }
+}
+btnNao.onclick = function() {
+    overlay2.style.display = "none";
+    confirmarAcao = null; 
+};
 function apagarUser(btn){
     const line = btn.closest("tr")
     const apagarId = line.querySelector(".user-id").innerText
     const nomeUser = line.querySelector(".username").innerText
-    const overlay2 = document.querySelector(".overlay2")
     overlay2.style.display = "flex"
-    const alertText = document.querySelector(".subalert")
     alertText.textContent = "Você tem certeza que deseja excluir o usuário " + nomeUser + "?" 
-    const btnSim = document.querySelector(".sim")
-    const btnNao = document.querySelector(".nao")
-    btnSim.onclick= function(){
+    confirmarAcao = function(){
         fetch('http://127.0.0.1:5000/apagarUser',{
             method : "DELETE", 
             headers: { 'Content-Type': 'application/json' },
@@ -111,10 +122,7 @@ function apagarUser(btn){
             overlay2.style.display = "none";
             console.error("Erro na requisição:", err);
         });
-    }
-    btnNao.onclick= function(){
-        overlay2.style.display = "none"
-    }
+    };
 }
 
 function itens(){
@@ -200,6 +208,42 @@ function adicionarItem(){
         }
     }) .catch(err => console.error('Erro ao atualizar item:', err));
 }
+function apagarItem(){
+    const inputId= document.getElementById("remover-item-id")
+    const itemId= inputId.value
+    const inputConfirmId =document.getElementById("confirmar-remover-item-id")
+    const confirmItemId= inputConfirmId.value
+    if (itemId == confirmItemId){
+        overlay2.style.display = "flex"
+        alertText.textContent = "Tem certeza que deseja excluir o item ID: " + itemId + "?"
+        confirmarAcao = function(){
+            fetch('http://127.0.0.1:5000/deletarItem', {
+                method : 'DELETE',
+                headers:{'Content-Type': 'application/json'},
+                body : JSON.stringify({
+                    itemId: itemId
+                })
+            })
+            .then (response => response.json())
+            .then(data=>{
+                overlay2.style.display = "none"
+                overlay.style.display = "flex"
+                if (data.mensagem === "Item exluido do banco de dados com sucesso"){
+                    alertTitle.textContent = "Parabéns"
+                    alertTitle.style.color = "#2e7d32"
+                    alertSub.textContent = "Você Exluiu o item com sucesso"
+                    inputId.value=""
+                    inputConfirmId.value=""
+                    itens()
+                } else{
+                alertTitle.textContent = "Erro!"
+                alertTitle.style.color = "#c62828"
+                alertSub.textContent = "O item não foi Exluido do banco de dados, tente mais tarde."
+                }
+            }).catch(err => console.error('Erro ao atualizar item:', err));
+        };
+    } }
+
 if (userId && userId !==""){
     verifyIdentity()
     pegarInfomações()

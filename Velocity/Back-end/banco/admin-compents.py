@@ -137,5 +137,18 @@ def deletarUser():
         return jsonify({"mensagem": "Erro ao excluir o usuário"})
     return jsonify({"mensagem":"Usuário excluido com sucesso"})
 
+@app.route('/deletarItem', methods = ['DELETE'])
+def deletarItem():
+    dados= request.json
+    itemId = dados.get("itemId")
+    try:
+        with sqlite3.connect("banco-itens.db") as conexao:
+            cursor= conexao.cursor()
+            cursor.execute("DELETE FROM itens WHERE id=?", (itemId,))
+            conexao.commit()
+    except sqlite3.Error as e:
+        return jsonify({"mensagem" : "Erro ao excluir Item do banco de dados"})
+    return jsonify({"mensagem" : "Item exluido do banco de dados com sucesso"})
+
 if __name__ == '__main__':
     app.run(debug=True)
