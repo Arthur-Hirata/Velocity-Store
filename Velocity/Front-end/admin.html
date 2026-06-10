@@ -120,6 +120,7 @@
         <div class="container-Editar">
             <div class="editar">
                 <h3 class="sub">Edite um item existente</h3>
+                <h3 class="input-erro" id="erro-editar">Não existe um item com esse ID</h3>
                 <div class="inputs">
                     <input type="text" placeholder="ID do item" id="item-id">
                     <input type="text" placeholder="Nome do item" id="nome-item">
@@ -127,29 +128,31 @@
                 </div>
                 <div class="btns">
                     <button class="enviar" onclick="editarItem()">Editar</button>
-                    <button class="cancelar">Cancelar</button>
+                    <button class="cancelar" id="cancelarEditar">Cancelar</button>
                 </div>
             </div>
             <div class="adcionar">
                 <h3 class="sub">Adicione um novo item</h3>
+               
                 <div class="inputs">
                     <input type="text" placeholder="Nome do item" id="nome-item-novo">
                     <input type="text" placeholder="Preço do item" id="preco-item-novo">
                 </div>
                 <div class="btns">
                     <button class="enviar"onclick="adicionarItem()">Adicionar Item</button>
-                    <button class="cancelar">Cancelar</button>
+                    <button class="cancelar" id="cancelarAdicionar">Cancelar</button>
                 </div>
             </div>
             <div class="apagar">
                 <h3 class="sub">Apague um item</h3>
+                <h3 class="input-erro" id="erro-apagar">Os ID's não coincidem!</h3>
                 <div class="inputs">
                     <input type="text" placeholder="Id do item" id="remover-item-id">
                     <input type="text" placeholder="Confirmação do id do item" id="confirmar-remover-item-id">
                 </div>
                 <div class="btns">
                     <button class="enviar"onclick="apagarItem()">Exluir Item</button>
-                    <button class="cancelar">Cancelar</button>
+                    <button class="cancelar" id="cancelarApagar">Cancelar</button>
                 </div>
             </div>
         </div>

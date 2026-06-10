@@ -133,6 +133,7 @@ function itens(){
     .then(response => response.json())
     .then(data=>{
         const tabelaItens = document.getElementById("tabela-itens")
+        tabelaItens.innerHTML=""
         data.item.forEach(item=>{
             const tr = document.createElement("tr")
             tr.innerHTML=`
@@ -150,11 +151,26 @@ const bntVoltar = document.querySelector(".voltar")
 bntVoltar.addEventListener("click", function(){
     overlay.style.display = "none"
 })
-function editarItem(){
-    const itemId = document.getElementById("item-id").value
-    const nomeItem = document.getElementById("nome-item").value
-    const precoItem= document.getElementById("preco-item").value
+const erroEditar = document.getElementById("erro-editar")
 
+
+const btnCancelar1 = document.getElementById("cancelarEditar")
+const inputItemId = document.getElementById("item-id")
+const inputNomeItem =  document.getElementById("nome-item")
+const inputPrecoItem = document.getElementById("preco-item")
+
+btnCancelar1.addEventListener("click", function(){
+    inputItemId.value=""
+    inputNomeItem.value=""
+    inputPrecoItem.value=""
+})
+
+function editarItem(){
+    const itemId =inputItemId.value
+    const nomeItem = inputNomeItem.value
+    const precoItem=inputPrecoItem.value
+    inputItemId.style.border=""
+    erroEditar.style.display="none"
     fetch('http://127.0.0.1:5000/atualizarItem', {
         method : 'PATCH',
         headers :{ 'Content-Type': 'application/json' },
@@ -170,20 +186,35 @@ function editarItem(){
             alertTitle.textContent = "Parabéns"
             alertTitle.style.color = "#2e7d32"
             alertSub.textContent = "Você atualizou o item com sucesso"
-            itemId.value=""
-            nomeItem.value=""
-            precoItem.value=""
-            itens()
-        } else {
+            inputItemId.value=""
+            inputNomeItem.value=""
+            inputPrecoItem.value=""
+            itens();
+        } else if (data.mensagem === "Esse item não existe no banco de dados"){
+            erroEditar.style.display="block"
+            inputItemId.style.border="1px solid #c62828"
+            overlay.style.display = "none"
+        }
+        else {
             alertTitle.textContent = "Erro!"
             alertTitle.style.color = "#c62828"
             alertSub.textContent = "O item não foi atualizado no banco de dados, tente mais tarde."
         }
     }) .catch(err => console.error('Erro ao atualizar item:', err));
 }
+
+
+const btnCancelar2 = document.getElementById("cancelarAdicionar")
+const inputNomeItemNovo =document.getElementById("nome-item-novo")
+const inputprecoItemNovo = document.getElementById("preco-item-novo")
+
+btnCancelar2.addEventListener("click", function(){
+    inputNomeItemNovo.value=""
+    inputprecoItemNovo.value= ""
+})
 function adicionarItem(){
-    const nomeItemNovo = document.getElementById("nome-item-novo").value
-    const precoItemNovo = document.getElementById("preco-item-novo").value
+    const nomeItemNovo = inputNomeItemNovo.value
+    const precoItemNovo = inputprecoItemNovo.value
     fetch('http://127.0.0.1:5000/adcItem', {
         method : 'POST',
         headers : { 'Content-Type': 'application/json' },
@@ -205,14 +236,29 @@ function adicionarItem(){
             alertTitle.textContent = "Erro!"
             alertTitle.style.color = "#c62828"
             alertSub.textContent = "O item não foi adicionado ao banco de dados, tente mais tarde."
+            inputNomeItemNovo.value=""
+            inputprecoItemNovo.value= ""
         }
     }) .catch(err => console.error('Erro ao atualizar item:', err));
 }
+
+
+
+
+const btnCancelar3 = document.getElementById("cancelarApagar")
+const inputId= document.getElementById("remover-item-id")
+const inputConfirmId =document.getElementById("confirmar-remover-item-id")
+btnCancelar3.addEventListener("click", function(){
+    inputId.value=""
+    inputConfirmId.value=""
+})
+const erro2 = document.getElementById("erro-apagar")
 function apagarItem(){
-    const inputId= document.getElementById("remover-item-id")
     const itemId= inputId.value
-    const inputConfirmId =document.getElementById("confirmar-remover-item-id")
     const confirmItemId= inputConfirmId.value
+    erro2.style.display = "none"
+    inputId.style.border=""
+    inputConfirmId.style.border=""
     if (itemId == confirmItemId){
         overlay2.style.display = "flex"
         alertText.textContent = "Tem certeza que deseja excluir o item ID: " + itemId + "?"
@@ -242,7 +288,12 @@ function apagarItem(){
                 }
             }).catch(err => console.error('Erro ao atualizar item:', err));
         };
-    } }
+    } else{
+        inputId.style.border="1px solid #c62828"
+        inputConfirmId.style.border="1px solid #c62828"
+        erro2.style.display="block"
+    }
+}
 
 if (userId && userId !==""){
     verifyIdentity()

@@ -106,6 +106,8 @@ def atualizarItem():
             cursor = conexao.cursor()
             cursor.execute("UPDATE itens set nome=?, preco=? WHERE id=?", (nome, preco, item_id))
             conexao.commit()
+            if cursor.rowcount ==0:
+                return jsonify({"mensagem" : "Esse item não existe no banco de dados"}), 404
     except sqlite3.Error as e:
         return jsonify({"mensagem": "Erro no banco de dados"}), 500
     return jsonify({"mensagem": "Item atualizado com sucesso"}), 200

@@ -530,4 +530,9 @@ select:focus {
     margin-left: 20px;
     margin-right: 20px;
 }
+.input-erro{
+    text-align: center;
+    color:#E11D48;
+    display: none;
+}
 /* E11D48
