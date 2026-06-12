@@ -61,7 +61,6 @@ if (userId && userId !==""){
         })
         .catch(err => console.error('Erro ao buscar preço final:', err));
     }
-    const remover = document.querySelector(".remover")
     carrinho.addEventListener("click", function() {
         if (lista.style.display === "none" || lista.style.display === "") {
             icon.className = "fa-solid fa-x";
@@ -75,9 +74,10 @@ if (userId && userId !==""){
             lista.style.display = "none";
         }
     });
-    const btnadc = document.querySelectorAll(".btn-adicionar");
-    btnadc.forEach(btn => {
-        btn.addEventListener('click', (e) => { //USEI IA AQUI
+    const remover = document.querySelector(".remover")
+    document.addEventListener("click", (e)=>{
+        const btn= e.target.closest(".btn-adicionar")
+        if (btn){
             e.preventDefault();
             const idProduto = btn.dataset.id;
             btnMap.set(idProduto, btn); // Armazena o botão no mapa
@@ -106,25 +106,25 @@ if (userId && userId !==""){
                 atualizarPrecoFinal();
             })
             .catch(err => console.error("Erro no fetch:", err));
-        }); 
-    });
-    
-    remover.addEventListener('click', function(){
+        }
         
-        fetch ("http://127.0.0.1:5000/apagar", {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-             body: JSON.stringify({
-                    id_user: userId   
-                })
-        })
-        .then(response => response.json())
-        .then(data =>{
-            mostrarCarrinho();
-            atualizarPrecoFinal()
-        })
-        .catch(err => console.error("Erro ao limpar:", err));
     })
+    remover.addEventListener('click', function(){
+   
+   fetch ("http://127.0.0.1:5000/apagar", {
+       method: 'PATCH',
+       headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+               id_user: userId   
+           })
+   })
+   .then(response => response.json())
+   .then(data =>{
+       mostrarCarrinho();
+       atualizarPrecoFinal()
+   })
+   .catch(err => console.error("Erro ao limpar:", err));
+})
     function mostrarCarrinho(btn){ 
         fetch("http://127.0.0.1:5000/mostrar",{
             method: 'POST',

@@ -3,16 +3,18 @@ $(document).ready(function(){
 const pesquisa = document.querySelector(".busca")
 const erros = document.querySelector(".erros")
 const botoes = document.querySelectorAll('.btn-selecionar');
-botoes.forEach(botao => {
-    botao.addEventListener("click", function(){
-        botoes.forEach(b => b.className = "nao-clicado" )
-        this.className = "clicado"
-        
-    })
+document.addEventListener("click", (e)=>{
+    const botaoClicado = e.target.closest("btn-selecionar")
+     
+    if (botaoClicado){
+        document.querySelectorAll('.btn-selecionar').forEach(b=>{
+            b.className ="nao-clicado"
+        });
+        this.className="clicado"
+    }
 })
-
-const itens = document.querySelectorAll("ul.hardware > li.promocao")
 function tudo(){
+    const itens = document.querySelectorAll("ul.hardware > li.promocao")
     itens.forEach(item =>{
         item.style.visibility = "visible"
         item.style.display = "flex"
@@ -22,6 +24,7 @@ function tudo(){
 }
 function ram(){
     let visiveis = 0
+    const itens = document.querySelectorAll("ul.hardware > li.promocao")
     itens.forEach(item =>{
         let ram = item.querySelector(".ram") !== null;
         if (ram){
@@ -41,6 +44,7 @@ function ram(){
 }
 function cpu(){
     let visiveis = 0
+    const itens = document.querySelectorAll("ul.hardware > li.promocao")
     itens.forEach(item => {
         let cpu = item.querySelector(".cpu") !== null;
         if (cpu){
@@ -60,6 +64,7 @@ function cpu(){
 }
 function gpu(){
     let visiveis = 0
+    const itens = document.querySelectorAll("ul.hardware > li.promocao")
     itens.forEach(item => {
         let gpu = item.querySelector('.gpu') !== null
         if (gpu){
@@ -80,6 +85,7 @@ function gpu(){
 }
 function arm(){
     let visiveis =0
+    const itens = document.querySelectorAll("ul.hardware > li.promocao")
     itens.forEach(item =>{
         let arm = item.querySelector(".arm") !== null
         if (arm){
@@ -100,6 +106,7 @@ function arm(){
 }
 function mth(){
     let visiveis = 0
+    const itens = document.querySelectorAll("ul.hardware > li.promocao")
     itens.forEach(item =>{
         let mth = item.querySelector(".mth") !== null
         if (mth){
@@ -120,6 +127,7 @@ function mth(){
 }
 function gab(){
     let visiveis =0
+    const itens = document.querySelectorAll("ul.hardware > li.promocao")
     itens.forEach(item =>{
         let gab = item.querySelector(".gab") !==null
         if (gab){
@@ -141,7 +149,8 @@ function gab(){
 function buscarProduto(){
     const pesquisa = document.querySelector(".busca").value.toLowerCase()
     const erros = document.querySelector(".erros")
-    erros.style.display = "none"
+    const itens = document.querySelectorAll("ul.hardware .promocao")
+    erros.style.display = "flex"
     let hasMatch = false
     // USEI IA NESSA PARTE
     for (let a = 0; a <itens.length; a++ ){
@@ -163,11 +172,12 @@ function buscarProduto(){
         const notFound = document.querySelector(".nao-encontrado")
         const mensagem = `Desculpe não encontramos "${pesquisa}" em nosso estoque!`
         notFound.textContent = mensagem
-        erros.style.display = "block"
+        erros.style.visibility="visible"
     }
 }
 function apagarBusca(){
     const pesquisa = document.querySelector(".busca")
     pesquisa.value=""
+    erros.style.visibility="hidden"
     buscarProduto()
 }

@@ -260,7 +260,35 @@ def preço_total(lista_carrinho):
     total = sum(produto['preco_unitario'] * produto['quantidade'] for produto in lista_carrinho)
     return total
 
-
+@app.route("/getItens", methods=['GET'])
+def pegarItens():
+    hardware=[]
+    perifericos=[]
+    try:
+        with sqlite3.connect("banco-itens.db") as conexao:
+            cursor = conexao.cursor()
+            cursor.execute("SELECT id, nome, preco, imagem, tipo, componente FROM itens")
+            resultado =cursor.fetchall()
+        for id, nome,preco, imagem, tipo, componente in resultado:
+            if tipo == "Hardware" :
+                hardware.append({
+                    'id': id,
+                    'preco': preco,
+                    'nome':nome,
+                    'imagem': imagem,
+                    'componente' : componente
+                })
+            elif tipo == 'periferico':
+                perifericos.append({
+                    'id': id,
+                    'preco': preco,
+                    'nome':nome,
+                    'imagem': imagem,
+                    'componente' : componente
+                })
+    except sqlite3.Error as e:
+        return jsonify({"mensagem":"Erro ao pegar os itens"}), 500
+    return jsonify({"Hardwares": hardware, 'perifericos': perifericos}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

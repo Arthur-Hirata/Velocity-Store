@@ -69,7 +69,8 @@ input::placeholder, textarea::placeholder{
     font-size: 20px;
     color: var(--cor-texto);
 }
-.hardware{
+.hardware,
+.perifericos{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
@@ -77,51 +78,64 @@ input::placeholder, textarea::placeholder{
     overflow-y: auto;
     height: 680px;
 }
-.hardware::-webkit-scrollbar{
+.hardware::-webkit-scrollbar,
+.perifericos::-webkit-scrollbar{
     background-color: transparent;
     width: 6px;
     height: 6px;
 }
-.hardware::-webkit-scrollbar-track{
+.hardware::-webkit-scrollbar-track,
+.perifericos::-webkit-scrollbar-track{
     background-color: transparent;
     border-radius: 50%;
 }
-.hardware::-webkit-scrollbar-thumb{
+.hardware::-webkit-scrollbar-thumb,
+.perifericos::-webkit-scrollbar-thumb{
     background-color: rgb(151, 147, 147);
     border-radius: 50px;
 
 }
-.hardware .promocao{
+.hardware .promocao,
+.perifericos .promocao{
     margin-top: 10px;
     position: relative;
 }
-.hardware .foto-produto{
+.hardware .foto-produto,
+.perifericos .foto-produto{
     position: relative;
     margin-top: -10px;
 }
-.hardware .preco-org{
+.hardware .preco-org,
+.perifericos .preco-org{
     position: relative;
     display: none;
 }
-.hardware .price{
+.hardware .price,
+.perifericos .price{
     position: relative;
     margin-top: 10px;
 }
-.hardware .nome-produto{
+.hardware .nome-produto,
+.perifericos .nome-produto{
     position: relative;
     margin-top: -30px;
-}
-.hardware .btn-adicionar{
+    text-overflow: ellipsis;}
+.hardware .btn-adicionar,
+.perifericos .btn-adicionar{
     position: relative;
-    margin-top: -0px;
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .erros{
-    display: none;
+    display: flex;
+    visibility: hidden;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-left: 560px;
     position: static;
+    margin-top: -500px;
 }
 .nao-encontrado{
     display: block;
@@ -163,6 +177,7 @@ input::placeholder, textarea::placeholder{
     font-size: 25px;
     margin-left: -60px;
 }
+
 @media screen and (min-width:300px) and (max-width:450px) {
     .busca{
         width: 330px;
@@ -282,9 +297,6 @@ input::placeholder, textarea::placeholder{
 @media screen and (min-width:1900px) and (max-width:4000px){
     .box{
         width: 1300px;
-    }
-    .erros{
-        margin-left: 470px;
     }
 }
 
