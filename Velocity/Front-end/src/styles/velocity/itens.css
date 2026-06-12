@@ -137,6 +137,15 @@ input::placeholder, textarea::placeholder{
     position: static;
     margin-top: -500px;
 }
+.erros2{
+    display: flex;
+    visibility: hidden;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: static;
+    margin-top: -500px;
+}
 .nao-encontrado{
     display: block;
     position: relative;

@@ -2,7 +2,10 @@ $(document).ready(function(){
 })
 const pesquisa = document.querySelector(".busca")
 const erros = document.querySelector(".erros")
+const erros2 = document.querySelector(".erros2")
 const botoes = document.querySelectorAll('.btn-selecionar');
+const notFound = document.querySelector(".nao-encontrado")
+const notFound2 = document.getElementById("nao-encontrado-perifericos")
 document.addEventListener("click", (e)=>{
     const botaoClicado = e.target.closest("btn-selecionar")
      
@@ -37,9 +40,10 @@ function ram(){
     })
     if (visiveis === 0 ){
         pesquisa.value = ""
-        erros.style.display = "block"
+        erros.style.visibility = "visible"
+        notFound.textContent = "Desculpe, não temos Memórias Ram em nossos estoques"
     } else {
-        erros.style.display = "none"
+        erros.style.visibility = "hidden"
     }
 }
 function cpu(){
@@ -57,9 +61,10 @@ function cpu(){
     })
     if (visiveis === 0 ){
         pesquisa.value = ""
-        erros.style.display = "block"
+        erros.style.visibility = "visible"
+        notFound.textContent = "Desculpe, não temos processadores em nossos estoques"
     } else {
-        erros.style.display = "none"
+        erros.style.visibility = "hidden"
     }
 }
 function gpu(){
@@ -78,9 +83,10 @@ function gpu(){
     })
     if (visiveis === 0 ){
         pesquisa.value = ""
-        erros.style.display = "block"
+        erros.style.visibility = "visible"
+        notFound.textContent = "Desculpe, não temos Placas de Vídeo em nossos estoques"
     } else {
-        erros.style.display = "none"
+        erros.style.visibility = "hidden"
     }
 }
 function arm(){
@@ -99,9 +105,10 @@ function arm(){
     })
     if (visiveis === 0 ){
         pesquisa.value = ""
-        erros.style.display = "block"
+        erros.style.visibility = "visible"
+        notFound.textContent = "Desculpe, não temos Armazenamentos em nossos estoques"
     } else {
-        erros.style.display = "none"
+        erros.style.visibility = "hidden"
     }
 }
 function mth(){
@@ -120,9 +127,10 @@ function mth(){
     })
     if (visiveis === 0 ){
         pesquisa.value = ""
-        erros.style.display = "block"
+        erros.style.visibility = "visible"
+        notFound.textContent = "Desculpe, não temos Placas Mãe em nossos estoques"
     } else {
-        erros.style.display = "none"
+        erros.style.visibility = "hidden"
     }
 }
 function gab(){
@@ -141,14 +149,136 @@ function gab(){
     })
     if (visiveis === 0 ){
         pesquisa.value = ""
-        erros.style.display = "block"
+        erros.style.visibility = "visible"
+        notFound.textContent = "Desculpe, não temos Gabinetes em nossos estoques"
     } else {
-        erros.style.display = "none"
+        erros.style.visibility = "hidden"
     }
 }
+function todosPerifecos(){
+    const itens = document.querySelectorAll("ul.perifericos > li.promocao")
+    itens.forEach(item =>{
+        item.style.visibility = "visible"
+        item.style.display = "flex"
+        erros2.style.display = "none"
+        pesquisa.value =""
+    })
+}
+function mouse(){
+    let visiveis =0
+    const itens = document.querySelectorAll("ul.perifericos > li.promocao")
+    itens.forEach(item =>{
+        let mouse = item.querySelector(".mouse") !==null
+        if (mouse){
+            item.style.visibility= "visible"
+            item.style.display= "flex"
+            visiveis++
+            
+        } else {
+            item.style.display= "none"
+        }
+    })
+    if (visiveis === 0 ){
+        pesquisa.value = ""
+        erros2.style.visibility = "visible"
+        notFound2.textContent="Desculpe, não temos mouses em nosso estoques."
+    } else {
+        erros2.style.visibility = "hidden"
+    }
+}
+function teclado(){
+    let visiveis =0
+    const itens = document.querySelectorAll("ul.perifericos > li.promocao")
+    itens.forEach(item =>{
+        let teclado = item.querySelector(".teclado") !==null
+        if (teclado){
+            item.style.visibility= "visible"
+            item.style.display= "flex"
+            visiveis++
+            
+        } else {
+            item.style.display= "none"
+        }
+    })
+    if (visiveis === 0 ){
+        pesquisa.value = ""
+        erros2.style.visibility = "visible"
+        notFound2.textContent="Desculpe, não temos teclados em nosso estoques."
+    } else {
+        erros2.style.visibility = "hidden"
+    }
+}
+function mousepad(){
+    let visiveis =0
+    const itens = document.querySelectorAll("ul.perifericos > li.promocao")
+    itens.forEach(item =>{
+        let mousepad = item.querySelector(".mousepad") !==null
+        if (mousepad){
+            item.style.visibility= "visible"
+            item.style.display= "flex"
+            visiveis++
+            
+        } else {
+            item.style.display= "none"
+        }
+    })
+    if (visiveis === 0 ){
+        pesquisa.value = ""
+        erros2.style.visibility = "visible"
+        notFound2.textContent="Desculpe, não temos mousepad em nosso estoques."
+    } else {
+        erros2.style.visibility = "hidden"
+    }
+}
+function headset(){
+    let visiveis =0
+    const itens = document.querySelectorAll("ul.perifericos > li.promocao")
+    itens.forEach(item =>{
+        let headseat = item.querySelector(".headset") !==null
+        if (headseat){
+            item.style.visibility= "visible"
+            item.style.display= "flex"
+            visiveis++
+            
+        } else {
+            item.style.display= "none"
+        }
+    })
+    if (visiveis === 0 ){
+        pesquisa.value = ""
+        erros2.style.visibility = "visible"
+        notFound2.textContent="Desculpe, não temos headsets em nosso estoques."
+    } else {
+        erros2.style.visibility = "hidden"
+    }
+}
+function monitor(){
+    let visiveis =0
+    const itens = document.querySelectorAll("ul.perifericos > li.promocao")
+    itens.forEach(item =>{
+        let monitores = item.querySelector(".monitor") !==null
+        if (monitores){
+            item.style.visibility= "visible"
+            item.style.display= "flex"
+            visiveis++
+            
+        } else {
+            item.style.display= "none"
+        }
+    })
+    if (visiveis === 0 ){
+        pesquisa.value = ""
+        erros2.style.visibility = "visible"
+        notFound2.textContent="Desculpe, não temos monitores em nosso estoques."
+    } else {
+        erros2.style.visibility = "hidden"
+    }
+}
+
+
+
 function buscarProduto(){
     const pesquisa = document.querySelector(".busca").value.toLowerCase()
-    const erros = document.querySelector(".erros")
     const itens = document.querySelectorAll("ul.hardware .promocao")
     erros.style.display = "flex"
     let hasMatch = false
@@ -163,13 +293,13 @@ function buscarProduto(){
                 itens[a].style.visibility = "visible"
                 itens[a].style.display = "flex"
                 hasMatch = true
+                erros.style.visibility="hidden"
             } else {
                 itens[a].style.display = "none"
             }
         }
     }
     if (!hasMatch && pesquisa.length > 0){
-        const notFound = document.querySelector(".nao-encontrado")
         const mensagem = `Desculpe não encontramos "${pesquisa}" em nosso estoque!`
         notFound.textContent = mensagem
         erros.style.visibility="visible"
@@ -180,4 +310,39 @@ function apagarBusca(){
     pesquisa.value=""
     erros.style.visibility="hidden"
     buscarProduto()
+}
+function buscarPerifericos(){
+    const pesquisa = document.getElementById("busca-perifericos").value.toLowerCase()
+    const erros2 = document.querySelector(".erros2")
+    const itens = document.querySelectorAll("ul.perifericos .promocao")
+    erros2.style.display = "flex"
+    let hasMatch = false
+    for (let a = 0; a <itens.length; a++ ){
+        let subTexto = itens[a].querySelector(".nome-produto")
+    
+        if (subTexto){
+            let conteudo = subTexto.textContent || subTexto.innerText;
+            
+            if (conteudo.toLowerCase().indexOf(pesquisa)> -1 ){
+                itens[a].style.visibility = "visible"
+                itens[a].style.display = "flex"
+                erros2.style.visibility="hidden"
+                hasMatch = true
+            } else {
+                itens[a].style.display = "none"
+            }
+        }
+    }
+    if (!hasMatch && pesquisa.length > 0){
+        const mensagem = `Desculpe não encontramos "${pesquisa}" em nosso estoque!`
+        notFound2.textContent = mensagem
+        erros2.style.visibility="visible"
+    }
+}
+function apagarBuscaPerifericos(){
+    const pesquisa = document.getElementById("busca-perifericos")
+    pesquisa.value=""
+    erros2.style.visibility="hidden"
+    buscarProduto()
+    todosPerifecos()
 }

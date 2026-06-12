@@ -98,7 +98,7 @@
                         <img src="https://a-static.mlcdn.com.br/800x800/monitor-gamer-benq-mobiuz-23-8-ex240n-full-hd-1ms-144hz-com-alto-falante/magazineluiza/240246600/4c6f8225f1855605267fb08fa683f51a.jpg" alt="" class="foto-produto">
                         <h5 class="preco-org">R$ 1999</h5>
                         <h4 class="price">R$ 1599</h4>
-                        <h3 class="nome-produto">Monitro Benq 144Hz</h3>                       
+                        <h3 class="nome-produto">Monitor Benq 144Hz</h3>                       
                         <button class="btn-adicionar" data-id="5" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
                     </li>
                     <li class="promocao">
@@ -155,11 +155,11 @@
             <h1 class="tit">Periféricos</h1>
             <div class="input-pesquisa">
                 <button  type="button"class="btn-busca"><i class="fa-solid fa-magnifying-glass" id="lupa"></i></button>
-                <input type="text" class="busca" placeholder="Digete o periférico que deseja..." onkeyup="buscarProduto()">
-                <button  type="button" class="erase" onclick="apagarBusca()"><i class="fa fa-eraser" id="apagar"></i></button>
+                <input type="text" class="busca" id="busca-perifericos" placeholder="Digete o periférico que deseja..." onkeyup="buscarPerifericos()">
+                <button  type="button" class="erase" onclick="apagarBuscaPerifericos()"><i class="fa fa-eraser" id="apagar"></i></button>
             </div>
             <div class="botoes">
-                <button  type="button" class="btn-selecionar" onclick="tudo()">Tudo</button>
+                <button  type="button" class="btn-selecionar" onclick="todosPerifecos()">Tudo</button>
                 <button  type="button"class="btn-selecionar" onclick="mouse()">Mouses</button>
                 <button  type="button"class="btn-selecionar" onclick="teclado()">Teclados</button>
                 <button  type="button"class="btn-selecionar" onclick="mousepad()">Mousepads</button>
@@ -168,6 +168,10 @@
             </div>
             <div class="box">
                 <ul class="perifericos"></ul>
+                <div class="erros2" style="display: flex;">
+                    <span class="fa-solid fa-xmark" id="erro"></span>
+                    <span class="nao-encontrado" id="nao-encontrado-perifericos"></span>
+                </div>
             </div>
         </section>
     </main>

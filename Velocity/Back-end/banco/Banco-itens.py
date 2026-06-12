@@ -14,8 +14,8 @@ cursor.execute('''
 #itens = [
 #]
 #cursor.executemany("INSERT INTO itens (nome, preco, imagem, tipo, componente) VALUES (?, ?, ?, ? ,?)", itens)
-image = "https://img.terabyteshop.com.br/produto/p/gabinete…do-e-atx-sem-fonte-sem-fan-black-v100x_261034.jpg"
-cursor.execute("UPDATE itens SET imagem=? WHERE id=?", (image, 2))
+mudança = "	https://img.terabyteshop.com.br/produto/p/gabinete…do-e-atx-sem-fonte-sem-fan-black-v100x_261034.jpg"
+cursor.execute("UPDATE itens SET imagem=? WHERE id=?", (mudança, 2))
 # Deletar duplicados (id 15 a 20)
 #cursor.execute("DELETE FROM itens WHERE id BETWEEN 15 AND 20")
 
