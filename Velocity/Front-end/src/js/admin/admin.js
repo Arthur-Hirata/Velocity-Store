@@ -158,11 +158,16 @@ const btnCancelar1 = document.getElementById("cancelarEditar")
 const inputItemId = document.getElementById("item-id")
 const inputNomeItem =  document.getElementById("nome-item")
 const inputPrecoItem = document.getElementById("preco-item")
-
 btnCancelar1.addEventListener("click", function(){
     inputItemId.value=""
     inputNomeItem.value=""
     inputPrecoItem.value=""
+    inputImg.style.display="none"
+    divBtnsEditar.style.marginTop="30px"
+    divImgChange.style.visibility="visible"
+    checkbox.checked=false
+    inputImg.value="" 
+
 })
 
 function editarItem(){
@@ -171,13 +176,18 @@ function editarItem(){
     const precoItem=inputPrecoItem.value
     inputItemId.style.border=""
     erroEditar.style.display="none"
+    let urlImg = ""
+    if (checkbox.checked){
+        urlImg = inputImg.value
+    }
     fetch('http://127.0.0.1:5000/atualizarItem', {
         method : 'PATCH',
         headers :{ 'Content-Type': 'application/json' },
         body : JSON.stringify({
             id : itemId,
             nome : nomeItem,
-            preco : precoItem
+            preco : precoItem, 
+            imagem: urlImg
         })
     }).then (response => response.json())
     .then(data=>{
@@ -189,6 +199,11 @@ function editarItem(){
             inputItemId.value=""
             inputNomeItem.value=""
             inputPrecoItem.value=""
+            inputImg.value="" 
+            inputImg.style.visibility="hidden"
+            divBtnsEditar.style.marginTop="-30px"
+            divImgChange.style.visibility="visible"
+            checkbox.checked=false
             itens();
         } else if (data.mensagem === "Esse item não existe no banco de dados"){
             erroEditar.style.display="block"
@@ -225,12 +240,12 @@ function adicionarItem(){
     }).then (response=> response.json())
     .then(data=>{
         overlay.style.display = "flex"
-        if (data.mensagem === "Item adcionando com sucesso"){
+        if (data.mensagem === "Item adicionado com sucesso"){
             alertTitle.textContent = "Parabéns"
             alertTitle.style.color = "#2e7d32"
             alertSub.textContent = "Você adicionou o item com sucesso"
-            nomeItemNovo.value=""
-            precoItemNovo.value=""
+            inputNomeItemNovo.value=""
+            inputprecoItemNovo.value=""
             itens()
         } else {
             alertTitle.textContent = "Erro!"
@@ -294,7 +309,16 @@ function apagarItem(){
         erro2.style.display="block"
     }
 }
+const checkbox= document.getElementById("checkbox-img")
+const divImgChange = document.querySelector(".img-change")
+const divBtnsEditar= document.getElementById("div-btns-Editar")
+const inputImg= document.getElementById("img-item")
 
+checkbox.addEventListener("click", function(){
+    divImgChange.style.visibility="hidden"
+    inputImg.style.display="block"
+    divBtnsEditar.style.marginTop="-0px"
+})
 if (userId && userId !==""){
     verifyIdentity()
     pegarInfomações()

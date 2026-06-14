@@ -125,15 +125,19 @@
                     <input type="text" placeholder="ID do item" id="item-id">
                     <input type="text" placeholder="Nome do item" id="nome-item">
                     <input type="text" placeholder="Preço do item" id="preco-item">
+                    <input type="text" placeholder="Insira a url da imagem" id="img-item">
+                    <div class="img-change">
+                        <input type="checkbox" id="checkbox-img">
+                        <h3 class="sub2">Deseja mudar a imagem no banco?</h3>
+                    </div>
                 </div>
-                <div class="btns">
+                <div class="btns" style="margin-top: 30px;" id="div-btns-Editar">
                     <button class="enviar" onclick="editarItem()">Editar</button>
                     <button class="cancelar" id="cancelarEditar">Cancelar</button>
                 </div>
             </div>
             <div class="adcionar">
                 <h3 class="sub">Adicione um novo item</h3>
-               
                 <div class="inputs">
                     <input type="text" placeholder="Nome do item" id="nome-item-novo">
                     <input type="text" placeholder="Preço do item" id="preco-item-novo">

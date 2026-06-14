@@ -535,4 +535,41 @@ select:focus {
     color:#E11D48;
     display: none;
 }
+.img-change{
+    display: flex;
+    visibility: visible;
+    position: absolute;
+    margin-top: 180px;
+    align-items: center;
+}
+.sub2{
+    font-size: 15px;
+    margin-left: 12px;
+    text-align: center;
+}
+#checkbox-img{
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(59, 130, 246, 0.6);
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+#checkbox-img:checked{
+    background-color: var(--cor-destaque);
+    border-color: var(--cor-destaque);
+} /* essa parte foi feita por IA*/
+#checkbox-img:checked::after{
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+#img-item{
+    display: none;
+}
 /* E11D48

@@ -101,22 +101,42 @@ def atualizarItem():
     item_id = dados.get('id')
     nome = dados.get('nome')
     preco = dados.get('preco')
-    try:
-        with sqlite3.connect('banco-itens.db') as conexao:
-            cursor = conexao.cursor()
-            cursor.execute("UPDATE itens set nome=?, preco=? WHERE id=?", (nome, preco, item_id))
-            conexao.commit()
-            if cursor.rowcount ==0:
-                return jsonify({"mensagem" : "Esse item não existe no banco de dados"}), 404
-    except sqlite3.Error as e:
-        return jsonify({"mensagem": "Erro no banco de dados"}), 500
-    return jsonify({"mensagem": "Item atualizado com sucesso"}), 200
+    imagem=dados.get('imagem')
+    if imagem == "":
+        try:
+            with sqlite3.connect('banco-itens.db') as conexao:
+                cursor = conexao.cursor()
+                cursor.execute("UPDATE itens set nome=?, preco=? WHERE id=?", (nome, preco, item_id))
+                conexao.commit()
+                if cursor.rowcount ==0:
+                    return jsonify({"mensagem" : "Esse item não existe no banco de dados"}), 404
+        except sqlite3.Error as e:
+            return jsonify({"mensagem": "Erro no banco de dados"}), 500
+        return jsonify({"mensagem": "Item atualizado com sucesso"}), 200
+    else :
+        try:
+            with sqlite3.connect('banco-itens.db') as conexao:
+                cursor = conexao.cursor()
+                cursor.execute("UPDATE itens set nome=?, preco=?, imagem=? WHERE id=?", (nome, preco, imagem,item_id))
+                conexao.commit()
+                if cursor.rowcount ==0:
+                    return jsonify({"mensagem" : "Esse item não existe no banco de dados"}), 404
+        except sqlite3.Error as e:
+            return jsonify({"mensagem": "Erro no banco de dados"}), 500
+        return jsonify({"mensagem": "Item atualizado com sucesso"}), 200
  
 @app.route('/adcItem', methods=['POST'])
 def adcItem():
     dados = request.json
-    nome= dados.get('nome')
+    if not dados:
+        return jsonify({"mensagem": "Dados inválidos"}), 400
+    
+    nome = dados.get('nome')
     preco = dados.get('preco')
+    
+    if not nome or preco is None:
+        return jsonify({"mensagem": "Nome e preço são obrigatórios"}), 400
+    
     try:
         with sqlite3.connect("banco-itens.db") as conexao:
             cursor = conexao.cursor()
@@ -124,7 +144,7 @@ def adcItem():
             conexao.commit()
     except sqlite3.Error as e:
         return jsonify({"mensagem": "Erro no banco de dados"}), 500
-    return jsonify({"mensagem" : "Item adcionando com sucesso"}), 201
+    return jsonify({"mensagem" : "Item adicionado com sucesso"}), 201
 
 @app.route('/apagarUser', methods=['DELETE'])
 def deletarUser():
