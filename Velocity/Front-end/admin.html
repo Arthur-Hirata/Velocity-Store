@@ -131,7 +131,7 @@
                         <h3 class="sub2">Deseja mudar a imagem no banco?</h3>
                     </div>
                 </div>
-                <div class="btns" style="margin-top: 30px;" id="div-btns-Editar">
+                <div class="btns" style="margin-top: 50px;" id="div-btns-Editar">
                     <button class="enviar" onclick="editarItem()">Editar</button>
                     <button class="cancelar" id="cancelarEditar">Cancelar</button>
                 </div>
@@ -141,7 +141,34 @@
                 <div class="inputs">
                     <input type="text" placeholder="Nome do item" id="nome-item-novo">
                     <input type="text" placeholder="Preço do item" id="preco-item-novo">
+                    <input type="text" placeholder="Url da imgaem do item" id="imagem-item-novo">
                 </div>
+                <div class="container-item-type">
+                    <div class="select-type">
+                        <button class="item-type">Hardware</button>
+                        <button class="item-type" style="margin-left: 10px;">Periféricos</button>
+                    </div>
+                    <div>
+                        <select name="" id="hardware" style="display: flex;">
+                            <option value="none" disabled selected hidden>Selecione</option>
+                            <option value="ram">Memórias Ram</option>
+                            <option value="cpu">Processadores</option>
+                            <option value="gpu">Placas de Vídeo</option>
+                            <option value="arm">Armazenamento</option>
+                            <option value="mth">Placas Mãe</option>
+                            <option value="gab">Gabinetes</option>
+                        </select>
+                        <select name="" id="perifericos" style="display: none;" >
+                            <option value="none" disabled selected hidden>Selecione</option>
+                            <option value="mouse">Mouses</option>
+                            <option value="teclado">Teclados</option>
+                            <option value="mousepad">Mousepads</option>
+                            <option value="headset">Headsets</option>
+                            <option value="monitor">Monitores</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="btns">
                     <button class="enviar"onclick="adicionarItem()">Adicionar Item</button>
                     <button class="cancelar" id="cancelarAdicionar">Cancelar</button>

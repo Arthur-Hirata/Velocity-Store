@@ -1,4 +1,5 @@
 const userId = localStorage.getItem("userId")
+
 function verifyIdentity(){
     fetch('http://127.0.0.1:5000/getCredentials', {
         method:'POST',
@@ -163,7 +164,7 @@ btnCancelar1.addEventListener("click", function(){
     inputNomeItem.value=""
     inputPrecoItem.value=""
     inputImg.style.display="none"
-    divBtnsEditar.style.marginTop="30px"
+    divBtnsEditar.style.marginTop="50px"
     divImgChange.style.visibility="visible"
     checkbox.checked=false
     inputImg.value="" 
@@ -235,7 +236,8 @@ function adicionarItem(){
         headers : { 'Content-Type': 'application/json' },
         body : JSON.stringify({
             nome : nomeItemNovo,
-            preco : precoItemNovo
+            preco : precoItemNovo,
+            tipo : selectedItemType
         })
     }).then (response=> response.json())
     .then(data=>{
@@ -256,8 +258,45 @@ function adicionarItem(){
         }
     }) .catch(err => console.error('Erro ao atualizar item:', err));
 }
+// usei IA nessa parte
+const itemTypeButtons = document.querySelectorAll('.item-type');
+let selectedItemType = 'Hardware'; 
+const hardwareOptions = document.getElementById("hardware")
+const perifericOptions = document.getElementById("perifericos")
+
+if (itemTypeButtons.length > 0) {
+    itemTypeButtons[0].classList.add('active');
+}
+// escrevi errado no bando de dados então preciso disso
+const mapeamento = {
+    'Hardware': 'Hardware',
+    'Periféricos' : 'perifericos'
+}
+
+itemTypeButtons.forEach(button => {
+    button.addEventListener('click', function() {
+        
+        itemTypeButtons.forEach(btn => btn.classList.remove('active'));
+        
+        this.classList.add('active');
+        
+        const buttonText= this.textContent.trim();
+
+        selectedItemType = mapeamento[buttonText] || buttonText;
+
+        if (selectedItemType === "Hardware"){
+            hardwareOptions.style.display ="flex"
+            perifericOptions.style.display = "none"
+        }
+        else if (selectedItemType === "perifericos"){
+            hardwareOptions.style.display ="none"
+            perifericOptions.style.display = "flex"
+        }
 
 
+
+    });
+});
 
 
 const btnCancelar3 = document.getElementById("cancelarApagar")

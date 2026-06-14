@@ -572,4 +572,51 @@ select:focus {
 #img-item{
     display: none;
 }
+.container-item-type{
+    display: flex;
+    gap: 170px;
+}
+.select-type{
+    column-gap: 80px;
+    margin-left: 20px;
+}
+.item-type {
+    width: 100px;
+    height: 40px;
+    background-color: rgba(59, 130, 246, 0.15);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+    color: var(--cor-texto);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.item-type:hover {
+    background-color: rgba(59, 130, 246, 0.25);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.item-type.active {
+    background-color: var(--cor-promo);
+    border-color: var(--cor-promo);
+    color: var(--cor-texto2);
+    box-shadow: 0 0 12px rgba(245, 158, 11, 0.4);
+    font-weight: 700;
+}
+select{
+    width: 180px;
+    height: 40px;
+    border: 0;
+    text-align: center;
+}
+option {
+    background-color: var(--fundo-card);
+    color: var(--cor-texto);
+    padding: 12px;
+    border-radius: 8px;
+    font-family: Poppins;
+    font-size: 0.95rem;
+}
 /* E11D48
