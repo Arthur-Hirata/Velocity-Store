@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Front-end/src/styles/velocity/style1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <title>Velocity Store</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <i class="fa-solid fa-desktop" id="logo"></i>
+        </div>
+        <div>
+            <h1 class="nome">Velocity Store</h1>
+        </div>
+        <div class="aux">
+            <a class="red-log"><button class="login">Login</button></a>
+        </div>
+    </nav>
+    <div>
+        <button type="button" class="compras" onclick="mostrarCarrinho()"><i class="fa-solid fa-cart-shopping" id="carrinho"></i></button>
+    </div>
+    <div class="lista">
+        <div class="listas">
+            <ul class="lista-compras"></ul>
+            <div class="final-lista">
+                <h3 class="preco-final">Preço Final <br> R$ 0,00</h3>
+                <button class="btn-finalizar" type="button" onclick="finalizarCompra()">Finalizar Compra</button>
+            </div>
+            <div class="not-logged">
+                <h1 class="titulo">Você precisar estar logado em uma conta pra realizar essa ação</h1>
+                <a href="/Front-end/login.html"><button class="login2">Login <i class="fas fa-sign-in-alt"></i></button></a>
+            </div>
+        </div>
+        <div class="remover">
+           <button class="apagar-lista" type="button">Limpar Lista <i class="fa-solid fa-trash"></i></button>
+        </div>
+    </div>
+    <div class="err">
+        <button class="sair" type="button">X</button>
+        <h1 class="title">Erro!</h1>
+        <h3 class="erro-sub">Você precisar estar logado em uma conta para realizar essa ação</h3>
+        <a href="/Front-end/login.html"><button class="login3">Login <i class="fas fa-sign-in-alt"></i></button></a>
+    </div>
+    <div class="overlay" style="display: none;">
+        <div class="sucess">
+            <h1 class="tit">Parabens!</h1>
+            <h3 class="subtit">Sua compra foi realizada com sucesso, aguarde o envio do material.</h3>
+            <button class="vlt">Voltar</button>
+        </div>
+    </div>
+    <div class="overlay2" style="display: none;">
+        <div class="fail">
+            <h1 class="tit">Erro!</h1>
+            <h3 class="subtit">Você não tem itens em sua lista de compras.</h3>
+            <button class="vlt2">Voltar</button>
+        </div>
+    </div>
+    <main>
+        <section class="inicio">
+            <img class="foto-promo" src="https://img.cdndsgni.com/preview/12048485.jpg" alt="promoção de verão da loja ">
+            <div class="promo">
+                <h1 class="tit">Itens em promoção</h1>
+                <ul class="promo-itens">
+                    <li class="promocao">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkTk6jWaijcY6u1f2ygk-D6KUEebfNTeGLZg&s" class="foto-produto">
+                        <h5 class="preco-org"><s>R$ 1999</s></h5>
+                        <h4 class="price">R$ 1799</h4>
+                        <h3 class="nome-produto">RTX 3070 8GB</h3>
+                        <button class="btn-adicionar" data-id="1" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </li>
+                    <li class="promocao">
+                        <img src="https://img.terabyteshop.com.br/produto/p/gabinete-gamer-lian-li-vector-v100-rgb-mid-tower-vidro-temperado-e-atx-sem-fonte-sem-fan-black-v100x_261034.jpg" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 499</h5>
+                        <h4 class="price">R$ 399</h4>
+                        <h3 class="nome-produto">Lian Li vector V100</h3>                       
+                        <button class="btn-adicionar" data-id="2" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </li>
+                    <li class="promocao">
+                        <img src="https://images.kabum.com.br/produtos/fotos/sync_mirakl/507592/Mouse-Gamer-Sem-fio-Razer-Viper-V2-Pro-30-000DPI-6-Bot-es-Wireless-59g-Ultraleve-80hr-De-Bateria_1723491773_gg.jpg" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 899</h5>
+                        <h4 class="price">R$ 799</h4>
+                        <h3 class="nome-produto">Mouse Viper V2</h3>                       
+                        <button class="btn-adicionar" data-id="3" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </li>
+                    <li class="promocao">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCJ7frmXxjKhRvpOcbaBfQnaLYaKwYfQ4efg&s" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 599</h5>
+                        <h4 class="price">R$ 459</h4>
+                        <h3 class="nome-produto">Teclado Blackwindow chroma</h3>                      
+                        <button class="btn-adicionar" data-id="4" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </li>
+                    <li class="promocao">
+                        <img src="https://a-static.mlcdn.com.br/800x800/monitor-gamer-benq-mobiuz-23-8-ex240n-full-hd-1ms-144hz-com-alto-falante/magazineluiza/240246600/4c6f8225f1855605267fb08fa683f51a.jpg" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 1999</h5>
+                        <h4 class="price">R$ 1599</h4>
+                        <h3 class="nome-produto">Monitor Benq 144Hz</h3>                       
+                        <button class="btn-adicionar" data-id="5" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </li>
+                    <li class="promocao">
+                    <img src="https://img.terabyteshop.com.br/produto/p/processador-amd-ryzen-7-8700g-42ghz-51ghz-turbo-8-cores-16-threads-am5-com-cooler-amd-wraith-stealth-100-100001236box_186220.jpg" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 1699</h5>
+                        <h4 class="price">R$ 1299</h4>
+                        <h3 class="nome-produto">AMD Ryzen 7 8700G</h3>                     
+                        <button class="btn-adicionar" data-id="6" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </li>
+                    <li class="promocao">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTERH5I2Fm3mHYBEsBmc2DIMsbBuM2gTVsgzQ&s" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 699</h5>
+                        <h4 class="price">R$ 499</h4>
+                        <h3 class="nome-produto">Mousepad Razer Gigantus V2</h3>                       
+                        <button class="btn-adicionar" data-id="7" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </li>
+                    <li class="promocao">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp5Mf1jTVsk1dP9wldzh121-XZRmwSqiGh_w&s" alt="" class="foto-produto">
+                        <h5 class="preco-org">R$ 799</h5>
+                        <h4 class="price">R$ 599</h4>
+                        <h3 class="nome-produto"> Mouse Razer Viper mini</h3>
+                        <button class="btn-adicionar" data-id="8" type="button">Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section class="itens">
+            <h1 class="tit">Hardware</h1>
+            <div class="input-pesquisa">
+                <button  type="button" class="btn-busca"><i class="fa-solid fa-magnifying-glass" id="lupa"></i></button>
+                <input type="text" class="busca" placeholder="Digete a peça que deseja..." onkeyup="buscarProduto()">
+                <button  type="button" class="erase" onclick="apagarBusca()"><i class="fa fa-eraser" id="apagar"></i></button>
+            </div>
+            <div class="botoes">
+                <button type="button" class="btn-selecionar" onclick="tudo() ">Tudo</button>
+                <button type="button" class="btn-selecionar" onclick="ram()">Memorias ram</button>
+                <button type="button" class="btn-selecionar" onclick="cpu()">Processadores</button>
+                <button type="button" class="btn-selecionar" onclick="gpu()">Placas de vídeo</button>
+                <button type="button" class="btn-selecionar" onclick="arm()">Armazenamento</button>
+                <button type="button" class="btn-selecionar" onclick="mth()">Placas Mãe</button>
+                <button type="button" class="btn-selecionar" onclick="gab()">Gabinetes</button>
+            </div>
+            <div class="box">
+                <ul class="hardware">
+                    
+                </ul>
+                <div class="erros" style="display: flex;">
+                    <span class="fa-solid fa-xmark" id="erro"></span>
+                    <span class="nao-encontrado"></span>
+                </div>
+            </div>
+        </section>
+        <section class="itens">
+            <h1 class="tit">Periféricos</h1>
+            <div class="input-pesquisa">
+                <button  type="button"class="btn-busca"><i class="fa-solid fa-magnifying-glass" id="lupa"></i></button>
+                <input type="text" class="busca" id="busca-perifericos" placeholder="Digete o periférico que deseja..." onkeyup="buscarPerifericos()">
+                <button  type="button" class="erase" onclick="apagarBuscaPerifericos()"><i class="fa fa-eraser" id="apagar"></i></button>
+            </div>
+            <div class="botoes">
+                <button  type="button" class="btn-selecionar" onclick="todosPerifecos()">Tudo</button>
+                <button  type="button"class="btn-selecionar" onclick="mouse()">Mouses</button>
+                <button  type="button"class="btn-selecionar" onclick="teclado()">Teclados</button>
+                <button  type="button"class="btn-selecionar" onclick="mousepad()">Mousepads</button>
+                <button  type="button"class="btn-selecionar" onclick="headset()">Headsetes</button>
+                <button  type="button"class="btn-selecionar" onclick="monitor()">Monitores</button>
+            </div>
+            <div class="box">
+                <ul class="perifericos"></ul>
+                <div class="erros2" style="display: flex;">
+                    <span class="fa-solid fa-xmark" id="erro"></span>
+                    <span class="nao-encontrado" id="nao-encontrado-perifericos"></span>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+</body>
+<script src="/Front-end/src/js/velocity/velocity.js"></script>
+<script src="/Front-end/src/js/velocity/selecao.js"></script>
+<script src="/Front-end/src/js/velocity/itens.js"></script>
+</html>
