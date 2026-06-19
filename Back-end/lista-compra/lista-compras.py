@@ -33,14 +33,13 @@ def precoFinal(userId):
 def adicionar_item():
     dados = request.json
     id_produto = dados.get('id') 
-    imagem_url = dados.get('imagem')
     quantidade = dados.get('quantidade') 
     user_id = dados.get('id_user')
 
    
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute("SELECT nome, preco FROM itens WHERE id = ?", (id_produto,))
+    cursor.execute("SELECT nome, preco, imagem FROM itens WHERE id = ?", (id_produto,))
     produto_no_banco = cursor.fetchone()
     conexao.close()	
 
@@ -65,20 +64,17 @@ def adicionar_item():
                 "nome": produto_no_banco[0], 
                 "preco_unitario": produto_no_banco[1],
                 "preco": produto_no_banco[1] * quantidade,
-                "imagem": imagem_url,
+                "imagem": produto_no_banco[2],
                 "quantidade": quantidade
             }
-            lista_carrinho.append(novo_item)
-            
-            # Correção no banco de usuários
+            lista_carrinho.append(novo_item)            
             with sqlite3.connect('banco-users.db') as conex:
                 cursor = conex.cursor()
-                # O SQLite não salva listas, então convertemos a lista inteira para texto
                 carrinho_texto = json.dumps(lista_carrinho)
                 cursor.execute("UPDATE users SET buylist=? WHERE id=?", (carrinho_texto, user_id))
                 conex.commit()
             
-            
+            return jsonify({"status": "sucesso", "item": novo_item})
 
 
     return jsonify({"status": "erro", "mensagem": "Produto não encontrado"})

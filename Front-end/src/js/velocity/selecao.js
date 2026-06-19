@@ -3,19 +3,32 @@ $(document).ready(function(){
 const pesquisa = document.querySelector(".busca")
 const erros = document.querySelector(".erros")
 const erros2 = document.querySelector(".erros2")
-const botoes = document.querySelectorAll('.btn-selecionar');
+const botoesHardware = document.querySelectorAll('#btns-hardware > .btn-selecionar');
+const botoesPefifericos = document.querySelectorAll('#btns-perifericos > .btn-selecionar')
 const notFound = document.querySelector(".nao-encontrado")
 const notFound2 = document.getElementById("nao-encontrado-perifericos")
-document.addEventListener("click", (e)=>{
-    const botaoClicado = e.target.closest("btn-selecionar")
-     
-    if (botaoClicado){
-        document.querySelectorAll('.btn-selecionar').forEach(b=>{
-            b.className ="nao-clicado"
-        });
-        this.className="clicado"
-    }
+
+
+
+function mudarAparenciaHadware(){
+    botoesHardware.forEach(botao=> botao.className = "nao-clicado")
+    this.className = "clicado"
+    
+}
+botoesHardware.forEach(btn =>{
+    btn.addEventListener("click", mudarAparenciaHadware)
 })
+function mudarAparenciaPerifericos(){
+    botoesPefifericos.forEach(botao=> botao.className = "nao-clicado")
+    this.className = "clicado"
+}
+botoesPefifericos.forEach(btn =>{
+    btn.addEventListener("click", mudarAparenciaPerifericos)
+})
+
+
+
+
 function tudo(){
     const itens = document.querySelectorAll("ul.hardware > li.promocao")
     itens.forEach(item =>{

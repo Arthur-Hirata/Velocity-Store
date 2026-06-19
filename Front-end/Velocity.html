@@ -132,8 +132,8 @@
                 <input type="text" class="busca" placeholder="Digete a peça que deseja..." onkeyup="buscarProduto()">
                 <button  type="button" class="erase" onclick="apagarBusca()"><i class="fa fa-eraser" id="apagar"></i></button>
             </div>
-            <div class="botoes">
-                <button type="button" class="btn-selecionar" onclick="tudo() ">Tudo</button>
+            <div class="botoes" id="btns-hardware">
+                <button type="button" class="btn-selecionar" onclick="tudo()">Tudo</button>
                 <button type="button" class="btn-selecionar" onclick="ram()">Memorias ram</button>
                 <button type="button" class="btn-selecionar" onclick="cpu()">Processadores</button>
                 <button type="button" class="btn-selecionar" onclick="gpu()">Placas de vídeo</button>
@@ -158,7 +158,7 @@
                 <input type="text" class="busca" id="busca-perifericos" placeholder="Digete o periférico que deseja..." onkeyup="buscarPerifericos()">
                 <button  type="button" class="erase" onclick="apagarBuscaPerifericos()"><i class="fa fa-eraser" id="apagar"></i></button>
             </div>
-            <div class="botoes">
+            <div class="botoes" id="btns-perifericos">
                 <button  type="button" class="btn-selecionar" onclick="todosPerifecos()">Tudo</button>
                 <button  type="button"class="btn-selecionar" onclick="mouse()">Mouses</button>
                 <button  type="button"class="btn-selecionar" onclick="teclado()">Teclados</button>
@@ -179,5 +179,5 @@
 </body>
 <script src="/Front-end/src/js/velocity/velocity.js"></script>
 <script src="/Front-end/src/js/velocity/selecao.js"></script>
-<script src="/Front-end/src/js/velocity/itens.js"></script>
+
 </html>
