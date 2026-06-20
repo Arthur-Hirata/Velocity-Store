@@ -1,0 +1,59 @@
+:root{
+    --cor-primaria: #1E293B;
+    --cor-secundaria: #FFFFFF;
+    --cor-marca:#1E3A8A;
+    --cor-destaque: #3B82F6;
+    --cor-promo: #F59E0B;
+    --cor-texto:  #FFFFFF;
+    --cor-texto2: #1F2937;
+    --fundo-card: rgb(43, 42, 42);
+    --sombra:0px 0px 12px 4px rgba(0,0, 0, 0.4);
+    --sombra-branca-neon:0 0 20px 5px rgba(255, 255, 255, 0.8);
+    --sombra-branca:0 4px 15px rgba(255, 255, 255, 0.3);
+}
+footer{
+    width: 96%;
+    margin: 80px auto 0;
+    padding: 18px 24px 0;
+    border-radius: 18px 18px 0 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(90deg, rgba(30, 41, 59, 0.96), rgba(30, 58, 138, 0.88));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 10px 28px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cor-promo), transparent);
+}
+
+#criador{
+    text-decoration: none;
+    color: var(--cor-texto);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+#criador:hover{
+    color: var(--cor-promo);
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.35);
+}
+
+footer span,
+#data{
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 12px;
+    font-weight: 500;
+}
