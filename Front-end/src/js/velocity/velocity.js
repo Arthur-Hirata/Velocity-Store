@@ -9,6 +9,7 @@ const userId = localStorage.getItem('userId')
 
 window.addEventListener('load', function () {
     getItens();
+    itensNaLista();
 });
 function getItens(){
     fetch("http://127.0.0.1:5000/getItens", {
@@ -68,7 +69,8 @@ function getCredentials(){
             if (data.role === "admin"){
                 createAdimn();
             }
-            isLogged()
+            isLogged();
+            itensNaLista()
         }
         else if (data.mensagem ==="usuário não encontrado"){
             naoLoggado()
@@ -80,7 +82,39 @@ const login=document.querySelector(".red-log")
 login.addEventListener("click", function(){
     window.location.href = "acc.html"
 })
+function itensNaLista(){
+    fetch("http://127.0.0.1:5000/mostrar",{
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+             body: JSON.stringify({
+                    id_user: userId   
+        })
+    })
+    .then(response=> response.json())
+    .then(data=>{
+        data.produtos.forEach(produto=>{
+            const btnAdicionar = document.querySelectorAll(".btn-adicionar")
+                btnAdicionar.forEach(btn => {
+                    if (btn.dataset.id === produto.id){
+                        btn.textContent=""
+                        btn.style.backgroundColor ="green"
+                        const i = document.createElement("i")
+                        i.className = "fas fa-check-circle"
+                        btn.append(i)
+                    }
+                    else{
+                        const carrinho = document.createElement("i")
+                        carrinho.className = "fa-solid fa-cart-shopping"
+                        carrinho.style.marginLeft = "4px"
+                        btn.style.backgroundColor = "#F59E0B";
+                        btn.textContent = "Carrnho";
+                        btn.append(carrinho)
+                    }
+            })  
+        })
 
+    })
+}
 function createAdimn(){
     if (document.querySelector(".admin-button")) return;
 
@@ -118,12 +152,9 @@ btnAdicionar.forEach(btn=>{
     btn.addEventListener("click", function(){
         const itemID = btn.dataset.id
         const card = btn.closest(".promocao")
-        btn.textContent=""
-        btn.style.backgroundColor ="green"
-        const i = document.createElement("i")
-        i.className = "fas fa-check-circle"
+        
         const imagem = card.closest(".foto-produto")
-        btn.append(i)
+
         let quantidade = 1
         fetch("http://127.0.0.1:5000/adicionar", {
             method: 'POST',
@@ -200,6 +231,18 @@ function mostrarCarrinho(){
             divBtns.append(spanQuantidade)
             divBtns.appendChild(removerQnt)
 
+            const btnAdicionar = document.querySelectorAll(".btn-adicionar")
+            btnAdicionar.forEach(btn => {
+                if (btn.dataset.id === produto.id){
+                    btn.textContent=""
+                    btn.style.backgroundColor ="green"
+                    const i = document.createElement("i")
+                    i.className = "fas fa-check-circle"
+                    btn.append(i)
+                }
+            })
+
+
             aumentarQnt.addEventListener("click", function(){
                 fetch("http://127.0.0.1:5000/atualizar/"+ produto.id,{
                     method: 'PATCH',
@@ -244,16 +287,8 @@ function mostrarCarrinho(){
                     .then (data => {
                         if (data.status === "removido") {
                             listaCompras.removeChild(li);
-                            const btnAdicionar = btnMap.get(produto.id);
-                            if (btnAdicionar) {
-                                const carrinho = document.createElement("i")
-                                carrinho.className = "fa-solid fa-cart-shopping"
-                                carrinho.style.marginLeft = "4px"
-                                btnAdicionar.style.backgroundColor = "#F59E0B";
-                                btnAdicionar.textContent = "Carrnho";
-                                btnAdicionar.append(carrinho)
-                            }
                             mostrarCarrinho()
+                            itensNaLista();
                             if (listaCompras.children.length == 0){
                                 
                                 remover.style.visibility="hidden"
