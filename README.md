@@ -13,12 +13,15 @@
   <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white">
 </p>
 
+
 ## 📖 Sobre o projeto
 
 Este projeto foi minha **primeira experiência desenvolvendo uma aplicação Full Stack**.
 
 A proposta foi criar um **E-commerce de peças para computadores**, implementando autenticação de usuários, gerenciamento de produtos, banco de dados e um painel administrativo completo.
 
+# 📸 Demonstração
+<img width="1421" height="745" alt="Velocity" src="https://github.com/user-attachments/assets/d57ccb4c-a6c2-4720-bee6-60b69d702849" />
 
 # ✨ Funcionalidades
 
